@@ -1,5 +1,33 @@
 {
   "dependencies": {
+    "com.prybh.packagetosource": {
+      "version": "https://github.com/Prybh/PackageToSource.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1a8771687cf707468d91057e69ee4e33644e9dc7"
+    },
+    "com.prybh.pathfinder": {
+      "version": "https://github.com/Prybh/Pathfinder.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e40460fde5553e6d4dcb5205b30fae9401148170"
+    },
+    "com.prybh.simplescenemanagement": {
+      "version": "https://github.com/Prybh/SimpleSceneManagement.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "26a7dc1edb418be503efd37cc9b07c08873d474a"
+    },
+    "com.prybh.tilemaptools": {
+      "version": "https://github.com/Prybh/TilemapTools.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8a47985039ef7910e149973566de1c7f0ec2a74f"
+    },
     "com.unity.2d.animation": {
       "version": "8.0.3",
       "depth": 1,
@@ -84,6 +112,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.8.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
     },

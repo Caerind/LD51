@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "com.prybh.packagetosource": "https://github.com/Prybh/PackageToSource.git",
+    "com.prybh.pathfinder": "https://github.com/Prybh/Pathfinder.git",
+    "com.prybh.simplescenemanagement": "https://github.com/Prybh/SimpleSceneManagement.git",
+    "com.prybh.tilemaptools": "https://github.com/Prybh/TilemapTools.git",
+    "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.2",
     "com.unity.feature.2d": "1.0.0",
     "com.unity.ide.rider": "3.0.15",
