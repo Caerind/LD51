@@ -19,7 +19,7 @@ public class SaveData
 
     public static T Load<T>(string key)
     {
-        string path = Application.persistentDataPath + folder;
+        string path = UnityEngine.Application.persistentDataPath + folder;
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream fileStream = new FileStream(path + key, FileMode.Open);
@@ -44,7 +44,7 @@ public class SaveData
 
     private static void SaveToFile<T>(T objectToSave, string fileName)
     {
-        string path = Application.persistentDataPath + folder;
+        string path = UnityEngine.Application.persistentDataPath + folder;
 
         Directory.CreateDirectory(path);
 
