@@ -10,24 +10,41 @@ public class AIController : Soldier
 
     private NavMeshAgent agent;
 
-    private float timerFire = 900.0f;
+    private void Awake()
+    {
+        lineRenderer = GetComponentInChildren<LineRenderer>();
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        isPlayerSoldier = false;
+        lookDir = new Vector2(0.0f, -1.0f);
+
         agent.speed = speed;
     }
 
     private void Update()
     {
+        UpdateSoldier();
+
         if (IsMainSoldier())
         {
-            agent.destination = targetPositionDebug;
+            UpdateMainAI();
+        }
+        else
+        {
+            UpdateReactions();
         }
     }
 
-    private bool CanFire()
+    protected override bool CanFire()
     {
-        return timerFire >= (fireCooldown + fireCooldownBonusAI);
+        return timerFire >= (fireCooldown + fireCooldownBonusAI + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
+    }
+
+    private void UpdateMainAI()
+    {
+        agent.destination = targetPositionDebug;
     }
 }

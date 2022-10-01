@@ -50,6 +50,16 @@ public class GameManager : Singleton<GameManager>
         return timer;
     }
 
+    public General GetPlayerGeneral()
+    {
+        return playerGeneral;
+    }
+
+    public General GetEnemyGeneral()
+    {
+        return aiGeneral;
+    }
+
     public void RegisterGeneral(General general)
     {
         if (general.IsPlayerGeneral())

@@ -1,11 +1,23 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : Soldier
 {
-    private float timerFire = 900.0f;
+    private void Awake()
+    {
+        lineRenderer = GetComponentInChildren<LineRenderer>();
+    }
+
+    private void Start()
+    {
+        isPlayerSoldier = true;
+        lookDir = new Vector2(0.0f, 1.0f);
+    }
 
     private void Update()
     {
+        UpdateSoldier();
+
         if (IsMainSoldier())
         {
             UpdateMainPlayer();
@@ -49,26 +61,20 @@ public class PlayerController : Soldier
         }
         if (look != Vector2.zero)
         {
-            float angle = -90.0f + Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
-            lookVector = look;
+            lookDir = new Vector2(look.x, look.y);
+            lookDir.Normalize();
+            transform.eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
         }
 
         // Fire
         if (inputs.fire && CanFire())
         {
             Fire();
-            timerFire = 0.0f;
         }
     }
 
-    private void UpdateReactions()
+    protected override bool CanFire()
     {
-        // TODO
-    }
-
-    private bool CanFire()
-    {
-        return timerFire >= fireCooldown;
+        return timerFire >= (fireCooldown + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
     }
 }
