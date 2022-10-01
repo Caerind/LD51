@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Soldier : MonoBehaviour
 {
@@ -124,7 +125,8 @@ public class Soldier : MonoBehaviour
                 if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
                     // Do a raycast to check is there is obstacle between us
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraDistanceForRaycast * diff, diff, distance);
+                    LayerMask mask = LayerMask.GetMask("Default");
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraDistanceForRaycast * diff, diff, distance, mask);
                     if (hit.collider.gameObject == soldier.gameObject)
                     {
                         // Good so look at it
