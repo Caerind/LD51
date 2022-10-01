@@ -13,7 +13,7 @@ public class Inputs : Singleton<Inputs>
 
     private PlayerInput input;
 
-    private void Start()
+    private void Awake()
     {
         input = GetComponent<PlayerInput>();
     }

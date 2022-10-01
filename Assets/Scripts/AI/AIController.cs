@@ -12,14 +12,9 @@ public class AIController : Soldier
 
     private void Awake()
     {
-        AwakeSoldier();
+        AwakeSoldier(isPlayer: false);
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
-    }
-
-    private void Start()
-    {
-        StartSoldier(isPlayer: false);
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -27,7 +22,7 @@ public class AIController : Soldier
         if (sender != null)
         {
             Soldier senderSoldier = (Soldier)sender;
-            if (senderSoldier != null && !senderSoldier.IsPlayerSoldier())
+            if (senderSoldier != null && senderSoldier.IsPlayerSoldier())
             {
                 SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
             }

@@ -4,7 +4,7 @@ public class FakeAgentManager : MonoBehaviour
 {
     [SerializeField] private GameObject fakeAgentPrefab;
 
-    private void Awake()
+    private void Start()
     {
         General enemyGeneral = GameManager.Instance.GetEnemyGeneral();
         foreach (Soldier soldier in enemyGeneral.GetSoldiers())

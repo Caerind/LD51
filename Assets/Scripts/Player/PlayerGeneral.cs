@@ -8,11 +8,6 @@ public class PlayerGeneral : General
         FetchSoldiersAndRegister();
     }
 
-    private void Start()
-    {
-        SelectNextPlayer();
-    }
-
     private void Update()
     {
         Inputs inputs = Inputs.Instance;

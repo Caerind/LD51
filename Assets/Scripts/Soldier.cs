@@ -91,14 +91,10 @@ public class Soldier : MonoBehaviour
         return false;
     }
 
-    protected void AwakeSoldier()
+    protected void AwakeSoldier(bool isPlayer)
     {
         healthSystem = GetComponent<HealthSystem>();
         lineRenderer = GetComponentInChildren<LineRenderer>();
-    }
-
-    protected void StartSoldier(bool isPlayer)
-    {
         isPlayerSoldier = isPlayer;
         BuildFov();
     }

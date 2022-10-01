@@ -12,16 +12,11 @@ public class PlayerController : Soldier
     
     private void Awake()
     {
-        AwakeSoldier();
+        AwakeSoldier(isPlayer: true);
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
         fovLight.pointLightInnerRadius = 0.0f;
         fovLight.pointLightOuterRadius = fireDistance;
-    }
-
-    private void Start()
-    {
-        StartSoldier(isPlayer: true);
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)

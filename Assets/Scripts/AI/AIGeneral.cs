@@ -14,11 +14,6 @@ public class AIGeneral : General
         FetchSoldiersAndRegister();
     }
 
-    private void Start()
-    {
-        SelectNextPlayer();
-    }
-
     private void Update()
     {
         timer += Time.deltaTime;

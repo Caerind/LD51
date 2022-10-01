@@ -8,11 +8,7 @@ public class GameManager : Singleton<GameManager>
     private float timer = 0.0f;
     public const float timerMax = 10.0f;
 
-    private bool isPlaying = true;
-
-    private void Start()
-    {
-    }
+    private bool isPlaying = false;
 
     private void Update()
     {
@@ -25,6 +21,11 @@ public class GameManager : Singleton<GameManager>
                 playerGeneral.SelectNextPlayer();
                 aiGeneral.SelectNextPlayer();
             }
+        }
+        else
+        {
+            playerGeneral.SelectNextPlayer();
+            aiGeneral.SelectNextPlayer();
         }
     }
 
