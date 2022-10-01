@@ -77,8 +77,7 @@ public class General : MonoBehaviour
         return result;
     }
 
-    //suppression de la liste des soldats
-    public void SetSoldierDead(Soldier soldier)
+    public void RemoveRefToSoldier(Soldier soldier)
     {
         soldiers.Remove(soldier);
     }

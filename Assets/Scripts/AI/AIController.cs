@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AIController : Soldier
@@ -13,6 +12,7 @@ public class AIController : Soldier
     private void Awake()
     {
         AwakeSoldier();
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
     }
 
@@ -27,6 +27,12 @@ public class AIController : Soldier
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
+        GetGeneral().RemoveRefToSoldier(this);
+
+        // Spawn new entity
+        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBody");
+        Instantiate(pfDeadBody, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 
@@ -85,6 +91,7 @@ public class AIController : Soldier
         }
         else
         {
+            agent.SetSpeed(GetSpeed());
             agent.SetDestination(point.transform.position);
         }
     }

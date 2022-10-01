@@ -1,11 +1,8 @@
-using Mono.Cecil.Cil;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class Soldier : MonoBehaviour
 {
-    [SerializeField] protected float speed = 5.0f;
+    [SerializeField] private float speed = 5.0f;
     
     [SerializeField] protected float fireCooldown = 3.0f;
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
@@ -19,6 +16,8 @@ public class Soldier : MonoBehaviour
     protected LineRenderer lineRenderer;
 
     protected float timerFire = 900.0f;
+
+    private float speedMultiplier = 1.0f;
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
@@ -34,6 +33,11 @@ public class Soldier : MonoBehaviour
     public bool IsPlayerSoldier()
     {
         return isPlayerSoldier;
+    }
+
+    public float GetSpeed()
+    {
+        return speed * speedMultiplier;
     }
 
     public General GetGeneral()

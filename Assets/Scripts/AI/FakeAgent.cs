@@ -39,4 +39,10 @@ public class FakeAgent : MonoBehaviour
     {
         agent.destination = destination.ToVector3();
     }
+
+    public void SetSpeed(float speed)
+    {
+        agent.speed = speed;
+    }
+
 }

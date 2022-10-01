@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerController : Soldier
 {
@@ -21,20 +20,18 @@ public class PlayerController : Soldier
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        //on récupère le général du soldat pour le supprimer de la liste
-        General general = GetGeneral();
-        general.SetSoldierDead(this);
+        GetGeneral().RemoveRefToSoldier(this);
 
-        //Remplacement par le sprite
+        // Spawn new entity
         Transform pfDeadBody = Resources.Load<Transform>("pfDeadBody");
         Instantiate(pfDeadBody, transform.position, Quaternion.identity);
 
-        //centrer la caméra si c'est le main soldat qui meurt
-        if(IsMainSoldier())
+        // Center cam on new entity
+        if (IsMainSoldier())
         {
             PlayerCameraController.Instance.SetFollow(transform);
         }
-        //suppression de l'élément.
+
         Destroy(gameObject);
     }
 
@@ -69,7 +66,7 @@ public class PlayerController : Soldier
         // Mvt
         if (inputs.move != Vector2.zero)
         {
-            float s = speed * Time.deltaTime;
+            float s = GetSpeed() * Time.deltaTime;
             transform.position += new Vector3(s * inputs.move.x, s * inputs.move.y, 0.0f);
         }
 
