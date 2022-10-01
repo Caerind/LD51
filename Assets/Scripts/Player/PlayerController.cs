@@ -21,7 +21,21 @@ public class PlayerController : Soldier
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        //Destroy(gameObject);
+        //on récupère le général du soldat pour le supprimer de la liste
+        General general = GetGeneral();
+        general.SetSoldierDead(this);
+
+        //Remplacement par le sprite
+        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBody");
+        Instantiate(pfDeadBody, transform.position, Quaternion.identity);
+
+        //centrer la caméra si c'est le main soldat qui meurt
+        if(IsMainSoldier())
+        {
+            PlayerCameraController.Instance.SetFollow(transform);
+        }
+        //suppression de l'élément.
+        Destroy(gameObject);
     }
 
     private void Update()

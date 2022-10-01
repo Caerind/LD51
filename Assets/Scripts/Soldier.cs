@@ -1,3 +1,5 @@
+using Mono.Cecil.Cil;
+using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
@@ -53,14 +55,21 @@ public class Soldier : MonoBehaviour
         }
 
         Shoot(dir);
-        healthSystem.Damage(10);
-
         timerFire = 0.0f;
+    }
+
+    public void RecevedDamage(int Damage)
+    {
+        healthSystem.Damage(Damage);
     }
 
     private void Shoot(Vector2 dir)
     {
         BulletProjectile.Create(this, dir, 2.0f);
+    }
+    public float GetFireDistanceMax()
+    {
+        return fireDistance;
     }
 
     protected virtual bool CanFire()
