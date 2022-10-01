@@ -1,13 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class General : MonoBehaviour
 {
     protected List<Soldier> soldiers;
     protected Soldier selectedSoldier;
-    protected int nextSelectedIndex = 0;
-    protected int currentSelectedIndex = 0;
+    protected Soldier nextSelectedSoldier;
 
     protected void FetchSoldiersAndRegister()
     {
@@ -22,6 +21,8 @@ public class General : MonoBehaviour
         }
 
         GameManager.Instance.RegisterGeneral(this);
+
+        nextSelectedSoldier = soldiers.ToList().Randomize().ToList()[0]; // This doesn't create a copy of soldiers (and randomize it) I guess
     }
 
     public virtual bool IsPlayerGeneral()
@@ -31,7 +32,19 @@ public class General : MonoBehaviour
 
     public int GetNextSelectedIndex()
     {
-        return nextSelectedIndex;
+        if (soldiers == null)
+        {
+            return 777;
+        }
+        if (soldiers.Count == 0)
+        {
+            return 888;
+        }
+        if (nextSelectedSoldier == null)
+        {
+            return 999;
+        }
+        return soldiers.IndexOf(nextSelectedSoldier);
     }
 
     public List<Soldier> GetSoldiers()
@@ -39,7 +52,7 @@ public class General : MonoBehaviour
         return soldiers;
     }
 
-    public Soldier GetSelectedPlayer()
+    public Soldier GetSelectedSoldier()
     {
         return selectedSoldier;
     }
@@ -48,51 +61,54 @@ public class General : MonoBehaviour
     {
         for (int i = 0; i < soldiers.Count; ++i)
         {
-            if (i == nextSelectedIndex)
+            Soldier soldier = soldiers[i];
+            if (soldier == nextSelectedSoldier)
             {
-                selectedSoldier = soldiers[i];
+                selectedSoldier = soldier;
                 selectedSoldier.SetMainSoldier(true);
-                currentSelectedIndex = i;
+                nextSelectedSoldier = null;
             }
             else
             {
-                soldiers[i].SetMainSoldier(false);
+                if (nextSelectedSoldier == null)
+                {
+                    nextSelectedSoldier = soldier;
+                }
+                soldier.SetMainSoldier(false);
             }
         }
-
-        // NextSelectedIndex
-        List<int> availables = GetAvailableIndexesForSelection();
-        if (availables.Count > 1)
+        if (nextSelectedSoldier == null && soldiers.Count > 0)
         {
-            int nextIndexInAvailable = availables.IndexOf(nextSelectedIndex);
-            if (nextIndexInAvailable < 0)
-            {
-                nextIndexInAvailable = 0;
-            }
-            nextIndexInAvailable = (nextIndexInAvailable + 1) % availables.Count;
-            nextSelectedIndex = availables[nextIndexInAvailable];
+            nextSelectedSoldier = soldiers[0];
         }
     }
 
-    public List<int> GetAvailableIndexesForSelection()
+    public List<Soldier> GetAvailableSoldiersForSelection()
     {
-        List<int> result = new List<int>(Mathf.Max(soldiers.Count - 1, 1));
+        List<Soldier> result = new List<Soldier>(Mathf.Max(soldiers.Count - 1, 1));
         for (int i = 0; i < soldiers.Count; ++i)
         {
-            if (i != currentSelectedIndex)
+            Soldier soldier = soldiers[i];
+            if (soldier != selectedSoldier)
             {
-                result.Add(i);
+                result.Add(soldier);
             }
         }
-        if (result.Count == 0)
+        if (result.Count == 0 && soldiers.Count > 0)
         {
-            result.Add(0);
+            result.Add(soldiers[0]);
         }
         return result;
     }
 
     public void RemoveRefToSoldier(Soldier soldier)
     {
+        if (nextSelectedSoldier == soldier)
+        {
+            int indexOf = soldiers.IndexOf(soldier);
+            indexOf = (indexOf + 1) % soldiers.Count;
+            nextSelectedSoldier = soldiers[indexOf];
+        }
         soldiers.Remove(soldier);
     }
 }

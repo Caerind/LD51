@@ -27,10 +27,10 @@ public class AIGeneral : General
     private void ChooseBestNext()
     {
         // Random
-        List<int> availables = GetAvailableIndexesForSelection().Randomize().ToList();
+        List<Soldier> availables = GetAvailableSoldiersForSelection().Randomize().ToList();
         if (availables.Count > 0)
         {
-            nextSelectedIndex = availables[0];
+            nextSelectedSoldier = availables[0];
         }
     }
 }

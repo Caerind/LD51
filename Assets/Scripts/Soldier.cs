@@ -9,7 +9,8 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
-    [SerializeField] protected float reactionDevAngle = 15.0f;
+    [SerializeField] protected float reactionDevAngle = 5.0f;
+    [SerializeField] protected float fireDevAngle = 2.5f;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
@@ -59,16 +60,20 @@ public class Soldier : MonoBehaviour
 
     public void Fire(bool reactionFire = false)
     {
-        Vector2 dir = GetLookDir();
+        float lookAngle = GetLookAngle();
         if (reactionFire)
         {
-            float lookAngle = GetLookAngle();
             lookAngle += Random.Range(-reactionDevAngle, reactionDevAngle);
-            lookAngle *= Mathf.Deg2Rad;
-            dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
         }
+        else
+        {
+            lookAngle += Random.Range(-fireDevAngle, fireDevAngle);
+        }
+        lookAngle *= Mathf.Deg2Rad;
+        Vector2 dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
 
         Shoot(dir);
+
         timerFire = 0.0f;
     }
 
@@ -81,6 +86,7 @@ public class Soldier : MonoBehaviour
     {
         BulletProjectile.Create(this, dir, 2.0f);
     }
+
     public float GetFireDistanceMax()
     {
         return fireDistance;
