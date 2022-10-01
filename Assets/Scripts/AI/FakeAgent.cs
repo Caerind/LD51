@@ -45,4 +45,8 @@ public class FakeAgent : MonoBehaviour
         agent.speed = speed;
     }
 
+    public Soldier GetSoldier()
+    {
+        return soldier;
+    }
 }

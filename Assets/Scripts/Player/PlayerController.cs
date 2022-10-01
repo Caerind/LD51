@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : Soldier
 {
+    [SerializeField] private Light2D fovLight;
+
     private void Awake()
     {
         AwakeSoldier();
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
+        fovLight.pointLightInnerRadius = 0.0f;
+        fovLight.pointLightOuterRadius = fireDistance;
     }
 
     private void Start()

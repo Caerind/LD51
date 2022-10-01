@@ -98,20 +98,23 @@ public class AIController : Soldier
 
     private void LateUpdate()
     {
-        Vector2 prevPos = transform.position.ToVector2();
-        transform.position = agent.transform.position;
+        if (IsMainSoldier())
+        {
+            Vector2 prevPos = transform.position.ToVector2();
+            transform.position = agent.transform.position;
 
-        Vector2 mvt = transform.position.ToVector2() - prevPos;
-        if (mvt != Vector2.zero)
-        {
-            SetLookDir(mvt.normalized);
-        }
-        else if (point != null)
-        {
-            float sqrPointDistance = (transform.position - point.transform.position).sqrMagnitude;
-            if (sqrPointDistance < 2.0f * 2.0f)
+            Vector2 mvt = transform.position.ToVector2() - prevPos;
+            if (mvt != Vector2.zero)
             {
-                SetLookDir(point.GetLookDir());
+                SetLookDir(mvt.normalized);
+            }
+            else if (point != null)
+            {
+                float sqrPointDistance = (transform.position - point.transform.position).sqrMagnitude;
+                if (sqrPointDistance < 2.0f * 2.0f)
+                {
+                    SetLookDir(point.GetLookDir());
+                }
             }
         }
     }
