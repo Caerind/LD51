@@ -253,6 +253,7 @@ Transform:
   m_Children:
   - {fileID: 4395893599133749043}
   - {fileID: 1384880493332031294}
+  - {fileID: 6556399720776751771}
   - {fileID: 5160978454013781053}
   - {fileID: 4519866703184726411}
   m_Father: {fileID: 0}
@@ -276,6 +277,7 @@ MonoBehaviour:
   fov: 60
   fireDistance: 40
   reactionDevAngle: 15
+  fovLight: {fileID: 1627116386072193263}
   IntensiteTirShake: 3
   TimerTirShake: 1
   IntensiteDegatShake: 6
@@ -516,7 +518,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1384880493332031294}
   - component: {fileID: 8234126094249288316}
-  - component: {fileID: 5579246553215146652}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -591,13 +592,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5579246553215146652
+--- !u!1 &8158101420904154894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6556399720776751771}
+  - component: {fileID: 1627116386072193263}
+  m_Layer: 0
+  m_Name: FOVLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6556399720776751771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158101420904154894}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4395893598687474584}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+--- !u!114 &1627116386072193263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6872778827491387132}
+  m_GameObject: {fileID: 8158101420904154894}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}

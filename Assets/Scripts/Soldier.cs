@@ -24,7 +24,11 @@ public class Soldier : MonoBehaviour
     public virtual void SetMainSoldier(bool mainSoldier)
     {
         isMainSoldier = mainSoldier;
-        lineRenderer.enabled = !mainSoldier;
+
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = !mainSoldier;
+        }
     }
 
     public bool IsMainSoldier()
@@ -114,12 +118,13 @@ public class Soldier : MonoBehaviour
             Vector2 diff = (soldierPos - currentPos);
             if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
             {
-                float distance = diff.magnitude + 1.0f;
+                const float extraDistanceForRaycast = 1.0f;
+                float distance = diff.magnitude - extraDistanceForRaycast;
                 diff.Normalize();
                 if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
                     // Do a raycast to check is there is obstacle between us
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance);
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraDistanceForRaycast * diff, diff, distance);
                     if (hit.collider.gameObject == soldier.gameObject)
                     {
                         // Good so look at it

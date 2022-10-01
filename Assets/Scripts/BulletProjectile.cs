@@ -31,6 +31,10 @@ public class BulletProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Soldier soldier = collision.GetComponent<Soldier>();
+        if (soldier == null)
+        {
+            soldier = collision.GetComponentInParent<FakeAgent>()?.GetSoldier();
+        }
         if (soldier != null)
         {
             Destroy(gameObject);
