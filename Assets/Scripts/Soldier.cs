@@ -64,11 +64,18 @@ public class Soldier : MonoBehaviour
         {
             Debug.Log(gameObject.name + ": Fire");
         }
-        
+
+        Shoot();
         healthSystem.Damage(10);
 
         timerFire = 0.0f;
     }
+    private void Shoot()
+    {
+        BulletProjectile.Create(this);
+    }
+
+
 
     protected virtual bool CanFire()
     {
@@ -112,6 +119,11 @@ public class Soldier : MonoBehaviour
     public float GetLookAngle()
     {
         return Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+    }
+
+    public Vector2 GetLookDir()
+    {
+        return lookDir;
     }
 
     private void UpdateFOV()
