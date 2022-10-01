@@ -106,6 +106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2119577455391413532, guid: 3f835eea58752dd4d9cac8dc8888d0c9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3223852043107293736, guid: 3f835eea58752dd4d9cac8dc8888d0c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
@@ -301,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 181305973943668400, guid: 3f835eea58752dd4d9cac8dc8888d0c9, type: 3}
       propertyPath: m_Name
       value: AI (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119577455391413532, guid: 3f835eea58752dd4d9cac8dc8888d0c9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

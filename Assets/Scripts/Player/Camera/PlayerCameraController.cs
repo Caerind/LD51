@@ -11,11 +11,14 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
     [SerializeField] private bool m_invertZoom = true;
 
     private CinemachineVirtualCamera m_virtualCamera;
+    private CinemachineCameraShake cinemachinecameraShake;
     private float m_orthographicSize;
     private float m_targetOrthographicSize;
+    private float shakeTimer;
 
     private void Awake()
     {
+        cinemachinecameraShake= GetComponent<CinemachineCameraShake>();
         m_virtualCamera = GetComponent<CinemachineVirtualCamera>();
         m_orthographicSize = m_virtualCamera.m_Lens.OrthographicSize;
         m_targetOrthographicSize = m_orthographicSize;
@@ -29,6 +32,7 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
         m_orthographicSize = Mathf.Lerp(m_orthographicSize, m_targetOrthographicSize, Time.deltaTime * m_zoomSpeed);
 
         m_virtualCamera.m_Lens.OrthographicSize = m_orthographicSize;
+
     }
 
     public void SetFollow(Transform transform)
@@ -37,5 +41,11 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
         {
             m_virtualCamera.Follow = transform;
         }
+    }
+
+    public void Shake(float Amount, float time)
+    {
+        cinemachinecameraShake.Shake(Amount, time);
+
     }
 }
