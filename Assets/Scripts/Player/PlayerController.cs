@@ -4,7 +4,11 @@ using UnityEngine.Rendering.Universal;
 public class PlayerController : Soldier
 {
     [SerializeField] private Light2D fovLight;
-
+    [SerializeField] private float IntensiteTirShake = 3f;
+    [SerializeField] private float TimerTirShake = 1f;
+    [SerializeField] private float IntensiteDegatShake = 6f;
+    [SerializeField] private float TimerDegatShake = 3f;
+    
     private void Awake()
     {
         AwakeSoldier();
@@ -21,6 +25,10 @@ public class PlayerController : Soldier
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
+        if(IsMainSoldier())
+        {
+            PlayerCameraController.Instance.Shake(IntensiteDegatShake, TimerDegatShake);
+        }
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
@@ -94,6 +102,7 @@ public class PlayerController : Soldier
         if (inputs.fire && CanFire())
         {
             Fire();
+            PlayerCameraController.Instance.Shake(IntensiteTirShake, TimerTirShake);
         }
     }
 

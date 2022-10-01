@@ -123,41 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &12015196 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6390992491025039568, guid: 1a169fd6240f6684bbebe5526d6abe9d, type: 3}
+--- !u!60 &12015200 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 12015200, guid: 1a169fd6240f6684bbebe5526d6abe9d, type: 3}
   m_PrefabInstance: {fileID: 6390992490249648143}
   m_PrefabAsset: {fileID: 0}
---- !u!60 &12015200
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12015196}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
-  m_UseDelaunayMesh: 0
 --- !u!1001 &78262106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,28 +246,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ed00c9b16bf5a44bb7589ee1ef00a27, type: 3}
---- !u!1 &563874696 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4469209714469089490, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
-  m_PrefabInstance: {fileID: 4469209714449956622}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &563874701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563874696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ConfineMode: 0
-  m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 12015200}
-  m_ConfineScreenEdges: 1
-  m_Damping: 0
 --- !u!1001 &901633275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -413,10 +361,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7403872734380598103, guid: 9bf0a481ae0857844bfb33c80e721f0c, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: aa62bfb11981ce74f9e8e758ad3845a9, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf0a481ae0857844bfb33c80e721f0c, type: 3}
@@ -495,38 +439,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 225
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -123.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 940966205700185276, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 83.3
-      objectReference: {fileID: 0}
     - target: {fileID: 940966206246977678, guid: 752f190a7e6ee2a46be718ecbd996f77, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -645,6 +557,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 563874701, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 12015200}
+    - target: {fileID: 4469209713374648875, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
+      propertyPath: m_AmplitudeGain
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469209713374648875, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
+      propertyPath: m_FrequencyGain
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4469209714469089490, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
       propertyPath: m_Name
       value: VirtualCamera
@@ -747,6 +671,10 @@ PrefabInstance:
     - target: {fileID: 4079415292456202208, guid: 76d005321f277c248bf89a554a3190ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265494480699850857, guid: 76d005321f277c248bf89a554a3190ce, type: 3}
+      propertyPath: TimerDegatShake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736926449216106469, guid: 76d005321f277c248bf89a554a3190ce, type: 3}
       propertyPath: m_Name

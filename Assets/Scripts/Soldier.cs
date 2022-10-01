@@ -19,6 +19,7 @@ public class Soldier : MonoBehaviour
     protected float timerFire = 900.0f;
 
     private float speedMultiplier = 1.0f;
+
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
