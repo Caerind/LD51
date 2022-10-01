@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963541214717166173}
   - component: {fileID: 6963541214717166172}
+  - component: {fileID: 801766618}
   m_Layer: 0
   m_Name: StartZone
   m_TagString: Untagged
@@ -58,3 +59,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 180, y: 15}
   m_EdgeRadius: 0
+--- !u!114 &801766618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6963541214717166162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bfb0bf0534a2ed4fa35335114802b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerZone: 0
+  timerMax: 30
