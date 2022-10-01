@@ -72,9 +72,9 @@ public class Soldier : MonoBehaviour
         timerFire = 0.0f;
     }
 
-    public void RecevedDamage(int Damage)
+    public void RecevedDamage(int Damage, Soldier shooter)
     {
-        healthSystem.Damage(Damage);
+        healthSystem.Damage(Damage, shooter);
     }
 
     private void Shoot(Vector2 dir)

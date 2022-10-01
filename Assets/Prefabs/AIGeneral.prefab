@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerRecomputeBest: 1.9
+  commander: {fileID: 11400000, guid: 3701cd34e35768f458957a02fe2dbd96, type: 2}
 --- !u!1001 &7601010192659671464
 PrefabInstance:
   m_ObjectHideFlags: 0

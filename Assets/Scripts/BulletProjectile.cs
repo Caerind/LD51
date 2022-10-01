@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletProjectile : MonoBehaviour
 {
-    private Vector2 dir;
-    [SerializeField] private float speed= 30f;
-    private float maxdistance;
+    [SerializeField] private float speed = 60f;
     [SerializeField] private int degat = 20;
+
+    private Soldier shooter;
+    private Vector2 dir;
+    private float maxdistance;
 
     public static BulletProjectile Create(Soldier soldier, Vector2 dir, float startDistance)
     {
@@ -17,6 +17,7 @@ public class BulletProjectile : MonoBehaviour
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
         bulletProjectile.dir = dir;
         bulletProjectile.maxdistance = soldier.GetFireDistanceMax();
+        bulletProjectile.shooter = soldier;
         return bulletProjectile;
     }
 
@@ -38,7 +39,7 @@ public class BulletProjectile : MonoBehaviour
         if (soldier != null)
         {
             Destroy(gameObject);
-            soldier.RecevedDamage(degat);
+            soldier.RecevedDamage(degat, shooter);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -25,9 +26,17 @@ public class PlayerController : Soldier
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
-        if(IsMainSoldier())
+        if (IsMainSoldier())
         {
             PlayerCameraController.Instance.Shake(IntensiteDegatShake, TimerDegatShake);
+        }
+        else if (sender != null)
+        {
+            Soldier senderSoldier = (Soldier)sender;
+            if (senderSoldier != null && !senderSoldier.IsPlayerSoldier())
+            {
+                SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
+            }
         }
     }
 
