@@ -6,6 +6,7 @@ public class General : MonoBehaviour
     protected List<Soldier> soldiers;
     protected Soldier selectedSoldier;
     protected int nextSelectedIndex = 0;
+    protected int currentSelectedIndex = 0;
 
     protected void FetchSoldiersAndRegister()
     {
@@ -50,11 +51,29 @@ public class General : MonoBehaviour
             {
                 selectedSoldier = soldiers[i];
                 selectedSoldier.SetMainSoldier(true);
+                currentSelectedIndex = i;
             }
             else
             {
                 soldiers[i].SetMainSoldier(false);
             }
         }
+    }
+
+    public List<int> GetAvailableIndexesForSelection()
+    {
+        List<int> result = new List<int>(Mathf.Max(soldiers.Count - 1, 1));
+        for (int i = 0; i < soldiers.Count; ++i)
+        {
+            if (i != currentSelectedIndex)
+            {
+                result.Add(i);
+            }
+        }
+        if (result.Count == 0)
+        {
+            result.Add(0);
+        }
+        return result;
     }
 }

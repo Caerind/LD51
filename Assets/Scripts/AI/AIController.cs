@@ -7,23 +7,25 @@ public class AIController : Soldier
 
     public Vector3 targetPositionDebug;
 
-
     private NavMeshAgent agent;
 
     private void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
+        AwakeSoldier();
         healthSystem.OnDeath += HealthSystem_OnDied;
-        lineRenderer = GetComponentInChildren<LineRenderer>();
+
         agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
-        isPlayerSoldier = false;
-        lookDir = new Vector2(0.0f, -1.0f);
+        StartSoldier(isPlayer: false, Vector2.down);
 
         agent.speed = speed;
+    }
+
+    private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
+    {
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)

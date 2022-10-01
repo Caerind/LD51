@@ -1,21 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour 
 {
-    [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] private Vector2 offset;
 
-    private Transform bartransform;
+    private HealthSystem healthSystem;
+    private Transform target;
+    private Transform fullBarTransform;
+    private Transform barTransform;
 
     private void Awake()
     {
-        bartransform = transform.Find("bar");
+        fullBarTransform = transform.Find("FullBar");
+        barTransform = fullBarTransform.Find("bar");
     }
-    private void Start()
+
+    public void Init(Soldier soldier)
     {
+        healthSystem = soldier.GetComponent<HealthSystem>();
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
+        target = soldier.transform;
+        fullBarTransform.gameObject.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = target.position + offset.ToVector3();
     }
 
     private void HealthSystem_OnDamaged(object sender, EventArgs e)
@@ -25,6 +36,7 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar()
     {
-        bartransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1, 1);
+        fullBarTransform.gameObject.SetActive(true);
+        barTransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1, 1);
     }
 }

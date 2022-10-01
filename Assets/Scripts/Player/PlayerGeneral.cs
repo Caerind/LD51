@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerGeneral : General
@@ -17,15 +18,35 @@ public class PlayerGeneral : General
         Inputs inputs = Inputs.Instance;
         if (inputs != null && soldiers.Count > 0)
         {
-            if (inputs.nextLeft)
+            if (inputs.nextLeft || inputs.nextRight)
             {
-                inputs.nextLeft = false;
-                nextSelectedIndex = (nextSelectedIndex - 1 + soldiers.Count) % soldiers.Count;
-            }
-            if (inputs.nextRight)
-            {
-                inputs.nextRight = false;
-                nextSelectedIndex = (nextSelectedIndex + 1) % soldiers.Count;
+                List<int> availables = GetAvailableIndexesForSelection();
+                int nextIndexInAvailable = availables.IndexOf(nextSelectedIndex);
+                if (nextIndexInAvailable < 0)
+                {
+                    nextIndexInAvailable = 0;
+                }
+
+                if (availables.Count > 1)
+                {
+                    if (inputs.nextLeft)
+                    {
+                        inputs.nextLeft = false;
+                        nextIndexInAvailable = (nextIndexInAvailable - 1 + availables.Count) % availables.Count;
+                        nextSelectedIndex = availables[nextIndexInAvailable];
+                    }
+                    if (inputs.nextRight)
+                    {
+                        inputs.nextRight = false;
+                        nextIndexInAvailable = (nextIndexInAvailable + 1) % availables.Count;
+                        nextSelectedIndex = availables[nextIndexInAvailable];
+                    }
+                }
+                else
+                {
+                    inputs.nextLeft = false;
+                    inputs.nextRight= false;
+                }
             }
         }
     }
