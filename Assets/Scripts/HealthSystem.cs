@@ -14,16 +14,16 @@ public class HealthSystem : MonoBehaviour
         healthAmount = healthAmountMax;
     }
 
-    public void Damage(int Amount) 
+    public void Damage(int Amount, Soldier shooter) 
     {
         healthAmount -= Amount;
         healthAmount = Mathf.Clamp(healthAmount, 0, healthAmountMax);
 
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+        OnDamaged?.Invoke(shooter, EventArgs.Empty);
 
         if (IsDead())
         {
-            OnDeath?.Invoke(this, EventArgs.Empty);
+            OnDeath?.Invoke(shooter, EventArgs.Empty);
         }
     }
 

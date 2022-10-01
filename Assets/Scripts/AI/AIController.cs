@@ -6,6 +6,7 @@ public class AIController : Soldier
     [SerializeField] private float fireCooldownBonusAI = 0.5f;
 
     private InterestPoint point = null;
+    private bool justFoundPoint = false;
 
     private FakeAgent agent;
 
@@ -23,6 +24,14 @@ public class AIController : Soldier
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
+        if (sender != null)
+        {
+            Soldier senderSoldier = (Soldier)sender;
+            if (senderSoldier != null && !senderSoldier.IsPlayerSoldier())
+            {
+                SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
+            }
+        }
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
@@ -88,12 +97,16 @@ public class AIController : Soldier
                 }
                 point = bestPoint;
             }
+            justFoundPoint = true;
+
         }
-        else
+        else if (justFoundPoint)
         {
-            agent.SetSpeed(GetSpeed());
             agent.SetDestination(point.transform.position);
+            justFoundPoint = false;
         }
+
+        agent.SetSpeed(GetSpeed());
     }
 
     private void LateUpdate()
@@ -108,13 +121,9 @@ public class AIController : Soldier
             {
                 SetLookDir(mvt.normalized);
             }
-            else if (point != null)
+            else if (point != null && (transform.position - point.transform.position).sqrMagnitude < 1.0f * 1.0f)
             {
-                float sqrPointDistance = (transform.position - point.transform.position).sqrMagnitude;
-                if (sqrPointDistance < 2.0f * 2.0f)
-                {
-                    SetLookDir(point.GetLookDir());
-                }
+                SetLookDir(point.GetLookDir());
             }
         }
     }

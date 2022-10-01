@@ -3,16 +3,24 @@ using UnityEngine.AI;
 
 public class FakeAgent : MonoBehaviour
 {
+    [SerializeField] private float acceleration = 20.0f;
+
     private NavMeshAgent agent;
     private Soldier soldier;
 
     public void Init(Soldier soldier)
     {
+        transform.position = soldier.transform.position;
+
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.acceleration = acceleration;
+        agent.destination = transform.position;
+        agent.stoppingDistance = 0.1f;
+        agent.ResetPath();
+
         this.soldier = soldier;
 
-        transform.position = soldier.transform.position;
-        
         AIController aiController = (AIController)soldier;
         if (aiController != null)
         {
@@ -37,6 +45,7 @@ public class FakeAgent : MonoBehaviour
 
     public void SetDestination(Vector2 destination)
     {
+        agent.ResetPath();
         agent.destination = destination.ToVector3();
     }
 

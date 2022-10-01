@@ -5,6 +5,8 @@ using UnityEngine;
 public class AIGeneral : General
 {
     [SerializeField] private float timerRecomputeBest = 1.9f;
+    [SerializeField] private Commander commander;
+
     private float timer;
 
     private void Awake()

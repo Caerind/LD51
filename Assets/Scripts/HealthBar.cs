@@ -34,6 +34,7 @@ public class HealthBar : MonoBehaviour
     {
         UpdateBar();
     }
+
     private void HealthSystem_OnDeath(object sender, EventArgs e)
     {
         Destroy(gameObject);
