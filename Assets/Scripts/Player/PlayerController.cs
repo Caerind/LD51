@@ -4,6 +4,20 @@ public class PlayerController : Soldier
 {
     private float timerFire = 900.0f;
 
+    #region Gestion PV vie Mort
+    //Initialisation des PV
+    private void Start()
+    {
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.OnDeath += HealthSystem_OnDied;
+    }
+    //Gestiond de la mort
+    private void HealthSystem_OnDied(object sender, System.EventArgs e)
+    {
+        Destroy(gameObject);
+    }
+    #endregion
+
     private void Update()
     {
         if (IsMainSoldier())
