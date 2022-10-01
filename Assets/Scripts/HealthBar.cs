@@ -22,6 +22,7 @@ public class HealthBar : MonoBehaviour
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         target = soldier.transform;
         fullBarTransform.gameObject.SetActive(false);
+        healthSystem.OnDeath +=HealthSystem_OnDeath;
     }
 
     private void LateUpdate()
@@ -32,6 +33,10 @@ public class HealthBar : MonoBehaviour
     private void HealthSystem_OnDamaged(object sender, EventArgs e)
     {
         UpdateBar();
+    }
+    private void HealthSystem_OnDeath(object sender, EventArgs e)
+    {
+        Destroy(gameObject);
     }
 
     private void UpdateBar()
