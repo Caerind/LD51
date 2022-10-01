@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         {
             playerGeneral.SelectNextPlayer();
             aiGeneral.SelectNextPlayer();
+            isPlaying = true;
         }
     }
 
