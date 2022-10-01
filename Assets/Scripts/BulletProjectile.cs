@@ -9,15 +9,14 @@ public class BulletProjectile : MonoBehaviour
     private float maxdistance;
     [SerializeField] private int degat = 20;
 
-    public static BulletProjectile Create(Soldier soldier)
+    public static BulletProjectile Create(Soldier soldier, Vector2 dir, float startDistance)
     {
         Transform pfBulletProjectile = Resources.Load<Transform>("pfBulletProjectile");
-        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.transform.position+ soldier.GetLookDir().ToVector3() * 2, Quaternion.identity);
+        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.transform.position + dir.ToVector3() * startDistance, Quaternion.identity);
 
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
+        bulletProjectile.dir = dir;
         bulletProjectile.maxdistance = soldier.GetFireDistanceMax();
-        bulletProjectile.dir = soldier.GetLookDir();
-
         return bulletProjectile;
     }
 
@@ -31,7 +30,7 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Soldier soldier=collision.GetComponent<Soldier>();
+        Soldier soldier = collision.GetComponent<Soldier>();
         if (soldier != null)
         {
             Destroy(gameObject);

@@ -12,26 +12,17 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
 
-    protected Vector2 lookDir;
-
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
 
     protected HealthSystem healthSystem;
     protected LineRenderer lineRenderer;
-    private bool fovUpdated = false;
 
     protected float timerFire = 900.0f;
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
-        if (isMainSoldier && !mainSoldier)
-        {
-            fovUpdated = false;
-        }
-
         isMainSoldier = mainSoldier;
-
         lineRenderer.enabled = !mainSoldier;
     }
 
@@ -57,34 +48,29 @@ public class Soldier : MonoBehaviour
 
     public void Fire(bool reactionFire = false)
     {
-        Vector2 dir = lookDir;
+        Vector2 dir = GetLookDir();
         if (reactionFire)
         {
-            Debug.Log(gameObject.name + ": ReactionFire");
+            // TODO : Add random dev
         }
-        else
-        {
-            Debug.Log(gameObject.name + ": Fire");
-        }
-        Shoot();
+
+        Shoot(dir);
         timerFire = 0.0f;
-        healthSystem.Damage(50);
     }
 
     public void RecevedDamage(int Damage)
     {
         healthSystem.Damage(Damage);
     }
-    private void Shoot()
+
+    private void Shoot(Vector2 dir)
     {
-        BulletProjectile.Create(this);
+        BulletProjectile.Create(this, dir, 2.0f);
     }
     public float GetFireDistanceMax()
     {
         return fireDistance;
     }
-
-
 
     protected virtual bool CanFire()
     {
@@ -97,10 +83,10 @@ public class Soldier : MonoBehaviour
         lineRenderer = GetComponentInChildren<LineRenderer>();
     }
 
-    protected void StartSoldier(bool isPlayer, Vector2 look)
+    protected void StartSoldier(bool isPlayer)
     {
         isPlayerSoldier = isPlayer;
-        lookDir = look;
+        BuildFov();
     }
 
     protected void UpdateSoldier()
@@ -110,11 +96,6 @@ public class Soldier : MonoBehaviour
 
     protected void UpdateReactions()
     {
-        if (!fovUpdated)
-        {
-            UpdateFOV();
-        }
-
         General enemyGeneral = GetOppositeGeneral();
         float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
         foreach (Soldier soldier in enemyGeneral.GetSoldiers())
@@ -125,9 +106,21 @@ public class Soldier : MonoBehaviour
             if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
             {
                 diff.Normalize();
-                if (Vector2.Dot(lookDir, diff) > cosHalfFov) // Is in fov
+                if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
-                    lookDir = diff;
+                    /*
+                    transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg);
+                    if (isPlayerSoldier)
+                    {
+                        transform.eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
+                    }
+                    else
+                    {
+                        Vector3 eulerAngles = transform.eulerAngles;
+                        transform.eulerAngles = new Vector3(GetLookAngle(), eulerAngles.y, eulerAngles.z);
+                    }
+                    */
+
                     if (CanFire())
                     {
                         Fire(reactionFire: true);
@@ -137,40 +130,46 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    public void SetLookAngle(float angle)
+    {
+        transform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
+    }
+
+    public void SetLookDir(Vector2 lookDir)
+    {
+        SetLookAngle(Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg);
+    }
+
     public float GetLookAngle()
     {
-        return Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        return transform.eulerAngles.z;
     }
 
     public Vector2 GetLookDir()
     {
-        return lookDir;
+        float angle = GetLookAngle();
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 
-    private void UpdateFOV()
+    private void BuildFov()
     {
         if (lineRenderer != null)
         {
-            float lookAngle = GetLookAngle();
-            float minAngle = lookAngle - (fov * 0.5f);
+            float minAngle = -fov * 0.5f;
 
-            int arcPointCount = 10;
+            int arcPointCount = 20;
             Vector3[] lines = new Vector3[1 + arcPointCount];
             float angle = minAngle;
             for (int i = 0; i < arcPointCount; ++i)
             {
-                lines[1 + i] = transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * fireDistance, Mathf.Sin(angle * Mathf.Deg2Rad) * fireDistance, 0.0f);
+                lines[1 + i] = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * fireDistance, Mathf.Sin(angle * Mathf.Deg2Rad) * fireDistance, 0.0f);
                 angle += fov / arcPointCount;
             }
-            lines[0] = transform.position;
+            lines[0] = Vector3.zero;
 
-            lineRenderer.useWorldSpace = true;
             lineRenderer.loop = true;
             lineRenderer.positionCount = 1 + arcPointCount;
             lineRenderer.SetPositions(lines);
         }
-
-        fovUpdated = true;
     }
-
 }
