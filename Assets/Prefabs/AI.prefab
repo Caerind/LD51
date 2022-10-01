@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 7352131924919563314}
   - component: {fileID: 7594742761366824694}
   - component: {fileID: 5893074324336176739}
+  - component: {fileID: 3017557581855253714}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -215,10 +216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   fireCooldown: 3
+  fireCooldownBonusReaction: 0.5
   fov: 60
   fireDistance: 40
-  lookAngle: 0
-  lookDir: {x: 0, y: 0}
   fireCooldownBonusAI: 0.5
   targetPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!195 &7594742761366824694
@@ -255,6 +255,19 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_SortAtRoot: 0
+--- !u!114 &3017557581855253714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181305973943668400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2581af3992929244b4e1183a07008eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmountMax: 100
 --- !u!1 &2119577455391413532
 GameObject:
   m_ObjectHideFlags: 0

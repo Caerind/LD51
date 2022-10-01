@@ -12,6 +12,8 @@ public class AIController : Soldier
 
     private void Awake()
     {
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.OnDeath += HealthSystem_OnDied;
         lineRenderer = GetComponentInChildren<LineRenderer>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -22,6 +24,11 @@ public class AIController : Soldier
         lookDir = new Vector2(0.0f, -1.0f);
 
         agent.speed = speed;
+    }
+
+    private void HealthSystem_OnDied(object sender, System.EventArgs e)
+    {
+        Destroy(gameObject);
     }
 
     private void Update()
