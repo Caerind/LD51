@@ -8,6 +8,7 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
+    [SerializeField] protected float reactionDevAngle = 15.0f;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
@@ -55,7 +56,10 @@ public class Soldier : MonoBehaviour
         Vector2 dir = GetLookDir();
         if (reactionFire)
         {
-            // TODO : Add random dev
+            float lookAngle = GetLookAngle();
+            lookAngle += Random.Range(-reactionDevAngle, reactionDevAngle);
+            lookAngle *= Mathf.Deg2Rad;
+            dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
         }
 
         Shoot(dir);
@@ -109,25 +113,22 @@ public class Soldier : MonoBehaviour
             Vector2 diff = (soldierPos - currentPos);
             if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
             {
+                float distance = diff.magnitude + 1.0f;
                 diff.Normalize();
                 if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
-                    /*
-                    transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg);
-                    if (isPlayerSoldier)
+                    // Do a raycast to check is there is obstacle between us
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance);
+                    if (hit.collider.gameObject == soldier.gameObject)
                     {
-                        transform.eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
-                    }
-                    else
-                    {
-                        Vector3 eulerAngles = transform.eulerAngles;
-                        transform.eulerAngles = new Vector3(GetLookAngle(), eulerAngles.y, eulerAngles.z);
-                    }
-                    */
+                        // Good so look at it
+                        SetLookDir(diff);
 
-                    if (CanFire())
-                    {
-                        Fire(reactionFire: true);
+                        // Fire at it if we can
+                        if (CanFire())
+                        {
+                            Fire(reactionFire: true);
+                        }
                     }
                 }
             }

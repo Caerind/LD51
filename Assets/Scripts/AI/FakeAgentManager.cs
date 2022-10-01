@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FakeAgentManager : MonoBehaviour
 {
     [SerializeField] private GameObject fakeAgentPrefab;
 
-    private void Start()
+    private void Awake()
     {
         General enemyGeneral = GameManager.Instance.GetEnemyGeneral();
         foreach (Soldier soldier in enemyGeneral.GetSoldiers())

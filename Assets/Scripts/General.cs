@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class General : MonoBehaviour
 {
@@ -57,6 +58,19 @@ public class General : MonoBehaviour
             {
                 soldiers[i].SetMainSoldier(false);
             }
+        }
+
+        // NextSelectedIndex
+        List<int> availables = GetAvailableIndexesForSelection();
+        if (availables.Count > 1)
+        {
+            int nextIndexInAvailable = availables.IndexOf(nextSelectedIndex);
+            if (nextIndexInAvailable < 0)
+            {
+                nextIndexInAvailable = 0;
+            }
+            nextIndexInAvailable = (nextIndexInAvailable + 1) % availables.Count;
+            nextSelectedIndex = availables[nextIndexInAvailable];
         }
     }
 
