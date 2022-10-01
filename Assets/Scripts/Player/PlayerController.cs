@@ -14,6 +14,20 @@ public class PlayerController : Soldier
         lookDir = new Vector2(0.0f, 1.0f);
     }
 
+    #region Gestion PV vie Mort
+    //Initialisation des PV
+    private void Start()
+    {
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.OnDeath += HealthSystem_OnDied;
+    }
+    //Gestiond de la mort
+    private void HealthSystem_OnDied(object sender, System.EventArgs e)
+    {
+        Destroy(gameObject);
+    }
+    #endregion
+
     private void Update()
     {
         UpdateSoldier();

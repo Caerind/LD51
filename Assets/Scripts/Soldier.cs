@@ -4,10 +4,12 @@ using UnityEngine;
 public class Soldier : MonoBehaviour
 {
     [SerializeField] protected float speed = 5.0f;
+    
     [SerializeField] protected float fireCooldown = 3.0f;
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
+    protected HealthSystem healthSystem;
 
     protected Vector2 lookDir;
 
@@ -18,7 +20,7 @@ public class Soldier : MonoBehaviour
     private bool fovUpdated = false;
 
     protected float timerFire = 900.0f;
-
+    
     public virtual void SetMainSoldier(bool mainSoldier)
     {
         if (isMainSoldier && !mainSoldier)
@@ -62,6 +64,8 @@ public class Soldier : MonoBehaviour
         {
             Debug.Log(gameObject.name + ": Fire");
         }
+        
+        healthSystem.Damage(10);
 
         timerFire = 0.0f;
     }
@@ -135,4 +139,5 @@ public class Soldier : MonoBehaviour
 
         fovUpdated = true;
     }
+
 }
