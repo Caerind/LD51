@@ -5,20 +5,23 @@ public class PlayerController : Soldier
 {
     private void Awake()
     {
-        healthSystem = GetComponent<HealthSystem>();
+        AwakeSoldier();
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
-        lineRenderer = GetComponentInChildren<LineRenderer>();
     }
 
     private void Start()
     {
-        isPlayerSoldier = true;
-        lookDir = new Vector2(0.0f, 1.0f);
+        StartSoldier(isPlayer: true, Vector2.up);
+    }
+
+    private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
+    {
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     private void Update()

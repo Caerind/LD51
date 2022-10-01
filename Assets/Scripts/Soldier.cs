@@ -9,13 +9,13 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
-    protected HealthSystem healthSystem;
 
     protected Vector2 lookDir;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
 
+    protected HealthSystem healthSystem;
     protected LineRenderer lineRenderer;
     private bool fovUpdated = false;
 
@@ -80,6 +80,18 @@ public class Soldier : MonoBehaviour
     protected virtual bool CanFire()
     {
         return false;
+    }
+
+    protected void AwakeSoldier()
+    {
+        healthSystem = GetComponent<HealthSystem>();
+        lineRenderer = GetComponentInChildren<LineRenderer>();
+    }
+
+    protected void StartSoldier(bool isPlayer, Vector2 look)
+    {
+        isPlayerSoldier = isPlayer;
+        lookDir = look;
     }
 
     protected void UpdateSoldier()

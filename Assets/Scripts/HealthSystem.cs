@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -8,7 +6,7 @@ public class HealthSystem : MonoBehaviour
     public event EventHandler OnDamaged;
     public event EventHandler OnDeath;
 
-    [SerializeField] private int healthAmountMax;
+    [SerializeField] private int healthAmountMax = 100;
     private int healthAmount;
 
     private void Awake()
@@ -31,13 +29,14 @@ public class HealthSystem : MonoBehaviour
 
     public bool IsDead()
     {
-        return healthAmount == 0;
+        return healthAmount <= 0;
     }
 
     public int GetHealthAMount()
     {
         return healthAmount;
     }
+
     public float GetHealthAmountNormalized()
     {
         return (float)healthAmount / healthAmountMax;
