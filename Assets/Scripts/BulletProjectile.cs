@@ -7,14 +7,13 @@ public class BulletProjectile : MonoBehaviour
     private Vector2 dir;
     [SerializeField] private float speed= 30f;
 
-    public static BulletProjectile Create(Soldier soldier)
+    public static BulletProjectile Create(Soldier soldier, Vector2 dir, float startDistance)
     {
         Transform pfBulletProjectile = Resources.Load<Transform>("pfBulletProjectile");
-        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.transform.position+ soldier.GetLookDir().ToVector3() * 2, Quaternion.identity);
+        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.transform.position + dir.ToVector3() * startDistance, Quaternion.identity);
 
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
-        bulletProjectile.dir = soldier.GetLookDir();
-
+        bulletProjectile.dir = dir;
         return bulletProjectile;
     }
 
@@ -25,7 +24,7 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Soldier soldier=collision.GetComponent<Soldier>();
+        Soldier soldier = collision.GetComponent<Soldier>();
         if (soldier != null)
         {
             Destroy(gameObject);

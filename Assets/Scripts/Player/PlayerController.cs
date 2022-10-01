@@ -12,7 +12,7 @@ public class PlayerController : Soldier
 
     private void Start()
     {
-        StartSoldier(isPlayer: true, Vector2.up);
+        StartSoldier(isPlayer: true);
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -71,9 +71,7 @@ public class PlayerController : Soldier
         }
         if (look != Vector2.zero)
         {
-            lookDir = new Vector2(look.x, look.y);
-            lookDir.Normalize();
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
+            SetLookDir(look.normalized);
         }
 
         // Fire
