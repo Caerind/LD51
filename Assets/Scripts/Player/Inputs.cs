@@ -33,6 +33,7 @@ public class Inputs : Singleton<Inputs>
     {
         look = value.Get<Vector2>();
         usingGamepad = true;
+        GameApplication.Instance.ShowCursor(false);
     }
 
     public void OnFire(InputValue value)
@@ -64,5 +65,6 @@ public class Inputs : Singleton<Inputs>
     {
         point = value.Get<Vector2>();
         usingGamepad = false;
+        GameApplication.Instance.ShowCursor(true);
     }
 }

@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
                 aiGeneral.SelectNextPlayer();
             }
         }
-        else
+        else if (playerGeneral != null && aiGeneral != null)
         {
             playerGeneral.SelectNextPlayer();
             aiGeneral.SelectNextPlayer();
@@ -41,12 +41,14 @@ public class GameManager : Singleton<GameManager>
         return isPlaying;
     }
 
+    /*
     private void OnGUI()
     {
         GUI.Label(new Rect(5, 5, 100, 25), "ZonePlayer: " + ((AIGeneral)aiGeneral).GetPlayerZone().GetCompteur().ToString());
         GUI.Label(new Rect(5, 35, 100, 25), "ZoneEnemy: " + ((AIGeneral)aiGeneral).GetEnemyZone().GetCompteur().ToString());
         GUI.Label(new Rect(5, 60, 100, 25), "AINext: " + aiGeneral.GetNextSelectedIndex().ToString());
     }
+    */
 
     public float GetTimer()
     {
