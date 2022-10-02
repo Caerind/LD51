@@ -140,14 +140,27 @@ public class AIController : Soldier
         // ReachInterestPoint
         {
             List<InterestPoint> interestPoints = GameManager.Instance.GetAllInterestPoints();
+
+            InterestPoint bestPoint = null;
+            float bestScore = -1.0f;
+
             foreach (var point in interestPoints)
             {
                 if (!point.IsLocked() && (point.transform.position - transform.position).sqrMagnitude < maxDistanceLookBrain * maxDistanceLookBrain)
                 {
-                    float score = 0.0f; // point.GetBaseScore();
-                    // TODO : Improve compute score
-                    results.Add(new Objective(ObjectiveType.ReachInterestPoint, point.gameObject, gameObject, score));
+                    float score = point.GetBaseScore();
+
+                    if (score > bestScore)
+                    {
+                        bestPoint = point;
+                        bestScore = score;
+                    }
                 }
+            }
+
+            if (bestPoint != null)
+            {
+                results.Add(new Objective(ObjectiveType.ReachInterestPoint, bestPoint.gameObject, gameObject, bestScore));
             }
         }
 
