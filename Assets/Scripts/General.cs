@@ -57,6 +57,11 @@ public class General : MonoBehaviour
         return selectedSoldier;
     }
 
+    public Soldier GetNextSelectedSoldier()
+    {
+        return nextSelectedSoldier;
+    }
+
     public void SelectNextPlayer()
     {
         for (int i = 0; i < soldiers.Count; ++i)

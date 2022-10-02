@@ -10,10 +10,6 @@ using UnityEngine;
 
 public class StartZone : MonoBehaviour
 {
-    [SerializeField] private int genZonePointCount = 30;
-    [SerializeField] private float genZonePointInterval = -4.0f;
-    [SerializeField] private float yDir = 2;
-
     [SerializeField] private bool playerZone;
     [SerializeField] private float timerMax = 30.0f;
 
@@ -64,6 +60,9 @@ public class StartZone : MonoBehaviour
 
 #if UNITY_EDITOR
     /*
+    [SerializeField] private int genZonePointCount = 30;
+    [SerializeField] private float genZonePointInterval = -4.0f;
+    [SerializeField] private float yDir = 2;
     [CustomEditor(typeof(StartZone))]
     internal class StartZoneEditor : Editor
     {

@@ -60,6 +60,11 @@ public class Soldier : MonoBehaviour
         return IsPlayerSoldier() ? GameManager.Instance.GetEnemyGeneral() : GameManager.Instance.GetPlayerGeneral();
     }
 
+    public HealthSystem GetHealthSystem()
+    {
+        return healthSystem;
+    }
+
     public void Fire(bool reactionFire = false)
     {
         float lookAngle = GetLookAngle();
