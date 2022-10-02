@@ -11,7 +11,9 @@ public class PlayerController : Soldier
     [SerializeField] private GameObject CircleBlue;
     [SerializeField] private GameObject CircleWhite;
     [SerializeField] private Transform cameraTarget;
-
+    [SerializeField] private GameObject bloodDeath;
+    [SerializeField] private GameObject bloodImpact;
+    
     private LineRenderer gamepadLine;
 
     private void Awake()
@@ -37,6 +39,7 @@ public class PlayerController : Soldier
             {
                 SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
             }
+            Instantiate(bloodImpact, transform.position, Quaternion.identity);
         }
     }
 
@@ -53,9 +56,11 @@ public class PlayerController : Soldier
         {
             PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
-
+        
         gamepadLine.enabled = false;
-
+        
+        Instantiate(bloodDeath, transform.position, Quaternion.identity);
+        
         Destroy(gameObject);
     }
 

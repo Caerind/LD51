@@ -367,6 +367,8 @@ MonoBehaviour:
   CircleBlue: {fileID: 466941874454349262}
   CircleWhite: {fileID: 1731080772177184833}
   cameraTarget: {fileID: 5304325853869980212}
+  bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
+  bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
 --- !u!210 &4253678537685930034
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -872,6 +874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartZoneTriggerer
       objectReference: {fileID: 0}
+    - target: {fileID: 8828477360329918660, guid: c05379f996a339f4bb8917941c7e49f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c05379f996a339f4bb8917941c7e49f6, type: 3}
@@ -935,6 +941,10 @@ PrefabInstance:
     - target: {fileID: 9214843365170148758, guid: e4ad4463f639601459ee74fdb9635878, type: 3}
       propertyPath: m_Name
       value: BulletDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214843365170148758, guid: e4ad4463f639601459ee74fdb9635878, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
