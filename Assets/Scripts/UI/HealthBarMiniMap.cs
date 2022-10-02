@@ -8,6 +8,7 @@ public class HealthBarMiniMap : MonoBehaviour
     private Transform fullBarTransform;
     private Transform barTransform;
     [SerializeField] private Image image;
+    [SerializeField] private float alphaDied = 0.2f;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class HealthBarMiniMap : MonoBehaviour
 
     private void HealthSystem_OnDeath(object sender, EventArgs e)
     {
-        image.color = Color.gray;
+        image.color = new Color(1.0f, 1.0f, 1.0f, alphaDied);
         Destroy(gameObject);
     }
 

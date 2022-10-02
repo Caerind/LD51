@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -33,7 +34,10 @@ public class AIController : Soldier
             {
                 SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
             }
-            Instantiate(bloodImpact, transform.position, Quaternion.identity);
+
+            // Blood
+            GameObject part = Instantiate(bloodImpact, transform.position, Quaternion.identity);
+            Destroy(part, 2.0f);
         }
     }
 
@@ -44,7 +48,11 @@ public class AIController : Soldier
         // Spawn new entity
         Transform pfDeadBody = Resources.Load<Transform>("pfDeadBodyAI");
         Instantiate(pfDeadBody, transform.position, Quaternion.identity).eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
-        Instantiate(bloodDeath, transform.position, Quaternion.identity);
+
+        // Blood
+        GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
+        Destroy(part, 2.0f);
+
         Destroy(gameObject);
     }
 

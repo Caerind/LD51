@@ -40,7 +40,10 @@ public class PlayerController : Soldier
             {
                 SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
             }
-            Instantiate(bloodImpact, transform.position, Quaternion.identity);
+
+            // Blood
+            GameObject part = Instantiate(bloodImpact, transform.position, Quaternion.identity);
+            Destroy(part, 2.0f);
         }
     }
 
@@ -60,8 +63,10 @@ public class PlayerController : Soldier
         
         gamepadLine.enabled = false;
 
-        Instantiate(bloodDeath, transform.position, Quaternion.identity);
-        
+        // Blood
+        GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
+        Destroy(part, 2.0f);
+
         Destroy(gameObject);
     }
 

@@ -28,16 +28,29 @@ public class StartZone : MonoBehaviour
 
     private void Update()
     {
-        //test victoire
-        if (timer > timerMax)
-        { 
-            Debug.Log("VICTORY");
+        if (GameManager.Instance.GetPlayerGeneral().GetSoldiers().Count == 0)
+        {
+            GameManager.Instance.Reset();
+            GameApplication.Instance.SetPlayerWin(false);
         }
+        if (GameManager.Instance.GetEnemyGeneral().GetSoldiers().Count == 0)
+        {
+            GameManager.Instance.Reset();
+            GameApplication.Instance.SetPlayerWin(true);
+        }
+
+        // TODO : UI Timer Win
 
         // Increment Timer
         if (compteur > 0)
         {
             timer += Time.deltaTime;
+
+            if (timer > timerMax)
+            {
+                GameManager.Instance.Reset();
+                GameApplication.Instance.SetPlayerWin(!playerZone);
+            }
         }
         else
         {
