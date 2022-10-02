@@ -137,11 +137,12 @@ public class AIController : Soldier
     {
         List<Objective> results = new List<Objective>();
 
+        // ReachInterestPoint
         {
             List<InterestPoint> interestPoints = GameManager.Instance.GetAllInterestPoints();
             foreach (var point in interestPoints)
             {
-                if ((point.transform.position - transform.position).sqrMagnitude < maxDistanceLookBrain * maxDistanceLookBrain)
+                if (!point.IsLocked() && (point.transform.position - transform.position).sqrMagnitude < maxDistanceLookBrain * maxDistanceLookBrain)
                 {
                     float score = 0.0f; // point.GetBaseScore();
                     // TODO : Improve compute score
@@ -224,17 +225,31 @@ public class AIController : Soldier
             }
         }
 
+        // AttackPlayer
         {
             List<Soldier> playerSoldiers = GameManager.Instance.GetPlayerGeneral().GetSoldiers();
+
+            Soldier bestPlayer = null;
+            float bestScore = -1.0f;
+
             foreach (var soldier in playerSoldiers)
             {
                 // *4 (2^2) here because, we can move+shoot
                 if ((soldier.transform.position - transform.position).sqrMagnitude < 4.0f * maxDistanceLookBrain * maxDistanceLookBrain)
                 {
-                    float score = 0.0f;
-                    // TODO : Best score is player is not covered/low life
-                    results.Add(new Objective(ObjectiveType.AttackPlayer, soldier.gameObject, gameObject, score));
+                    float score = 100.0f - soldier.GetHealthSystem().GetHealthAmount();
+
+                    if (score > bestScore)
+                    {
+                        bestPlayer = soldier;
+                        bestScore = score;
+                    }
                 }
+            }
+
+            if (bestPlayer != null)
+            {
+                results.Add(new Objective(ObjectiveType.AttackPlayer, bestPlayer.gameObject, gameObject, bestScore));
             }
         }
 

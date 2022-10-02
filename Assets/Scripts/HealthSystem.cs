@@ -32,7 +32,7 @@ public class HealthSystem : MonoBehaviour
         return healthAmount <= 0;
     }
 
-    public int GetHealthAMount()
+    public int GetHealthAmount()
     {
         return healthAmount;
     }

@@ -4,6 +4,8 @@ public class InterestPoint : MonoBehaviour
 {
     [SerializeField] private float baseScore = 10.0f;
 
+    private bool locked = false;
+
     private void Awake()
     {
         GameManager.Instance.RegisterInterestPoint(this);
@@ -12,6 +14,16 @@ public class InterestPoint : MonoBehaviour
     public float GetBaseScore()
     {
         return baseScore;
+    }
+
+    public bool IsLocked()
+    {
+        return locked;
+    }
+
+    public void SetIsLocked(bool locked)
+    {
+        this.locked = locked;
     }
 
     public Vector2 GetLookDir()
