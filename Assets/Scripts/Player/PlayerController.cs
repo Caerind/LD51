@@ -10,7 +10,9 @@ public class PlayerController : Soldier
     [SerializeField] private float TimerTirShake = 1f;
     [SerializeField] private float IntensiteDegatShake = 6f;
     [SerializeField] private float TimerDegatShake = 3f;
-    
+    [SerializeField] private GameObject CircleBlue;
+    [SerializeField] private GameObject CircleWhite;
+
     private void Awake()
     {
         AwakeSoldier(isPlayer: true);
@@ -64,6 +66,23 @@ public class PlayerController : Soldier
         else
         {
             UpdateReactions();
+        }
+
+        General general = GetGeneral();
+        if (this==general.GetNextSelectedSoldier())
+        {
+            CircleWhite.SetActive(true);
+            CircleBlue.SetActive(true);
+        }
+        else if(this==general.GetSelectedSoldier())
+        {
+            CircleWhite.SetActive(true);
+            CircleBlue.SetActive(false);
+        }
+        else
+        {
+            CircleWhite.SetActive(false);
+            CircleBlue.SetActive(true);
         }
     }
 
