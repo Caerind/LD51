@@ -13,7 +13,8 @@ public class PlayerController : Soldier
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private GameObject bloodDeath;
     [SerializeField] private GameObject bloodImpact;
-    
+    [SerializeField] private AudioSource Deplacement;
+
     private LineRenderer gamepadLine;
 
     private void Awake()
@@ -96,6 +97,7 @@ public class PlayerController : Soldier
         }
         else
         {
+            Deplacement.Stop();
             animator?.SetFloat(animIDMvt, 0.0f);
             isMoving = false;
             gamepadLine.enabled = false;
@@ -109,13 +111,24 @@ public class PlayerController : Soldier
         // Mvt
         float mvt = inputs.move.magnitude;
         animator?.SetFloat(animIDMvt, mvt);
+        bool wasmooving = isMoving;
         isMoving = mvt > 0.05f;
+        if(wasmooving != isMoving)
+        {
+            if (isMoving)
+            {
+                Deplacement.Play();
+            }
+            else
+            {
+                Deplacement.Stop();
+            }
+        }
         if (inputs.move != Vector2.zero)
         {
             float s = GetSpeed() * Time.deltaTime;
             transform.position += new Vector3(s * inputs.move.x, s * inputs.move.y, 0.0f);
         }
-
         // Look
         Vector2 look = Vector2.zero;
         if (inputs.IsUsingGamepad())
@@ -125,7 +138,6 @@ public class PlayerController : Soldier
                 look = inputs.look;
                 cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.25f;
             }
-
             gamepadLine.enabled = true;
             if (gamepadLine != null)
             {

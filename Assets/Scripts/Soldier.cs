@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Soldier : MonoBehaviour
@@ -18,6 +19,10 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float cacHitRadius = 0.25f;
     [SerializeField] protected int cacDamage = 70;
     [SerializeField] private float updateReactionTimer = 0.1f;
+    [SerializeField] private AudioSource TirRecharge;
+    [SerializeField] private AudioSource Baïonette;
+    [SerializeField] private AudioSource Blessure;
+    [SerializeField] public AudioSource Mort;
 
     private float reactionTimer;
 
@@ -108,14 +113,20 @@ public class Soldier : MonoBehaviour
         BulletProjectile.Create(this, dir);
 
         timerAction = 0.0f;
+        TirRecharge.Play();
     }
 
     public void Cac()
     {
         animator?.SetTrigger(animIDCac);
         justCaced = true;
-
+        Baïonette.Play();
         timerAction = 0.0f;
+    }
+
+    public void Deces()
+    {
+        Mort.Play();
     }
 
     public void CacHit()
@@ -144,7 +155,6 @@ public class Soldier : MonoBehaviour
         {
             soldier.RecevedDamage(cacDamage, this);
 
-            // TODO : Sound touched
 
             if (IsPlayerSoldier() && IsMainSoldier())
             {
@@ -159,6 +169,7 @@ public class Soldier : MonoBehaviour
 
     public void RecevedDamage(int Damage, Soldier shooter)
     {
+        Blessure.Play();
         healthSystem.Damage(Damage, shooter);
     }
 

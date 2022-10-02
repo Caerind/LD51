@@ -5,8 +5,8 @@ public class HealthSystem : MonoBehaviour
 {
     public event EventHandler OnDamaged;
     public event EventHandler OnDeath;
-
     [SerializeField] private int healthAmountMax = 100;
+
     private int healthAmount;
 
     private void Awake()
@@ -23,6 +23,8 @@ public class HealthSystem : MonoBehaviour
 
         if (IsDead())
         {
+            shooter.Deces();
+
             OnDeath?.Invoke(shooter, EventArgs.Empty);
         }
     }
