@@ -13,6 +13,7 @@ public class BulletDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // TODO : Fake agent
         BulletProjectile bullet = collision.GetComponent<BulletProjectile>();
         if (bullet != null && bullet.GetShooter() != null && bullet.GetShooter().IsPlayerSoldier() != soldier.IsPlayerSoldier())
         {

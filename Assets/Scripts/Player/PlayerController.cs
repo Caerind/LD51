@@ -12,6 +12,8 @@ public class PlayerController : Soldier
     [SerializeField] private GameObject CircleWhite;
     [SerializeField] private Transform cameraTarget;
 
+    private LineRenderer gamepadLine;
+
     private void Awake()
     {
         AwakeSoldier(isPlayer: true);
@@ -19,6 +21,7 @@ public class PlayerController : Soldier
         healthSystem.OnDeath += HealthSystem_OnDied;
         fovLight.pointLightInnerRadius = 0.0f;
         fovLight.pointLightOuterRadius = fireDistance;
+        gamepadLine = cameraTarget.GetComponent<LineRenderer>();
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -51,6 +54,8 @@ public class PlayerController : Soldier
             PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
 
+        gamepadLine.enabled = false;
+
         Destroy(gameObject);
     }
 
@@ -77,11 +82,13 @@ public class PlayerController : Soldier
         if (mainSoldier)
         {
             PlayerCameraController.Instance.SetFollow(cameraTarget);
+            gamepadLine.enabled = true;
         }
         else
         {
             animator?.SetFloat(animIDMvt, 0.0f);
             isMoving = false;
+            gamepadLine.enabled = false;
         }
     }
 
@@ -101,16 +108,35 @@ public class PlayerController : Soldier
 
         // Look
         Vector2 look = Vector2.zero;
-        if (inputs.look != Vector2.zero) // Gamepad
+        if (inputs.IsUsingGamepad())
         {
-            look = inputs.look;
-            cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.33f;
+            if (inputs.look != Vector2.zero) // Gamepad
+            {
+                look = inputs.look;
+                cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.25f;
+            }
+
+            gamepadLine.enabled = true;
+            if (gamepadLine != null)
+            {
+                Vector3[] lines = new Vector3[2];
+                lines[0] = transform.position;
+                lines[1] = transform.position + look.ToVector3() * fireDistance * 0.5f;
+                gamepadLine.useWorldSpace = true;
+                gamepadLine.positionCount = 2;
+                gamepadLine.SetPositions(lines);
+            }
         }
-        else if (inputs.point != Vector2.zero) // Mouse
+        else
         {
-            Vector3 diff = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position);
-            look = diff.ToVector2();
-            cameraTarget.transform.position = transform.position + diff * 0.5f;
+            if (inputs.point != Vector2.zero) // Mouse
+            {
+                Vector3 diff = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position);
+                look = diff.ToVector2();
+                cameraTarget.transform.position = transform.position + diff * 0.5f;
+            }
+
+            gamepadLine.enabled = false;
         }
         if (look != Vector2.zero)
         {
