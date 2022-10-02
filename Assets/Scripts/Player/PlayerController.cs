@@ -120,6 +120,7 @@ public class PlayerController : Soldier
         // Fire
         if (inputs.fire && CanFire())
         {
+            inputs.fire = false;
             Fire();
             PlayerCameraController.Instance.Shake(IntensiteTirShake, TimerTirShake);
         }
@@ -127,6 +128,7 @@ public class PlayerController : Soldier
         // Cac
         if (inputs.cac && CanCac())
         {
+            inputs.cac = false;
             Cac();
         }
     }

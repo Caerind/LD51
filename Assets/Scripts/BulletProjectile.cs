@@ -38,9 +38,9 @@ public class BulletProjectile : MonoBehaviour
         {
             soldier = collision.GetComponentInParent<FakeAgent>()?.GetSoldier();
         }
-
         if (soldier != null)
         {
+            Debug.Log("Soldier " + collision.gameObject.name);
             Destroy(gameObject);
             soldier.RecevedDamage(degat, shooter);
         }
@@ -52,11 +52,13 @@ public class BulletProjectile : MonoBehaviour
                 float random = Random.Range(0f, 1f);
                 if (random <= cover.coverPercent)
                 {
+                    Debug.Log("Cover " + collision.gameObject.name);
                     Destroy(gameObject);
                 }
             }
             else
             {
+                Debug.Log("Any " + collision.gameObject.name);
                 Destroy(gameObject);
             }
         }
