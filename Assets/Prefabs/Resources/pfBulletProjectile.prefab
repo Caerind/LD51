@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 60
-  degat: 20
+  degat: 200
 --- !u!61 &8282163101496704253
 BoxCollider2D:
   m_ObjectHideFlags: 0
