@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class AIController : Soldier
 {
@@ -9,6 +10,7 @@ public class AIController : Soldier
     [SerializeField] private float maxDistanceLookBrain = 40.0f;
     [SerializeField] private GameObject bloodDeath;
     [SerializeField] private GameObject bloodImpact;
+    [SerializeField] private AudioSource Deplacement;
 
     private InterestPoint point = null;
     private bool justFoundPoint = false;
@@ -69,6 +71,7 @@ public class AIController : Soldier
         if (!mainSoldier)
         {
             animator?.SetFloat(animIDMvt, 0.0f);
+            Deplacement.Stop();
         }
     }
 
@@ -130,14 +133,32 @@ public class AIController : Soldier
             Vector2 mvt = transform.position.ToVector2() - prevPos;
             float mvtMagn = mvt.magnitude;
             animator?.SetFloat(animIDMvt, mvtMagn);
+            bool wasmooving = isMoving;
             isMoving = mvtMagn > 0.05f;
+
+            if (wasmooving != isMoving)
+            {
+                if (isMoving)
+                {
+                    Deplacement.Play();
+                }
+                else
+                {
+                    Deplacement.Stop();
+                }
+            }
             if (mvt != Vector2.zero)
             {
+                Deplacement.Play();
                 SetLookDir(mvt.normalized);
             }
             else if (point != null && (transform.position - point.transform.position).sqrMagnitude < 1.0f * 1.0f)
             {
                 SetLookDir(point.GetLookDir());
+            }
+            if (mvt == Vector2.zero)
+            {
+                Deplacement.Stop();
             }
 
             agent.SetAngle(transform.eulerAngles.z);
