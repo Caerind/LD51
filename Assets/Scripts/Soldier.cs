@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,21 +8,27 @@ public class Soldier : MonoBehaviour
     
     [SerializeField] protected float fireCooldown = 3.0f;
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
+    [SerializeField] protected float cacCooldown = 1.0f;
+    [SerializeField] protected float cacCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
     [SerializeField] protected float reactionDevAngle = 5.0f;
     [SerializeField] protected float fireDevAngle = 2.5f;
     [SerializeField] protected Transform bulletSpawn;
+    [SerializeField] protected Transform cacHitCast;
+    [SerializeField] protected float cacHitRadius = 0.25f;
+    [SerializeField] protected int cacDamage = 70;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
     private bool justFired = false;
+    private bool justCaced = false;
 
     protected Animator animator;
     protected HealthSystem healthSystem;
     protected LineRenderer lineRenderer;
 
-    protected float timerFire = 900.0f;
+    protected float timerAction = 900.0f;
 
     private float speedMultiplier = 1.0f;
 
@@ -90,7 +97,46 @@ public class Soldier : MonoBehaviour
 
         BulletProjectile.Create(this, dir);
 
-        timerFire = 0.0f;
+        timerAction = 0.0f;
+    }
+
+    public void Cac()
+    {
+        animator?.SetTrigger("cac");
+        justCaced = true;
+
+        timerAction = 0.0f;
+    }
+
+    public void CacHit()
+    {
+        Soldier soldier = null;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(cacHitCast.transform.position.ToVector2(), cacHitRadius);
+        foreach (var collider in colliders)
+        {
+            soldier = collider.GetComponent<Soldier>();
+            if (soldier == null)
+            {
+                soldier = collider.GetComponentInParent<Soldier>();
+                if (soldier == null)
+                {
+                    soldier = collider.GetComponentInParent<FakeAgent>()?.GetSoldier();
+                }
+            }
+            if (soldier != null)
+                break;
+        }
+        if (soldier != null)
+        {
+            soldier.RecevedDamage(cacDamage, this);
+
+            // TODO : Sound
+
+            if (IsPlayerSoldier() && IsMainSoldier())
+            {
+                PlayerCameraController.Instance.Shake(5.0f, 1.0f);
+            }
+        }
     }
 
     public void RecevedDamage(int Damage, Soldier shooter)
@@ -108,6 +154,11 @@ public class Soldier : MonoBehaviour
         return false;
     }
 
+    protected virtual bool CanCac()
+    {
+        return false;
+    }
+
     protected void AwakeSoldier(bool isPlayer)
     {
         animator = GetComponentInChildren<Animator>();
@@ -119,12 +170,17 @@ public class Soldier : MonoBehaviour
 
     protected void UpdateSoldier()
     {
-        timerFire += Time.deltaTime;
+        timerAction += Time.deltaTime;
 
         if (justFired)
         {
             animator?.ResetTrigger("fire");
             justFired = false;
+        }
+        if (justCaced)
+        {
+            animator?.ResetTrigger("cac");
+            justCaced = false;
         }
     }
 

@@ -41,7 +41,6 @@ public class BulletProjectile : MonoBehaviour
             soldier.RecevedDamage(degat, shooter);
         }
 
-        Debug.Log(collision.gameObject);
         Destroy(gameObject);
     }
 }
