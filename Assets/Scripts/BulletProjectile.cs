@@ -1,15 +1,15 @@
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 public class BulletProjectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 60f;
-    [SerializeField] private int degat = 20;
+    [SerializeField] private float speed = 50.0f;
+    [SerializeField] private int degat = 40;
+    [SerializeField] private float distanceMinForCover = 3.0f;
 
     private Soldier shooter;
     private Vector2 dir;
-    private float maxdistance;
+    private float maxDistance;
+    private float distanceDone;
 
     public static BulletProjectile Create(Soldier soldier, Vector2 dir)
     {
@@ -18,7 +18,8 @@ public class BulletProjectile : MonoBehaviour
 
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
         bulletProjectile.dir = dir;
-        bulletProjectile.maxdistance = soldier.GetFireDistanceMax();
+        bulletProjectile.maxDistance = soldier.GetFireDistanceMax();
+        bulletProjectile.distanceDone = 0.0f;
         bulletProjectile.shooter = soldier;
         return bulletProjectile;
     }
@@ -26,9 +27,14 @@ public class BulletProjectile : MonoBehaviour
     private void Update()
     {
         transform.position += dir.ToVector3() * speed * Time.deltaTime;
-        maxdistance = maxdistance - (Time.deltaTime * speed);
-        if(maxdistance <= 0) 
+        float mvt = Time.deltaTime * speed;
+        maxDistance -= mvt;
+        distanceDone += mvt;
+        if (maxDistance <= 0)
+        {
+            Debug.Log("Decay");
             Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,12 +55,19 @@ public class BulletProjectile : MonoBehaviour
             Cover cover = collision.GetComponent<Cover>();
             if (cover != null)
             {
-                float random = Random.Range(0f, 1f);
-                if (random <= cover.coverPercent)
+                if (distanceDone > distanceMinForCover)
                 {
-                    Debug.Log("Cover " + collision.gameObject.name);
-                    Destroy(gameObject);
+                    float random = Random.Range(0f, 1f);
+                    if (random <= cover.coverPercent)
+                    {
+                        Debug.Log("Cover " + collision.gameObject.name);
+                        Destroy(gameObject);
+                    }
                 }
+                else
+                {
+                    // Don't destroy if close from cover
+                }                
             }
             else
             {
