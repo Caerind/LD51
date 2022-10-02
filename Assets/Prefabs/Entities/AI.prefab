@@ -57,13 +57,15 @@ MonoBehaviour:
   cacCooldown: 1
   cacCooldownBonusReaction: 0.5
   fov: 60
-  fireDistance: 40
+  fireDistance: 30
   reactionDevAngle: 5
   fireDevAngle: 2.5
+  fireDevAngleMoving: 2.5
   bulletSpawn: {fileID: 898977411426490754}
   cacHitCast: {fileID: 3819169800934112692}
   cacHitRadius: 0.25
   cacDamage: 70
+  updateReactionTimer: 0.1
   fireCooldownBonusAI: 0.5
   cacCooldownBonusAI: 0.5
   maxDistanceLookBrain: 40

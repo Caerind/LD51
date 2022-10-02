@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Windows;
 
 public class PlayerController : Soldier
 {
@@ -13,6 +10,7 @@ public class PlayerController : Soldier
     [SerializeField] private float TimerDegatShake = 3f;
     [SerializeField] private GameObject CircleBlue;
     [SerializeField] private GameObject CircleWhite;
+    [SerializeField] private Transform cameraTarget;
 
     private void Awake()
     {
@@ -50,7 +48,7 @@ public class PlayerController : Soldier
         // Center cam on new entity
         if (IsMainSoldier())
         {
-            PlayerCameraController.Instance.SetFollow(transform);
+            PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
 
         Destroy(gameObject);
@@ -70,7 +68,6 @@ public class PlayerController : Soldier
         }
 
         UpdateMinimap();
-
     }
 
     public override void SetMainSoldier(bool mainSoldier)
@@ -79,7 +76,7 @@ public class PlayerController : Soldier
 
         if (mainSoldier)
         {
-            PlayerCameraController.Instance.SetFollow(transform);
+            PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
         else
         {
@@ -107,10 +104,13 @@ public class PlayerController : Soldier
         if (inputs.look != Vector2.zero) // Gamepad
         {
             look = inputs.look;
+            cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.33f;
         }
         else if (inputs.point != Vector2.zero) // Mouse
         {
-            look = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position).ToVector2();
+            Vector3 diff = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position);
+            look = diff.ToVector2();
+            cameraTarget.transform.position = transform.position + diff * 0.5f;
         }
         if (look != Vector2.zero)
         {
