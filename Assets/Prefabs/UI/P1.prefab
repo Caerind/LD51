@@ -206,7 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerID: 0
   WhiteHalo: {fileID: 1520449568579518071}
-  HealthBar: {fileID: 0}
 --- !u!1001 &6115159917642509208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,49 +258,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2348069519580252159, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 2348069519580252159, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476957598061376580, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3476957598061376580, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
+    - target: {fileID: 358395293246277754, guid: a2674065a63c4c640b731722f870ea06, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 9054830927385803984}
     - target: {fileID: 4971369882149611172, guid: a2674065a63c4c640b731722f870ea06, type: 3}
       propertyPath: m_Name
       value: pfHealthBarMiniMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939626273130225414, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939626273130225414, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939626273130225414, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939626273130225414, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430092221311329251, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8430092221311329251, guid: a2674065a63c4c640b731722f870ea06, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

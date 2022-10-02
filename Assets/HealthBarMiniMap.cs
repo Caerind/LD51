@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBarMiniMap : MonoBehaviour
 {
     private HealthSystem healthSystem;
     private Transform fullBarTransform;
     private Transform barTransform;
+    [SerializeField] private Image image;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class HealthBarMiniMap : MonoBehaviour
 
     private void HealthSystem_OnDeath(object sender, EventArgs e)
     {
+        image.color = Color.gray;
         Destroy(gameObject);
     }
 
