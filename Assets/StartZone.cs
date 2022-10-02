@@ -45,6 +45,18 @@ public class StartZone : MonoBehaviour
         { 
             Debug.Log("VICTORY");
         }
+
+        General general=GameManager.Instance.GetPlayerGeneral();
+        General generalEnemy = GameManager.Instance.GetEnemyGeneral();
+        //Loose
+        if (general.GetSoldiers().Count ==0)
+        {
+            Debug.Log("Loose");
+        }
+        if (generalEnemy.GetSoldiers().Count == 0 )
+        {
+            Debug.Log("Win");
+        }
         //Increment Timer
         if (compteur>0)
         {

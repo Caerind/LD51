@@ -27,6 +27,8 @@ public class GameManager : Singleton<GameManager>
             playerGeneral.SelectNextPlayer();
             aiGeneral.SelectNextPlayer();
             isPlaying = true;
+            AudioManager.PlaySound("TICTAC");
+            AudioManager.PlaySound("Battement");
         }
     }
 
