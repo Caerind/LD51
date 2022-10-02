@@ -7,9 +7,12 @@ public class FakeAgent : MonoBehaviour
 
     private NavMeshAgent agent;
     private Soldier soldier;
+    private Transform physx;
 
     public void Init(Soldier soldier)
     {
+        physx = transform.Find("Physx");
+
         transform.position = soldier.transform.position;
 
         agent = GetComponent<NavMeshAgent>();
@@ -57,5 +60,10 @@ public class FakeAgent : MonoBehaviour
     public Soldier GetSoldier()
     {
         return soldier;
+    }
+
+    public void SetAngle(float z)
+    {
+        physx.localEulerAngles = new Vector3(90.0f, 90.0f, z + 90);
     }
 }

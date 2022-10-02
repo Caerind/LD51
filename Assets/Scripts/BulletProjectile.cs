@@ -1,4 +1,6 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class BulletProjectile : MonoBehaviour
 {
@@ -36,11 +38,37 @@ public class BulletProjectile : MonoBehaviour
         {
             soldier = collision.GetComponentInParent<FakeAgent>()?.GetSoldier();
         }
+
         if (soldier != null)
         {
+            Destroy(gameObject);
             soldier.RecevedDamage(degat, shooter);
         }
+        else if (collision.GetComponent<BulletDetector>() == null)
+        {
+            Cover cover = collision.GetComponent<Cover>();
+            if (cover != null)
+            {
+                float random = Random.Range(0f, 1f);
+                if (random <= cover.coverPercent)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        /*
+        else // If we have a BulletDetector, don't Destory
+        {
+        }
+        */
+    }
 
-        Destroy(gameObject);
+    public Soldier GetShooter()
+    {
+        return shooter;
     }
 }
