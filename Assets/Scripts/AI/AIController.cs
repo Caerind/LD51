@@ -37,8 +37,8 @@ public class AIController : Soldier
         GetGeneral().RemoveRefToSoldier(this);
 
         // Spawn new entity
-        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBody");
-        Instantiate(pfDeadBody, transform.position, Quaternion.identity);
+        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBodyAI");
+        Instantiate(pfDeadBody, transform.position, Quaternion.identity).eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
 
         Destroy(gameObject);
     }
