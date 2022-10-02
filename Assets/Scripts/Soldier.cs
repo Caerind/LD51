@@ -9,7 +9,10 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireCooldownBonusReaction = 0.5f;
     [SerializeField] protected float fov = 60.0f;
     [SerializeField] protected float fireDistance = 40.0f;
-    [SerializeField] protected float reactionDevAngle = 15.0f;
+    [SerializeField] protected float reactionDevAngle = 5.0f;
+    [SerializeField] protected float fireDevAngle = 2.5f;
+
+    private const float extraPhysxBulletDistance = 1.0f;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
@@ -59,16 +62,20 @@ public class Soldier : MonoBehaviour
 
     public void Fire(bool reactionFire = false)
     {
-        Vector2 dir = GetLookDir();
+        float lookAngle = GetLookAngle();
         if (reactionFire)
         {
-            float lookAngle = GetLookAngle();
             lookAngle += Random.Range(-reactionDevAngle, reactionDevAngle);
-            lookAngle *= Mathf.Deg2Rad;
-            dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
         }
+        else
+        {
+            lookAngle += Random.Range(-fireDevAngle, fireDevAngle);
+        }
+        lookAngle *= Mathf.Deg2Rad;
+        Vector2 dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
 
         Shoot(dir);
+
         timerFire = 0.0f;
     }
 
@@ -79,8 +86,9 @@ public class Soldier : MonoBehaviour
 
     private void Shoot(Vector2 dir)
     {
-        BulletProjectile.Create(this, dir, 2.0f);
+        BulletProjectile.Create(this, dir, extraPhysxBulletDistance);
     }
+
     public float GetFireDistanceMax()
     {
         return fireDistance;
@@ -115,14 +123,13 @@ public class Soldier : MonoBehaviour
             Vector2 diff = (soldierPos - currentPos);
             if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
             {
-                const float extraDistanceForRaycast = 1.0f;
-                float distance = diff.magnitude - extraDistanceForRaycast;
+                float distance = diff.magnitude - extraPhysxBulletDistance;
                 diff.Normalize();
                 if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
                     // Do a raycast to check is there is obstacle between us
                     LayerMask mask = LayerMask.GetMask("Default");
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraDistanceForRaycast * diff, diff, distance, mask);
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraPhysxBulletDistance * diff, diff, distance, mask);
                     if (hit.collider.gameObject == soldier.gameObject)
                     {
                         // Good so look at it

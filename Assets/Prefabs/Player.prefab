@@ -141,7 +141,8 @@ MonoBehaviour:
   fireCooldownBonusReaction: 0.5
   fov: 60
   fireDistance: 40
-  reactionDevAngle: 15
+  reactionDevAngle: 5
+  fireDevAngle: 2.5
   fovLight: {fileID: 1627116386072193263}
   IntensiteTirShake: 3
   TimerTirShake: 1

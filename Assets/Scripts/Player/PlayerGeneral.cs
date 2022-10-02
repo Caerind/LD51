@@ -15,26 +15,22 @@ public class PlayerGeneral : General
         {
             if (inputs.nextLeft || inputs.nextRight)
             {
-                List<int> availables = GetAvailableIndexesForSelection();
-                int nextIndexInAvailable = availables.IndexOf(nextSelectedIndex);
-                if (nextIndexInAvailable < 0)
-                {
-                    nextIndexInAvailable = 0;
-                }
-
+                List<Soldier> availables = GetAvailableSoldiersForSelection();
                 if (availables.Count > 1)
                 {
                     if (inputs.nextLeft)
                     {
                         inputs.nextLeft = false;
-                        nextIndexInAvailable = (nextIndexInAvailable - 1 + availables.Count) % availables.Count;
-                        nextSelectedIndex = availables[nextIndexInAvailable];
+                        int indexOf = availables.IndexOf(nextSelectedSoldier);
+                        indexOf = (indexOf - 1 + availables.Count) % availables.Count;
+                        nextSelectedSoldier = availables[indexOf];
                     }
                     if (inputs.nextRight)
                     {
                         inputs.nextRight = false;
-                        nextIndexInAvailable = (nextIndexInAvailable + 1) % availables.Count;
-                        nextSelectedIndex = availables[nextIndexInAvailable];
+                        int indexOf = availables.IndexOf(nextSelectedSoldier);
+                        indexOf = (indexOf + 1) % availables.Count;
+                        nextSelectedSoldier = availables[indexOf];
                     }
                 }
                 else

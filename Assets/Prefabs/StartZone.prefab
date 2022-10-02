@@ -71,5 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfb0bf0534a2ed4fa35335114802b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerZone: 0
+  genZonePointCount: 10
+  genZonePointInterval: -8
+  yDir: 6
+  playerZone: 1
   timerMax: 30

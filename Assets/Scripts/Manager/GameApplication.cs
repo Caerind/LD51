@@ -1,7 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameApplication : Singleton<GameApplication>
 {
+    [SerializeField] private SceneReference menuScene;
+    [SerializeField] private SceneReference campaignScene;
+    [SerializeField] private List<SceneReference> gameScenes;
     [SerializeField] private SceneReference endGameScene;
     private bool hasPlayerWin;
 
@@ -15,9 +20,29 @@ public class GameApplication : Singleton<GameApplication>
         return hasPlayerWin;
     }
 
-    public SceneReference GetEndGameScene()
+    public void GoToMenuScene()
     {
-        return endGameScene;
+        SceneManager.LoadScene(menuScene.ScenePath);
+    }
+
+    public void GoToCampaignGameScene()
+    {
+        SceneManager.LoadScene(endGameScene.ScenePath);
+    }
+
+    public int GetGameScenesCount()
+    {
+        return gameScenes.Count;
+    }
+
+    public void GoToGameScene(int index)
+    {
+        SceneManager.LoadScene(gameScenes[index].ScenePath);
+    }
+
+    public void GoToEndGameScene()
+    {
+        SceneManager.LoadScene(endGameScene.ScenePath);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
