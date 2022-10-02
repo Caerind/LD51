@@ -14,6 +14,7 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireDistance = 40.0f;
     [SerializeField] protected float reactionDevAngle = 5.0f;
     [SerializeField] protected float fireDevAngle = 2.5f;
+    [SerializeField] protected float fireDevAngleMoving = 2.5f;
     [SerializeField] protected Transform bulletSpawn;
     [SerializeField] protected Transform cacHitCast;
     [SerializeField] protected float cacHitRadius = 0.25f;
@@ -24,6 +25,8 @@ public class Soldier : MonoBehaviour
     private bool justFired = false;
     private bool justCaced = false;
 
+    protected bool isMoving = false;
+
     protected Animator animator;
     protected HealthSystem healthSystem;
     protected LineRenderer lineRenderer;
@@ -32,6 +35,11 @@ public class Soldier : MonoBehaviour
 
     private float speedMultiplier = 1.0f;
 
+    protected int animIDMvt;
+    protected int animIDFire;
+    protected int animIDCac;
+
+    private int updateReactionsOpti;
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
@@ -87,12 +95,13 @@ public class Soldier : MonoBehaviour
         }
         else
         {
-            lookAngle += Random.Range(-fireDevAngle, fireDevAngle);
+            float isMovingBonus = isMoving ? fireDevAngleMoving : 0.0f;
+            lookAngle += Random.Range(-fireDevAngle - isMovingBonus, fireDevAngle + isMovingBonus);
         }
         lookAngle *= Mathf.Deg2Rad;
         Vector2 dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
 
-        animator?.SetTrigger("fire");
+        animator?.SetTrigger(animIDFire);
         justFired = true;
 
         BulletProjectile.Create(this, dir);
@@ -102,7 +111,7 @@ public class Soldier : MonoBehaviour
 
     public void Cac()
     {
-        animator?.SetTrigger("cac");
+        animator?.SetTrigger(animIDCac);
         justCaced = true;
 
         timerAction = 0.0f;
@@ -123,6 +132,10 @@ public class Soldier : MonoBehaviour
                     soldier = collider.GetComponentInParent<FakeAgent>()?.GetSoldier();
                 }
             }
+            if (soldier == this)
+            {
+                soldier = null;
+            }
             if (soldier != null)
                 break;
         }
@@ -130,12 +143,16 @@ public class Soldier : MonoBehaviour
         {
             soldier.RecevedDamage(cacDamage, this);
 
-            // TODO : Sound
+            // TODO : Sound touched
 
             if (IsPlayerSoldier() && IsMainSoldier())
             {
                 PlayerCameraController.Instance.Shake(5.0f, 1.0f);
             }
+        }
+        else
+        {
+            // TODO : Sound failed
         }
     }
 
@@ -165,6 +182,9 @@ public class Soldier : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         lineRenderer = GetComponentInChildren<LineRenderer>();
         isPlayerSoldier = isPlayer;
+        animIDMvt = Animator.StringToHash("mvt");
+        animIDFire = Animator.StringToHash("fire");
+        animIDCac = Animator.StringToHash("cac");
         BuildFov();
     }
 
@@ -174,43 +194,51 @@ public class Soldier : MonoBehaviour
 
         if (justFired)
         {
-            animator?.ResetTrigger("fire");
+            animator?.ResetTrigger(animIDFire);
             justFired = false;
         }
         if (justCaced)
         {
-            animator?.ResetTrigger("cac");
+            animator?.ResetTrigger(animIDCac);
             justCaced = false;
         }
     }
 
     protected void UpdateReactions()
     {
-        General enemyGeneral = GetOppositeGeneral();
-        float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
-        foreach (Soldier soldier in enemyGeneral.GetSoldiers())
+        /*
+        updateReactionsOpti = (updateReactionsOpti == 1) ? 0 : 1;
+        if (GetInstanceID() % 2 == updateReactionsOpti)
+        */
         {
-            Vector2 currentPos = bulletSpawn.position.ToVector2();
-            Vector2 soldierPos = soldier.transform.position;
-            Vector2 diff = (soldierPos - currentPos);
-            if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
+            General enemyGeneral = GetOppositeGeneral();
+            float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
+            foreach (Soldier soldier in enemyGeneral.GetSoldiers())
             {
-                float distance = diff.magnitude;
-                diff.Normalize();
-                if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
+                Vector2 currentPos = bulletSpawn.position.ToVector2();
+                Vector2 soldierPos = soldier.transform.position;
+                Vector2 diff = (soldierPos - currentPos);
+                if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
                 {
-                    // Do a raycast to check is there is obstacle between us
-                    LayerMask mask = LayerMask.GetMask("Default");
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance, mask);
-                    if (hit.collider.gameObject == soldier.gameObject)
+                    float distance = diff.magnitude;
+                    diff.Normalize();
+                    if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                     {
-                        // Good so look at it
-                        SetLookDir(diff);
+                        // Do a raycast to check is there is obstacle between us
+                        LayerMask mask = LayerMask.GetMask("Default");
+                        RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance, mask);
 
-                        // Fire at it if we can
-                        if (CanFire())
+                        FakeAgent fakeAgent = hit.collider.gameObject.GetComponentInParent<FakeAgent>();
+                        if (hit.collider.gameObject == soldier.gameObject || (fakeAgent != null && fakeAgent.GetSoldier() == soldier))
                         {
-                            Fire(reactionFire: true);
+                            // Good so look at it
+                            SetLookDir(diff);
+
+                            // Fire at it if we can
+                            if (CanFire())
+                            {
+                                Fire(reactionFire: true);
+                            }
                         }
                     }
                 }

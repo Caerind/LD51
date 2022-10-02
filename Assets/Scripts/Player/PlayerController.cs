@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Windows;
 
 public class PlayerController : Soldier
 {
@@ -68,22 +69,8 @@ public class PlayerController : Soldier
             UpdateReactions();
         }
 
-        General general = GetGeneral();
-        if (this == general.GetNextSelectedSoldier())
-        {
-            CircleWhite.SetActive(true);
-            CircleBlue.SetActive(true);
-        }
-        else if (this == general.GetSelectedSoldier())
-        {
-            CircleWhite.SetActive(true);
-            CircleBlue.SetActive(false);
-        }
-        else
-        {
-            CircleWhite.SetActive(false);
-            CircleBlue.SetActive(true);
-        }
+        UpdateMinimap();
+
     }
 
     public override void SetMainSoldier(bool mainSoldier)
@@ -94,6 +81,11 @@ public class PlayerController : Soldier
         {
             PlayerCameraController.Instance.SetFollow(transform);
         }
+        else
+        {
+            animator?.SetFloat(animIDMvt, 0.0f);
+            isMoving = false;
+        }
     }
 
     private void UpdateMainPlayer()
@@ -101,7 +93,9 @@ public class PlayerController : Soldier
         Inputs inputs = Inputs.Instance;
 
         // Mvt
-        animator?.SetFloat("mvt", inputs.move.magnitude);
+        float mvt = inputs.move.magnitude;
+        animator?.SetFloat(animIDMvt, mvt);
+        isMoving = mvt > 0.05f;
         if (inputs.move != Vector2.zero)
         {
             float s = GetSpeed() * Time.deltaTime;
@@ -134,6 +128,26 @@ public class PlayerController : Soldier
         if (inputs.cac && CanCac())
         {
             Cac();
+        }
+    }
+
+    private void UpdateMinimap()
+    {
+        General general = GetGeneral();
+        if (this == general.GetNextSelectedSoldier())
+        {
+            CircleWhite.SetActive(true);
+            CircleBlue.SetActive(true);
+        }
+        else if (this == general.GetSelectedSoldier())
+        {
+            CircleWhite.SetActive(true);
+            CircleBlue.SetActive(false);
+        }
+        else
+        {
+            CircleWhite.SetActive(false);
+            CircleBlue.SetActive(true);
         }
     }
 

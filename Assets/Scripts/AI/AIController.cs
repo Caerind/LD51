@@ -62,6 +62,11 @@ public class AIController : Soldier
         base.SetMainSoldier(mainSoldier);
 
         agent.SetStopped(!mainSoldier);
+        isMoving = mainSoldier;
+        if (!mainSoldier)
+        {
+            animator?.SetFloat(animIDMvt, 0.0f);
+        }
     }
 
     public void SetFakeAgent(FakeAgent agent)
@@ -120,7 +125,9 @@ public class AIController : Soldier
             transform.position = agent.transform.position;
 
             Vector2 mvt = transform.position.ToVector2() - prevPos;
-            animator?.SetFloat("mvt", mvt.magnitude);
+            float mvtMagn = mvt.magnitude;
+            animator?.SetFloat(animIDMvt, mvtMagn);
+            isMoving = mvtMagn > 0.05f;
             if (mvt != Vector2.zero)
             {
                 SetLookDir(mvt.normalized);
@@ -129,10 +136,12 @@ public class AIController : Soldier
             {
                 SetLookDir(point.GetLookDir());
             }
+
+            agent.SetAngle(transform.eulerAngles.z);
         }
         else
         {
-            animator?.SetFloat("mvt", 0.0f);
+            transform.position = agent.transform.position; // Update pos when pushed
         }
     }
 
