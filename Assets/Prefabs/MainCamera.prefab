@@ -167,4 +167,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
-  sounds: []
+  sounds:
+  - name: TICTAC
+    clip: {fileID: 8300000, guid: 022bf52802b75e84a9bb35337cff7a4b, type: 3}
+    volume: 0.7
+    volumeVariance: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Battement
+    clip: {fileID: 8300000, guid: bf13c889a7049684b96c6801fa61c21a, type: 3}
+    volume: 0.8
+    volumeVariance: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

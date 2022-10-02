@@ -439,58 +439,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1629832792376338195, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832792988535999, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793081731016, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629832793234244562, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6405456756955608538, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -590,62 +538,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 022bf52802b75e84a9bb35337cff7a4b, type: 3}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: TICTAC
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bf13c889a7049684b96c6801fa61c21a, type: 3}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: Battement
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].pitchVariance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[0].volumeVariance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3052436251016943450, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
-      propertyPath: sounds.Array.data[1].volumeVariance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3200166125770974322, guid: 2974fcbd1d51e7d48bcd0b8b84465530, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -709,14 +601,6 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 12015200}
-    - target: {fileID: 4469209713374648875, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
-      propertyPath: m_AmplitudeGain
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469209713374648875, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
-      propertyPath: m_FrequencyGain
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4469209714469089490, guid: 2c636e904d9d5d14ab1645be1d9380d2, type: 3}
       propertyPath: m_Name
       value: VirtualCamera
