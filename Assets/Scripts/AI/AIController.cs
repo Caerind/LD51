@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class AIController : Soldier
 {
     [SerializeField] private float fireCooldownBonusAI = 0.5f;
+    [SerializeField] private float cacCooldownBonusAI = 0.5f;
 
     [SerializeField] private float maxDistanceLookBrain = 40.0f;
 
@@ -72,7 +71,12 @@ public class AIController : Soldier
 
     protected override bool CanFire()
     {
-        return timerFire >= (fireCooldown + fireCooldownBonusAI + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
+        return timerAction >= (fireCooldown + fireCooldownBonusAI + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
+    }
+
+    protected override bool CanCac()
+    {
+        return timerAction >= (cacCooldown + cacCooldownBonusAI + (IsMainSoldier() ? 0.0f : cacCooldownBonusReaction));
     }
 
     private void UpdateMainAI()

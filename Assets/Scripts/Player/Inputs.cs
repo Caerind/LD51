@@ -6,22 +6,11 @@ public class Inputs : Singleton<Inputs>
     public Vector2 move;
     public Vector2 look;
     public bool fire;
+    public bool cac;
     public bool tuto;
     public bool nextLeft;
     public bool nextRight;
     public Vector2 point;
-
-    private PlayerInput input;
-
-    private void Awake()
-    {
-        input = GetComponent<PlayerInput>();
-    }
-
-    public PlayerInput GetInput()
-    {
-        return input;
-    }
 
     public void OnMove(InputValue value)
     {
@@ -36,6 +25,11 @@ public class Inputs : Singleton<Inputs>
     public void OnFire(InputValue value)
     {
         fire = value.isPressed;
+    }
+
+    public void OnCac(InputValue value)
+    {
+        cac = value.isPressed;
     }
 
     public void OnTuto(InputValue value)

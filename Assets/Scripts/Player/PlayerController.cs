@@ -129,10 +129,21 @@ public class PlayerController : Soldier
             Fire();
             PlayerCameraController.Instance.Shake(IntensiteTirShake, TimerTirShake);
         }
+
+        // Cac
+        if (inputs.cac && CanCac())
+        {
+            Cac();
+        }
     }
 
     protected override bool CanFire()
     {
-        return timerFire >= (fireCooldown + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
+        return timerAction >= (fireCooldown + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
+    }
+
+    protected override bool CanCac()
+    {
+        return timerAction >= (cacCooldown + (IsMainSoldier() ? 0.0f : cacCooldownBonusReaction));
     }
 }
