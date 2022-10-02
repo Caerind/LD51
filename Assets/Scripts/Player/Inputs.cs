@@ -12,6 +12,18 @@ public class Inputs : Singleton<Inputs>
     public bool nextRight;
     public Vector2 point;
 
+    private bool usingGamepad;
+
+    public bool IsUsingGamepad()
+    {
+        return usingGamepad;
+    }
+
+    public bool IsUsingKeyboardMouse()
+    {
+        return !usingGamepad;
+    }
+
     public void OnMove(InputValue value)
     {
         move = value.Get<Vector2>();
@@ -20,6 +32,7 @@ public class Inputs : Singleton<Inputs>
     public void OnLook(InputValue value)
     {
         look = value.Get<Vector2>();
+        usingGamepad = true;
     }
 
     public void OnFire(InputValue value)
@@ -50,5 +63,6 @@ public class Inputs : Singleton<Inputs>
     public void OnPoint(InputValue value)
     {
         point = value.Get<Vector2>();
+        usingGamepad = false;
     }
 }

@@ -57,7 +57,7 @@ MonoBehaviour:
   cacCooldown: 1
   cacCooldownBonusReaction: 0.5
   fov: 60
-  fireDistance: 40
+  fireDistance: 30
   reactionDevAngle: 5
   fireDevAngle: 2.5
   fireDevAngleMoving: 2.5

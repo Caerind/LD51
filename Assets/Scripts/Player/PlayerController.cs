@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Windows;
 
 public class PlayerController : Soldier
 {
@@ -13,8 +10,11 @@ public class PlayerController : Soldier
     [SerializeField] private float TimerDegatShake = 3f;
     [SerializeField] private GameObject CircleBlue;
     [SerializeField] private GameObject CircleWhite;
+    [SerializeField] private Transform cameraTarget;
     [SerializeField] private GameObject bloodDeath;
     [SerializeField] private GameObject bloodImpact;
+    
+    private LineRenderer gamepadLine;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class PlayerController : Soldier
         healthSystem.OnDeath += HealthSystem_OnDied;
         fovLight.pointLightInnerRadius = 0.0f;
         fovLight.pointLightOuterRadius = fireDistance;
+        gamepadLine = cameraTarget.GetComponent<LineRenderer>();
     }
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
@@ -53,9 +54,13 @@ public class PlayerController : Soldier
         // Center cam on new entity
         if (IsMainSoldier())
         {
-            PlayerCameraController.Instance.SetFollow(transform);
+            PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
+        
+        gamepadLine.enabled = false;
+        
         Instantiate(bloodDeath, transform.position, Quaternion.identity);
+        
         Destroy(gameObject);
     }
 
@@ -73,7 +78,6 @@ public class PlayerController : Soldier
         }
 
         UpdateMinimap();
-
     }
 
     public override void SetMainSoldier(bool mainSoldier)
@@ -82,12 +86,14 @@ public class PlayerController : Soldier
 
         if (mainSoldier)
         {
-            PlayerCameraController.Instance.SetFollow(transform);
+            PlayerCameraController.Instance.SetFollow(cameraTarget);
+            gamepadLine.enabled = true;
         }
         else
         {
             animator?.SetFloat(animIDMvt, 0.0f);
             isMoving = false;
+            gamepadLine.enabled = false;
         }
     }
 
@@ -107,13 +113,35 @@ public class PlayerController : Soldier
 
         // Look
         Vector2 look = Vector2.zero;
-        if (inputs.look != Vector2.zero) // Gamepad
+        if (inputs.IsUsingGamepad())
         {
-            look = inputs.look;
+            if (inputs.look != Vector2.zero) // Gamepad
+            {
+                look = inputs.look;
+                cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.25f;
+            }
+
+            gamepadLine.enabled = true;
+            if (gamepadLine != null)
+            {
+                Vector3[] lines = new Vector3[2];
+                lines[0] = transform.position;
+                lines[1] = transform.position + look.ToVector3() * fireDistance * 0.5f;
+                gamepadLine.useWorldSpace = true;
+                gamepadLine.positionCount = 2;
+                gamepadLine.SetPositions(lines);
+            }
         }
-        else if (inputs.point != Vector2.zero) // Mouse
+        else
         {
-            look = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position).ToVector2();
+            if (inputs.point != Vector2.zero) // Mouse
+            {
+                Vector3 diff = (Camera.main.ScreenToWorldPoint(inputs.point) - transform.position);
+                look = diff.ToVector2();
+                cameraTarget.transform.position = transform.position + diff * 0.5f;
+            }
+
+            gamepadLine.enabled = false;
         }
         if (look != Vector2.zero)
         {
