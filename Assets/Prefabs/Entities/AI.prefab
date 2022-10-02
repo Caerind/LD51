@@ -60,13 +60,17 @@ MonoBehaviour:
   fireDistance: 40
   reactionDevAngle: 5
   fireDevAngle: 2.5
+  fireDevAngleMoving: 2.5
   bulletSpawn: {fileID: 898977411426490754}
   cacHitCast: {fileID: 3819169800934112692}
   cacHitRadius: 0.25
   cacDamage: 70
+  updateReactionTimer: 0.1
   fireCooldownBonusAI: 0.5
   cacCooldownBonusAI: 0.5
   maxDistanceLookBrain: 40
+  bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
+  bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
 --- !u!210 &5893074324336176739
 SortingGroup:
   m_ObjectHideFlags: 0

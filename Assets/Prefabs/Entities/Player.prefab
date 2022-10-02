@@ -352,10 +352,12 @@ MonoBehaviour:
   fireDistance: 40
   reactionDevAngle: 5
   fireDevAngle: 2.5
+  fireDevAngleMoving: 2.5
   bulletSpawn: {fileID: 7490166041583110188}
   cacHitCast: {fileID: 8961321265520406417}
   cacHitRadius: 0.25
   cacDamage: 70
+  updateReactionTimer: 0.1
   fovLight: {fileID: 1627116386072193263}
   IntensiteTirShake: 3
   TimerTirShake: 1
@@ -363,6 +365,8 @@ MonoBehaviour:
   TimerDegatShake: 1
   CircleBlue: {fileID: 466941874454349262}
   CircleWhite: {fileID: 1731080772177184833}
+  bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
+  bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
 --- !u!210 &4253678537685930034
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -733,6 +737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartZoneTriggerer
       objectReference: {fileID: 0}
+    - target: {fileID: 8828477360329918660, guid: c05379f996a339f4bb8917941c7e49f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c05379f996a339f4bb8917941c7e49f6, type: 3}
@@ -796,6 +804,10 @@ PrefabInstance:
     - target: {fileID: 9214843365170148758, guid: e4ad4463f639601459ee74fdb9635878, type: 3}
       propertyPath: m_Name
       value: BulletDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214843365170148758, guid: e4ad4463f639601459ee74fdb9635878, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
