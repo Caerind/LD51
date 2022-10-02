@@ -69,12 +69,12 @@ public class PlayerController : Soldier
         }
 
         General general = GetGeneral();
-        if (this==general.GetNextSelectedSoldier())
+        if (this == general.GetNextSelectedSoldier())
         {
             CircleWhite.SetActive(true);
             CircleBlue.SetActive(true);
         }
-        else if(this==general.GetSelectedSoldier())
+        else if (this == general.GetSelectedSoldier())
         {
             CircleWhite.SetActive(true);
             CircleBlue.SetActive(false);
@@ -101,6 +101,7 @@ public class PlayerController : Soldier
         Inputs inputs = Inputs.Instance;
 
         // Mvt
+        animator?.SetFloat("mvt", inputs.move.magnitude);
         if (inputs.move != Vector2.zero)
         {
             float s = GetSpeed() * Time.deltaTime;

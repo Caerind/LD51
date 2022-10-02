@@ -1,11 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using System.Timers;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class StartZone : MonoBehaviour
@@ -18,8 +10,8 @@ public class StartZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Soldier soldier = collision.GetComponent<Soldier>();
-        if (soldier != null && ( (soldier.IsPlayerSoldier() && playerZone == false) ||  (soldier.IsPlayerSoldier() == false && playerZone == true)) )
+        Soldier soldier = collision.GetComponentInParent<Soldier>();
+        if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
         {
             compteur++;
         }
@@ -27,7 +19,7 @@ public class StartZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Soldier soldier = collision.GetComponent<Soldier>();
+        Soldier soldier = collision.GetComponentInParent<Soldier>();
         if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
         {
             compteur--;
@@ -42,7 +34,7 @@ public class StartZone : MonoBehaviour
             Debug.Log("VICTORY");
         }
 
-        //Increment Timer
+        // Increment Timer
         if (compteur > 0)
         {
             timer += Time.deltaTime;

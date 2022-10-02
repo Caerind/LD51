@@ -11,12 +11,13 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float fireDistance = 40.0f;
     [SerializeField] protected float reactionDevAngle = 5.0f;
     [SerializeField] protected float fireDevAngle = 2.5f;
-
-    private const float extraPhysxBulletDistance = 1.0f;
+    [SerializeField] protected Transform bulletSpawn;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
+    private bool justFired = false;
 
+    protected Animator animator;
     protected HealthSystem healthSystem;
     protected LineRenderer lineRenderer;
 
@@ -65,6 +66,11 @@ public class Soldier : MonoBehaviour
         return healthSystem;
     }
 
+    public Vector2 GetBulletPos()
+    {
+        return bulletSpawn.transform.position.ToVector2();
+    }
+
     public void Fire(bool reactionFire = false)
     {
         float lookAngle = GetLookAngle();
@@ -79,7 +85,10 @@ public class Soldier : MonoBehaviour
         lookAngle *= Mathf.Deg2Rad;
         Vector2 dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
 
-        Shoot(dir);
+        animator?.SetTrigger("fire");
+        justFired = true;
+
+        BulletProjectile.Create(this, dir);
 
         timerFire = 0.0f;
     }
@@ -87,11 +96,6 @@ public class Soldier : MonoBehaviour
     public void RecevedDamage(int Damage, Soldier shooter)
     {
         healthSystem.Damage(Damage, shooter);
-    }
-
-    private void Shoot(Vector2 dir)
-    {
-        BulletProjectile.Create(this, dir, extraPhysxBulletDistance);
     }
 
     public float GetFireDistanceMax()
@@ -106,6 +110,7 @@ public class Soldier : MonoBehaviour
 
     protected void AwakeSoldier(bool isPlayer)
     {
+        animator = GetComponentInChildren<Animator>();
         healthSystem = GetComponent<HealthSystem>();
         lineRenderer = GetComponentInChildren<LineRenderer>();
         isPlayerSoldier = isPlayer;
@@ -115,6 +120,12 @@ public class Soldier : MonoBehaviour
     protected void UpdateSoldier()
     {
         timerFire += Time.deltaTime;
+
+        if (justFired)
+        {
+            animator?.ResetTrigger("fire");
+            justFired = false;
+        }
     }
 
     protected void UpdateReactions()
@@ -123,18 +134,18 @@ public class Soldier : MonoBehaviour
         float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
         foreach (Soldier soldier in enemyGeneral.GetSoldiers())
         {
-            Vector2 currentPos = transform.position;
+            Vector2 currentPos = bulletSpawn.position.ToVector2();
             Vector2 soldierPos = soldier.transform.position;
             Vector2 diff = (soldierPos - currentPos);
             if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
             {
-                float distance = diff.magnitude - extraPhysxBulletDistance;
+                float distance = diff.magnitude;
                 diff.Normalize();
                 if (Vector2.Dot(GetLookDir(), diff) > cosHalfFov) // Is in fov
                 {
                     // Do a raycast to check is there is obstacle between us
                     LayerMask mask = LayerMask.GetMask("Default");
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos + extraPhysxBulletDistance * diff, diff, distance, mask);
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance, mask);
                     if (hit.collider.gameObject == soldier.gameObject)
                     {
                         // Good so look at it
