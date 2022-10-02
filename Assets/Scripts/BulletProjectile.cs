@@ -9,10 +9,10 @@ public class BulletProjectile : MonoBehaviour
     private Vector2 dir;
     private float maxdistance;
 
-    public static BulletProjectile Create(Soldier soldier, Vector2 dir, float startDistance)
+    public static BulletProjectile Create(Soldier soldier, Vector2 dir)
     {
         Transform pfBulletProjectile = Resources.Load<Transform>("pfBulletProjectile");
-        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.transform.position + dir.ToVector3() * startDistance, Quaternion.identity);
+        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.GetBulletPos(), Quaternion.identity);
 
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
         bulletProjectile.dir = dir;
@@ -38,8 +38,10 @@ public class BulletProjectile : MonoBehaviour
         }
         if (soldier != null)
         {
-            Destroy(gameObject);
             soldier.RecevedDamage(degat, shooter);
         }
+
+        Debug.Log(collision.gameObject);
+        Destroy(gameObject);
     }
 }

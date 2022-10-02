@@ -43,8 +43,8 @@ public class GameManager : Singleton<GameManager>
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(5, 5, 100, 25), timer.ToString());
-        GUI.Label(new Rect(5, 35, 100, 25), "PlayerNext: " + playerGeneral.GetNextSelectedIndex().ToString());
+        GUI.Label(new Rect(5, 5, 100, 25), "ZonePlayer: " + ((AIGeneral)aiGeneral).GetPlayerZone().GetCompteur().ToString());
+        GUI.Label(new Rect(5, 35, 100, 25), "ZoneEnemy: " + ((AIGeneral)aiGeneral).GetEnemyZone().GetCompteur().ToString());
         GUI.Label(new Rect(5, 60, 100, 25), "AINext: " + aiGeneral.GetNextSelectedIndex().ToString());
     }
 
