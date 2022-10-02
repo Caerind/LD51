@@ -5,6 +5,7 @@ public class Player1 : MonoBehaviour
 {
     [SerializeField] int PlayerID;
     [SerializeField] private GameObject WhiteHalo;
+    [SerializeField] private float selectedTransformScale = 1.1f;
 
     private General general;
     private Soldier soldier;
@@ -23,6 +24,15 @@ public class Player1 : MonoBehaviour
 
     private void Update()
     {
-        WhiteHalo.SetActive(soldier == general.GetNextSelectedSoldier());
+        WhiteHalo.SetActive(soldier == general.GetSelectedSoldier());
+
+        if (soldier == general.GetNextSelectedSoldier())
+        {
+            transform.localScale = new Vector3(selectedTransformScale, selectedTransformScale, selectedTransformScale);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
     }
 }
