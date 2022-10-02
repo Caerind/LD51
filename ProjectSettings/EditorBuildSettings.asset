@@ -6,13 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menus/BoostScene.unity
+    guid: ace6c83d3b8665b4b8199a626d73994f
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: 984bf3bf6f688f44f8f0f6cfa9c0a3d9
+  - enabled: 1
+    path: Assets/Scenes/Menus/CampaignMenu.unity
+    guid: 8ec97f121699d78448a720ecf848d251
+  - enabled: 1
+    path: Assets/Scenes/Menus/EndGame.unity
+    guid: 591a295c54e010043bcf07e9d8c805ab
+  - enabled: 1
+    path: Assets/Scenes/AlexisScene.unity
+    guid: 3b405023a64c9d74b82aecd371c39629
+  - enabled: 1
+    path: Assets/Scenes/CharlesScene.unity
+    guid: ee3c53274e7ebd74e97ddecc5ffd4e7b
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/SceneTestB.unity
-    guid: bdfca75f04962e84097f3c5703938665
-  - enabled: 1
-    path: Assets/Scenes/SceneTestC.unity
-    guid: 0baf023425b4ee243a02518f892c951d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fcfc29dda049c5348bed11e6add462ac, type: 2}
