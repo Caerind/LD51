@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Soldier : MonoBehaviour
 {
@@ -19,6 +17,9 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected Transform cacHitCast;
     [SerializeField] protected float cacHitRadius = 0.25f;
     [SerializeField] protected int cacDamage = 70;
+    [SerializeField] private float updateReactionTimer = 0.1f;
+
+    private float reactionTimer;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
@@ -38,11 +39,11 @@ public class Soldier : MonoBehaviour
     protected int animIDMvt;
     protected int animIDFire;
     protected int animIDCac;
-
-    private int updateReactionsOpti;
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
+        reactionTimer = Random.Range(0.0f, updateReactionTimer); // Just so that all soldiers don't update on same frames
+
         isMainSoldier = mainSoldier;
 
         if (lineRenderer != null)
@@ -206,11 +207,11 @@ public class Soldier : MonoBehaviour
 
     protected void UpdateReactions()
     {
-        /*
-        updateReactionsOpti = (updateReactionsOpti == 1) ? 0 : 1;
-        if (GetInstanceID() % 2 == updateReactionsOpti)
-        */
+        reactionTimer += Time.deltaTime;
+        if (reactionTimer >= updateReactionTimer)
         {
+            reactionTimer -= updateReactionTimer;
+
             General enemyGeneral = GetOppositeGeneral();
             float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
             foreach (Soldier soldier in enemyGeneral.GetSoldiers())
