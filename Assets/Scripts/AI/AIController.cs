@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class AIController : Soldier
 {
     [SerializeField] private float fireCooldownBonusAI = 0.5f;
+
+    [SerializeField] private float maxDistanceLookBrain = 40.0f;
 
     private InterestPoint point = null;
     private bool justFoundPoint = false;
@@ -127,5 +131,113 @@ public class AIController : Soldier
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.position + GetLookDir().ToVector3() * 3.0f);
+    }
+
+    public List<Objective> ScanObjectives()
+    {
+        List<Objective> results = new List<Objective>();
+
+        {
+            List<InterestPoint> interestPoints = GameManager.Instance.GetAllInterestPoints();
+            foreach (var point in interestPoints)
+            {
+                if ((point.transform.position - transform.position).sqrMagnitude < maxDistanceLookBrain * maxDistanceLookBrain)
+                {
+                    float score = 0.0f; // point.GetBaseScore();
+                    // TODO : Improve compute score
+                    results.Add(new Objective(ObjectiveType.ReachInterestPoint, point.gameObject, gameObject, score));
+                }
+            }
+        }
+
+        // AttackPlayerZone
+        {
+            List<ZonePoint> playerZonePoints = GameManager.Instance.GetAllPlayerZonePoints();
+
+            ZonePoint bestPoint = null;
+            float bestScore = -1.0f;
+
+            float distanceCheck = maxDistanceLookBrain;
+
+            AIGeneral general = (AIGeneral)GetGeneral();
+            if (general != null && general.GetPlayerZone().GetCompteur() > 0)
+            {
+                distanceCheck *= general.GetCommander().factorDistanceAttackPlayerZone;
+            }
+
+            foreach (var point in playerZonePoints)
+            {
+                float d = (point.transform.position - transform.position).sqrMagnitude;
+                if (d < maxDistanceLookBrain * maxDistanceLookBrain)
+                {
+                    // Nearest point is best
+                    float score = distanceCheck * distanceCheck - d;
+
+                    if (score > bestScore)
+                    {
+                        bestPoint = point;
+                        bestScore = score;
+                    }
+                }
+            }
+
+            if (bestPoint != null)
+            {
+                results.Add(new Objective(ObjectiveType.AttackPlayerZone, bestPoint.gameObject, gameObject, bestScore));
+            }
+        }
+
+        // DefendEnemyZone
+        {
+            List<ZonePoint> enemyZonePoints = GameManager.Instance.GetAllEnemyZonePoints();
+
+            ZonePoint bestPoint = null;
+            float bestScore = -1.0f;
+
+            float distanceCheck = maxDistanceLookBrain;
+
+            AIGeneral general = (AIGeneral)GetGeneral();
+            if (general != null && general.GetEnemyZone().GetCompteur() > 0)
+            {
+                distanceCheck *= general.GetCommander().factorDistanceDefendEnemyZone;
+            }
+
+            foreach (var point in enemyZonePoints)
+            {
+                float d = (point.transform.position - transform.position).sqrMagnitude;
+                if (d < distanceCheck * distanceCheck)
+                {
+                    // Nearest point is best
+                    float score = maxDistanceLookBrain * maxDistanceLookBrain - d;
+
+                    if (score > bestScore)
+                    {
+                        bestPoint = point;
+                        bestScore = score;
+                    }
+                }
+            }
+
+            if (bestPoint != null)
+            {
+                results.Add(new Objective(ObjectiveType.DefendEnemyZone, bestPoint.gameObject, gameObject, bestScore));
+            }
+        }
+
+        {
+            List<Soldier> playerSoldiers = GameManager.Instance.GetPlayerGeneral().GetSoldiers();
+            foreach (var soldier in playerSoldiers)
+            {
+                // *4 (2^2) here because, we can move+shoot
+                if ((soldier.transform.position - transform.position).sqrMagnitude < 4.0f * maxDistanceLookBrain * maxDistanceLookBrain)
+                {
+                    float score = 0.0f;
+                    // TODO : Best score is player is not covered/low life
+                    results.Add(new Objective(ObjectiveType.AttackPlayer, soldier.gameObject, gameObject, score));
+                }
+            }
+        }
+
+        return results;
     }
 }

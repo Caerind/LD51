@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     private General playerGeneral = null;
     private General aiGeneral = null;
+    private List<InterestPoint> interestPoints = new List<InterestPoint>();
+    private List<ZonePoint> playerZonePoints = new List<ZonePoint>();
+    private List<ZonePoint> enemyZonePoints = new List<ZonePoint>();
 
     private float timer = 0.0f;
     public const float timerMax = 10.0f;
@@ -27,12 +31,8 @@ public class GameManager : Singleton<GameManager>
             playerGeneral.SelectNextPlayer();
             aiGeneral.SelectNextPlayer();
             isPlaying = true;
+            AudioManager.PlaySound("test");
         }
-    }
-
-    public void SetPlaying(bool playing)
-    {
-        isPlaying = playing;
     }
 
     public bool IsPlaying()
@@ -72,5 +72,47 @@ public class GameManager : Singleton<GameManager>
         {
             aiGeneral = general;
         }
+    }
+
+    public void RegisterInterestPoint(InterestPoint point)
+    {
+        interestPoints.Add(point);
+    }
+
+    public void RegisterZonePoint(ZonePoint point)
+    {
+        if (point.isPlayerZonePoint)
+        {
+            playerZonePoints.Add(point);
+        }
+        else
+        {
+            enemyZonePoints.Add(point);
+        }
+    }
+
+    public List<InterestPoint> GetAllInterestPoints()
+    {
+        return interestPoints;
+    }
+
+    public List<ZonePoint> GetAllPlayerZonePoints()
+    {
+        return playerZonePoints;
+    }
+
+    public List<ZonePoint> GetAllEnemyZonePoints()
+    {
+        return enemyZonePoints;
+    }
+
+    public void Reset()
+    {
+        isPlaying = false;
+        interestPoints.Clear();
+        playerGeneral = null;
+        aiGeneral = null;
+        playerZonePoints.Clear();
+        enemyZonePoints.Clear();
     }
 }
