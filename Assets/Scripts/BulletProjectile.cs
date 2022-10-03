@@ -48,7 +48,7 @@ public class BulletProjectile : MonoBehaviour
         {
             Debug.Log("Soldier " + collision.gameObject.name);
             Destroy(gameObject);
-            soldier.RecevedDamage(degat, shooter);
+            soldier.RecevedDamage(degat, shooter, fire:true);
         }
         else if (collision.GetComponent<BulletDetector>() == null)
         {
@@ -76,7 +76,7 @@ public class BulletProjectile : MonoBehaviour
             }
         }
         /*
-        else // If we have a BulletDetector, don't Destory
+        else // If we have a BulletDetector, don't Destroy
         {
         }
         */

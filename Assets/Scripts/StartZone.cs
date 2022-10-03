@@ -28,15 +28,20 @@ public class StartZone : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.GetPlayerGeneral().GetSoldiers().Count == 0)
+        General playerGeneral = GameManager.Instance.GetPlayerGeneral();
+        if (playerGeneral != null && playerGeneral.GetSoldiers() != null && playerGeneral.GetSoldiers().Count == 0)
         {
             GameManager.Instance.Reset();
             GameApplication.Instance.SetPlayerWin(false);
+            return;
         }
-        if (GameManager.Instance.GetEnemyGeneral().GetSoldiers().Count == 0)
+
+        General aiGeneral = GameManager.Instance.GetPlayerGeneral();
+        if (aiGeneral != null && aiGeneral.GetSoldiers() != null && aiGeneral.GetSoldiers().Count == 0)
         {
             GameManager.Instance.Reset();
-            GameApplication.Instance.SetPlayerWin(true);
+            GameApplication.Instance.SetPlayerWin(false);
+            return;
         }
 
         // TODO : UI Timer Win
@@ -50,6 +55,7 @@ public class StartZone : MonoBehaviour
             {
                 GameManager.Instance.Reset();
                 GameApplication.Instance.SetPlayerWin(!playerZone);
+                return;
             }
         }
         else

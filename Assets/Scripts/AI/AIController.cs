@@ -177,12 +177,6 @@ public class AIController : Soldier
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + GetLookDir().ToVector3() * 3.0f);
-    }
-
     public List<Objective> ScanObjectives()
     {
         List<Objective> results = new List<Objective>();

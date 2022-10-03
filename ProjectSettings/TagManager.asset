@@ -17,8 +17,8 @@ TagManager:
   - StartZoneTriggerer
   - BulletDetector
   - Blocs
-  - 
-  - 
+  - Hole
+  - HoleDetector
   - 
   - 
   - 
