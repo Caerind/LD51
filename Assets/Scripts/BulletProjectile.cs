@@ -32,7 +32,6 @@ public class BulletProjectile : MonoBehaviour
         distanceDone += mvt;
         if (maxDistance <= 0)
         {
-            Debug.Log("Decay");
             Destroy(gameObject);
         }
     }
@@ -46,7 +45,6 @@ public class BulletProjectile : MonoBehaviour
         }
         if (soldier != null)
         {
-            Debug.Log("Soldier " + collision.gameObject.name);
             Destroy(gameObject);
             soldier.RecevedDamage(degat, shooter, fire:true);
         }
@@ -60,7 +58,6 @@ public class BulletProjectile : MonoBehaviour
                     float random = Random.Range(0f, 1f);
                     if (random <= cover.coverPercent)
                     {
-                        Debug.Log("Cover " + collision.gameObject.name);
                         Destroy(gameObject);
                     }
                 }
@@ -71,7 +68,6 @@ public class BulletProjectile : MonoBehaviour
             }
             else
             {
-                Debug.Log("Any " + collision.gameObject.name);
                 Destroy(gameObject);
             }
         }

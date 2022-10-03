@@ -44,7 +44,7 @@ public class AIBrain : MonoBehaviour
             timerSkipBrain -= timeSkipBrain;
             if (controller.IsMainSoldier())
             {
-                Pattern newPattern = currentPattern;
+                Pattern newPattern;
                 if (((AIGeneral)controller.GetGeneral()).GetEnemyZone().GetCompteur() > 0)
                 {
                     if (defaultPattern == Pattern.CacMan)
