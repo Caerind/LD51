@@ -51,9 +51,9 @@ MonoBehaviour:
     m_ScenePath: Assets/Scenes/Menus/EndGame.unity
   gameScenes:
   - name: Pontivy
-    text: The small town of pontivy is under the enemy control, it's location could
-      allow us acces to the airport. We need to take control of the area. Good luck
-      soldier.
+    text: The small town of pontivy is under enemy control, it's localisation could
+      allow us an acces to the airport. We need to take control of the area. Good
+      luck soldier.
     icon: {fileID: 21300000, guid: d8af3f974f29b1040a57a2d781f0299b, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
     scene:
@@ -61,9 +61,9 @@ MonoBehaviour:
       m_IsDirty: 0
       m_ScenePath: Assets/Scenes/Scene1.unity
   - name: Montivilliers
-    text: The city known for it's coward population have been turn into an enemy
-      stronghold. An enemy command post has been discover in a farm nearby. We need
-      you to take control of this command center, cut the head of the snake soldier.
+    text: The city known for it's coward population has been turn into an enemy stronghold.
+      An enemy command post has been discover in a farm nearby. We need you to take
+      control of this command center, cut the head of the snake soldier.
     icon: {fileID: 21300000, guid: 85ffb3c5a5c3cb649bfd703ee592a07c, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
     scene:
@@ -71,11 +71,11 @@ MonoBehaviour:
       m_IsDirty: 0
       m_ScenePath: Assets/Scenes/Scene2.unity
   - name: Avranches
-    text: Located near the Britton Mont Saint michel, it's town hall has been converted
-      into a stronghold. Getting control of it is going to be a challenge, full traps
-      and embush. But it's the last place we need to conquer. One battle to rule
-      them, one battle to find them. One battle to bring them all, and in the darkness
-      bind them all.
+    text: Located near the Britton Mont Saint michel, Avranches town hall has been
+      converted into a stronghold. Getting control of it is going to be a challenge,
+      full traps and embush. But it's the last place we need to conquer. One battle
+      to rule them all, one battle to find them. One battle to bring them all, and
+      in the darkness bind them all.
     icon: {fileID: 21300000, guid: 80cbb6bdd2009254db0c899fca5dd47f, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
     scene:
