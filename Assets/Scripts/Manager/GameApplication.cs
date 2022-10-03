@@ -30,8 +30,6 @@ public class GameApplication : Singleton<GameApplication>
     {
         unlockedGameScenes = new List<int>();
         unlockedGameScenes.Add(0);
-        unlockedGameScenes.Add(1);
-        //unlockedGameScenes.Add(2);
 
         GameObject mouseCursor = Resources.Load<GameObject>("MouseCursor");
         cursorTexture = mouseCursor.GetComponent<SpriteRenderer>().sprite.texture;
