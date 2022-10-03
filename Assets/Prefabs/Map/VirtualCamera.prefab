@@ -195,7 +195,7 @@ MonoBehaviour:
   m_zoomSpeed: 5
   m_zoomAmount: 2
   m_minOrthographicSize: 5
-  m_maxOrthographicSize: 25
+  m_maxOrthographicSize: 12
   m_invertZoom: 1
 --- !u!114 &4469209714469089491
 MonoBehaviour:
