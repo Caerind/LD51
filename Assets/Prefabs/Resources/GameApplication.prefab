@@ -71,7 +71,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 80cbb6bdd2009254db0c899fca5dd47f, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
     scene:
-      m_SceneAsset: {fileID: 102900000, guid: 8a468da5478e0f04eb04d0da311a0c75, type: 3}
+      m_SceneAsset: {fileID: 102900000, guid: 5b0f482350e62aa4b92d4c6afa11d714, type: 3}
       m_IsDirty: 0
       m_ScenePath: Assets/Scenes/Scene3.unity
 --- !u!114 &2263512510653939199
