@@ -36,8 +36,9 @@ Transform:
   - {fileID: 4703652299416970720}
   - {fileID: 7299458910518200542}
   - {fileID: 3871853888634166297}
+  - {fileID: 963200522531482025}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7352131924919563314
 MonoBehaviour:
@@ -57,7 +58,7 @@ MonoBehaviour:
   cacCooldown: 1
   cacCooldownBonusReaction: 0.5
   fov: 60
-  fireDistance: 30
+  fireDistance: 40
   reactionDevAngle: 5
   fireDevAngle: 2.5
   fireDevAngleMoving: 2.5
@@ -66,8 +67,8 @@ MonoBehaviour:
   cacHitRadius: 0.25
   cacDamage: 70
   updateReactionTimer: 0.1
-  fireCooldownBonusAI: 0.5
-  cacCooldownBonusAI: 0.5
+  fireCooldownBonusAI: 0.25
+  cacCooldownBonusAI: 0.25
   maxDistanceLookBrain: 40
   bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
   bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
@@ -137,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7299458910518200542}
   - component: {fileID: 4240657942632662364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,6 +262,68 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &3773896887328122855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963200522531482025}
+  - component: {fileID: 6380350632066264283}
+  - component: {fileID: 9110815908734679544}
+  m_Layer: 12
+  m_Name: HoleDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963200522531482025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773896887328122855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 181305973943668366}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6380350632066264283
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773896887328122855}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
+--- !u!114 &9110815908734679544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773896887328122855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a703c54729b0f4a874ffc105129a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldier: {fileID: 7352131924919563314}
 --- !u!1 &4529016661315120862
 GameObject:
   m_ObjectHideFlags: 0

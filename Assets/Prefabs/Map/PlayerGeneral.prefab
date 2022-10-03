@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8364190172143029937}
   - {fileID: 8364190171162671303}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &313779949024335770
 MonoBehaviour:
@@ -96,6 +96,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   fire: 0
+  cac: 0
   tuto: 0
   nextLeft: 0
   nextRight: 0
@@ -114,11 +115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.6
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.6
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -154,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474598, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_Name
-      value: Player (4)
+      value: Player5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -178,11 +179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.7
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.6
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -218,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474598, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -242,11 +243,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.4
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.6
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -282,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474598, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_Name
-      value: Player (3)
+      value: Player4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -306,11 +307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.6
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -346,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474598, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_Name
-      value: Player (2)
+      value: Player3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -370,11 +371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -53.5
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.6
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474584, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -398,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4395893598687474598, guid: 5c51c610601e66449a25d5432cfb3bf4, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

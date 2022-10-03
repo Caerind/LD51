@@ -27,6 +27,7 @@ public class Soldier : MonoBehaviour
     private bool justCaced = false;
 
     protected bool isMoving = false;
+    protected bool isOnHole = false;
 
     protected Animator animator;
     protected HealthSystem healthSystem;
@@ -118,6 +119,11 @@ public class Soldier : MonoBehaviour
         timerAction = 0.0f;
     }
 
+    public void SetOnHole(bool hole)
+    {
+        isOnHole = hole;
+    }
+
     public void CacHit()
     {
         Soldier soldier = null;
@@ -142,7 +148,7 @@ public class Soldier : MonoBehaviour
         }
         if (soldier != null)
         {
-            soldier.RecevedDamage(cacDamage, this);
+            soldier.RecevedDamage(cacDamage, this, fire:false);
 
             // TODO : Sound touched
 
@@ -157,9 +163,16 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    public void RecevedDamage(int Damage, Soldier shooter)
+    public void RecevedDamage(int Damage, Soldier shooter, bool fire)
     {
-        healthSystem.Damage(Damage, shooter);
+        if (isOnHole && fire)
+        {
+            healthSystem.Damage(Damage / 2, shooter);
+        }
+        else
+        {
+            healthSystem.Damage(Damage, shooter);
+        }
     }
 
     public float GetFireDistanceMax()

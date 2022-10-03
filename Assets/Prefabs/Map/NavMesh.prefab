@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6140493605294122527
 Transform:
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!114 &7403872734380598103
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: aa62bfb11981ce74f9e8e758ad3845a9, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5f00b980607625c41aac730b18fd4245, type: 2}
 --- !u!114 &6875788098880986386
 MonoBehaviour:
   m_ObjectHideFlags: 0
