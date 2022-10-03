@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4735420207489372258}
   - component: {fileID: 7613464962489602320}
   - component: {fileID: -2834944904555898474}
+  - component: {fileID: 3252805514171603199}
   m_Layer: 0
   m_Name: GameApplication
   m_TagString: Untagged
@@ -164,3 +165,35 @@ MonoBehaviour:
   m_minOrthographicSize: 5
   m_maxOrthographicSize: 13
   m_invertZoom: 1
+--- !u!114 &3252805514171603199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798476760075977795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792e14cc9d8eea844b0ef6fd6da0945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: TICTAC
+    clip: {fileID: 8300000, guid: 022bf52802b75e84a9bb35337cff7a4b, type: 3}
+    volume: 0.7
+    volumeVariance: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Battement
+    clip: {fileID: 8300000, guid: bf13c889a7049684b96c6801fa61c21a, type: 3}
+    volume: 0.8
+    volumeVariance: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
