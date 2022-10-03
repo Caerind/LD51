@@ -17,14 +17,18 @@ public class BulletDetector : MonoBehaviour
         BulletProjectile bullet = collision.GetComponent<BulletProjectile>();
         if (bullet != null && bullet.GetShooter() != null && bullet.GetShooter().IsPlayerSoldier() != soldier.IsPlayerSoldier())
         {
-            Vector2 diff = (bullet.transform.position - soldier.transform.position).ToVector2();
+            Vector2 diff = (bullet.GetShooter().transform.position - soldier.transform.position).ToVector2();
             diff.Normalize();
 
             LayerMask mask = LayerMask.GetMask("Default");
             RaycastHit2D hit = Physics2D.Raycast(soldier.transform.position.ToVector2() + diff * 1.0f, diff, distanceShooterMax, mask);
-            if (hit.collider.gameObject == soldier.gameObject)
+            if (hit.collider != null)
             {
-                soldier.SetLookDir(diff);
+                FakeAgent fakeAgent = hit.collider.gameObject.GetComponentInParent<FakeAgent>();
+                if (hit.collider.gameObject == bullet.GetShooter().gameObject || (fakeAgent != null && fakeAgent.GetSoldier() == bullet.GetShooter()))
+                {
+                    soldier.SetLookDir(diff);
+                }
             }
         }
     }

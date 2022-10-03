@@ -4,6 +4,9 @@ public class InterestPoint : MonoBehaviour
 {
     [SerializeField] private float baseScore = 10.0f;
 
+    [SerializeField] private bool cover = true;
+    [SerializeField] private bool defendBase = false;
+
     private bool locked = false;
 
     private void Awake()

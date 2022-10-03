@@ -38,7 +38,7 @@ public class PlayerController : Soldier
             Soldier senderSoldier = (Soldier)sender;
             if (senderSoldier != null && !senderSoldier.IsPlayerSoldier())
             {
-                SetLookDir((senderSoldier.transform.position - transform.position).ToVector2().normalized);
+                SetLookAt(senderSoldier.transform.position);
             }
 
             // Blood
@@ -61,7 +61,8 @@ public class PlayerController : Soldier
             PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
         
-        gamepadLine.enabled = false;
+        if (gamepadLine != null)
+            gamepadLine.enabled = false;
 
         // Blood
         GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
@@ -93,14 +94,16 @@ public class PlayerController : Soldier
         if (mainSoldier)
         {
             PlayerCameraController.Instance.SetFollow(cameraTarget);
-            gamepadLine.enabled = true;
+            if (gamepadLine != null)
+                gamepadLine.enabled = true;
         }
         else
         {
             Deplacement.Stop();
             animator?.SetFloat(animIDMvt, 0.0f);
             isMoving = false;
-            gamepadLine.enabled = false;
+            if (gamepadLine != null)
+                gamepadLine.enabled = false;
         }
     }
 
@@ -112,7 +115,7 @@ public class PlayerController : Soldier
         float mvt = inputs.move.magnitude;
         animator?.SetFloat(animIDMvt, mvt);
         bool wasmooving = isMoving;
-        isMoving = mvt > 0.05f;
+        isMoving = mvt > 0.025f;
         if(wasmooving != isMoving)
         {
             if (isMoving)
@@ -136,14 +139,14 @@ public class PlayerController : Soldier
             if (inputs.look != Vector2.zero) // Gamepad
             {
                 look = inputs.look;
-                cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.25f;
+                cameraTarget.transform.position = transform.position + look.ToVector3() * fireDistance * 0.2f;
             }
-            gamepadLine.enabled = true;
             if (gamepadLine != null)
             {
+                gamepadLine.enabled = true;
                 Vector3[] lines = new Vector3[2];
                 lines[0] = transform.position;
-                lines[1] = transform.position + look.ToVector3() * fireDistance * 0.5f;
+                lines[1] = transform.position + look.ToVector3() * fireDistance * 0.4f;
                 gamepadLine.useWorldSpace = true;
                 gamepadLine.positionCount = 2;
                 gamepadLine.SetPositions(lines);
@@ -158,7 +161,8 @@ public class PlayerController : Soldier
                 cameraTarget.transform.position = transform.position + diff * 0.5f;
             }
 
-            gamepadLine.enabled = false;
+            if (gamepadLine != null)
+                gamepadLine.enabled = false;
         }
         if (look != Vector2.zero)
         {
@@ -201,12 +205,12 @@ public class PlayerController : Soldier
         }
     }
 
-    protected override bool CanFire()
+    public override bool CanFire()
     {
         return timerAction >= (fireCooldown + (IsMainSoldier() ? 0.0f : fireCooldownBonusReaction));
     }
 
-    protected override bool CanCac()
+    public override bool CanCac()
     {
         return timerAction >= (cacCooldown + (IsMainSoldier() ? 0.0f : cacCooldownBonusReaction));
     }

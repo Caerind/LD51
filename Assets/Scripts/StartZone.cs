@@ -14,6 +14,11 @@ public class StartZone : MonoBehaviour
         if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
         {
             compteur++;
+            AIController ai = soldier as AIController;
+            if (ai != null && playerZone)
+            {
+                ai.isInPlayerZone = true;
+            }
         }
     }
 
@@ -23,6 +28,11 @@ public class StartZone : MonoBehaviour
         if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
         {
             compteur--;
+            AIController ai = soldier as AIController;
+            if (ai != null && playerZone)
+            {
+                ai.isInPlayerZone = false;
+            }
         }
     }
 

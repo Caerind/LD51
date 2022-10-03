@@ -22,7 +22,7 @@ public class General : MonoBehaviour
 
         GameManager.Instance.RegisterGeneral(this);
 
-        nextSelectedSoldier = soldiers.ToList().Randomize().ToList()[0]; // This doesn't create a copy of soldiers (and randomize it) I guess
+        nextSelectedSoldier = GetAvailableSoldiersForSelection().ToList().Randomize().ToList()[0]; // This doesn't create a copy of soldiers (and randomize it) I guess
     }
 
     public virtual bool IsPlayerGeneral()
@@ -94,7 +94,7 @@ public class General : MonoBehaviour
         for (int i = 0; i < soldiers.Count; ++i)
         {
             Soldier soldier = soldiers[i];
-            if (soldier != selectedSoldier)
+            if (soldier != selectedSoldier && soldier.isSelectable)
             {
                 result.Add(soldier);
             }

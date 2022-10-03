@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,13 +23,15 @@ public class Soldier : MonoBehaviour
     [SerializeField] private AudioSource Baïonette;
     [SerializeField] private AudioSource Blessure;
     [SerializeField] public AudioSource Mort;
+    [SerializeField] public bool isSelectable = true;
 
     private float reactionTimer;
 
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
-    private bool justFired = false;
-    private bool justCaced = false;
+    private int justFired = 0;
+    private int justCaced = 0;
+    private const int skipFramesResetTrigger = 4;
 
     protected bool isMoving = false;
     protected bool isOnHole = false;
@@ -41,11 +42,14 @@ public class Soldier : MonoBehaviour
 
     protected float timerAction = 900.0f;
 
-    private float speedMultiplier = 1.0f;
-
     protected int animIDMvt;
     protected int animIDFire;
     protected int animIDCac;
+
+    public float GetFireDistance()
+    {
+        return fireDistance;
+    }
     
     public virtual void SetMainSoldier(bool mainSoldier)
     {
@@ -71,7 +75,7 @@ public class Soldier : MonoBehaviour
 
     public float GetSpeed()
     {
-        return speed * speedMultiplier;
+        return speed * 0.5f + speed * 0.5f * healthSystem.GetHealthAmountNormalized();
     }
 
     public General GetGeneral()
@@ -120,7 +124,7 @@ public class Soldier : MonoBehaviour
         Vector2 dir = new Vector2(Mathf.Cos(lookAngle), Mathf.Sin(lookAngle));
 
         animator?.SetTrigger(animIDFire);
-        justFired = true;
+        justFired = skipFramesResetTrigger;
 
         LayerMask mask = LayerMask.GetMask("Default");
         Vector2 pos = GetBulletPos();
@@ -145,7 +149,7 @@ public class Soldier : MonoBehaviour
     public void Cac()
     {
         animator?.SetTrigger(animIDCac);
-        justCaced = true;
+        justCaced = skipFramesResetTrigger;
         Baïonette.Play();
         timerAction = 0.0f;
     }
@@ -207,12 +211,12 @@ public class Soldier : MonoBehaviour
         return fireDistance;
     }
 
-    protected virtual bool CanFire()
+    public virtual bool CanFire()
     {
         return false;
     }
 
-    protected virtual bool CanCac()
+    public virtual bool CanCac()
     {
         return false;
     }
@@ -233,15 +237,15 @@ public class Soldier : MonoBehaviour
     {
         timerAction += Time.deltaTime;
 
-        if (justFired)
+        justFired--;
+        if (justFired == 0)
         {
             animator?.ResetTrigger(animIDFire);
-            justFired = false;
         }
-        if (justCaced)
+        justCaced--;
+        if (justCaced == 0)
         {
             animator?.ResetTrigger(animIDCac);
-            justCaced = false;
         }
     }
 
@@ -256,10 +260,24 @@ public class Soldier : MonoBehaviour
             float cosHalfFov = Mathf.Cos(fov * 0.5f * Mathf.Deg2Rad);
             foreach (Soldier soldier in enemyGeneral.GetSoldiers())
             {
+                if (soldier == null)
+                    continue;
                 Vector2 currentPos = bulletSpawn.position.ToVector2();
                 Vector2 soldierPos = soldier.transform.position;
                 Vector2 diff = (soldierPos - currentPos);
-                if (diff.sqrMagnitude <= fireDistance * fireDistance) // Is in fire range
+                float d = diff.sqrMagnitude;
+                if (d < 2.0f * 2.0f)
+                {
+                    diff.Normalize();
+                    SetLookDir(diff);
+
+                    // Cac at it if we can
+                    if (CanCac())
+                    {
+                        Cac();
+                    }
+                }
+                else if (d <= fireDistance * fireDistance) // Is in fire range
                 {
                     float distance = diff.magnitude;
                     diff.Normalize();
@@ -268,17 +286,19 @@ public class Soldier : MonoBehaviour
                         // Do a raycast to check is there is obstacle between us
                         LayerMask mask = LayerMask.GetMask("Default");
                         RaycastHit2D hit = Physics2D.Raycast(currentPos, diff, distance, mask);
-
-                        FakeAgent fakeAgent = hit.collider.gameObject.GetComponentInParent<FakeAgent>();
-                        if (hit.collider.gameObject == soldier.gameObject || (fakeAgent != null && fakeAgent.GetSoldier() == soldier))
+                        if (hit.collider != null)
                         {
-                            // Good so look at it
-                            SetLookDir(diff);
-
-                            // Fire at it if we can
-                            if (CanFire())
+                            FakeAgent fakeAgent = hit.collider.gameObject.GetComponentInParent<FakeAgent>();
+                            if (hit.collider.gameObject == soldier.gameObject || (fakeAgent != null && fakeAgent.GetSoldier() == soldier))
                             {
-                                Fire(reactionFire: true);
+                                // Good so look at it
+                                SetLookDir(diff);
+
+                                // Fire at it if we can
+                                if (CanFire())
+                                {
+                                    Fire(reactionFire: true);
+                                }
                             }
                         }
                     }
@@ -295,6 +315,11 @@ public class Soldier : MonoBehaviour
     public void SetLookDir(Vector2 lookDir)
     {
         SetLookAngle(Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg);
+    }
+
+    public void SetLookAt(Vector2 pos)
+    {
+        SetLookDir((pos - transform.position.ToVector2()).normalized);
     }
 
     public float GetLookAngle()

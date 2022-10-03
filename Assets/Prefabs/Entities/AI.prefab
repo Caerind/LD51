@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7352131924919563314}
   - component: {fileID: 5893074324336176739}
   - component: {fileID: 3017557581855253714}
+  - component: {fileID: 7813447338966651391}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -68,16 +69,18 @@ MonoBehaviour:
   cacHitRadius: 0.25
   cacDamage: 70
   updateReactionTimer: 0.1
-  fireCooldownBonusAI: 0.25
-  cacCooldownBonusAI: 0.25
   TirRecharge: {fileID: 4510004999212407535}
   "Ba\xEFonette": {fileID: 122933841122302378}
   Blessure: {fileID: 386502454782811719}
   Mort: {fileID: 8687874850896028889}
-  maxDistanceLookBrain: 40
+  isSelectable: 1
+  fireCooldownBonusAI: 0.25
+  cacCooldownBonusAI: 0.25
   bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
   bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
   Deplacement: {fileID: 6948699846867786008}
+  redCircle: {fileID: 8883085236013995593}
+  isInPlayerZone: 0
 --- !u!210 &5893074324336176739
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -103,6 +106,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmountMax: 100
+--- !u!114 &7813447338966651391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181305973943668400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e6f92d8c0e35542910c2b22c34cd51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeRecomputePath: 0.2
+  timeSkipBrain: 0.15
+  defaultPattern: 0
 --- !u!1 &1079785056299584875
 GameObject:
   m_ObjectHideFlags: 0
