@@ -25,7 +25,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "1f5d7a25a158c6120b598971c2ab5f9e15f435b7"
+      "hash": "dea96cbff5901bcda49d54ba01e54a364b53bec9"
     },
     "com.prybh.tilemaptools": {
       "version": "https://github.com/Prybh/TilemapTools.git",

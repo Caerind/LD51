@@ -1,5 +1,6 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Soldier : MonoBehaviour
 {
@@ -93,6 +94,16 @@ public class Soldier : MonoBehaviour
         return bulletSpawn.transform.position.ToVector2();
     }
 
+    public void SetOnHole(bool hole)
+    {
+        isOnHole = hole;
+    }
+
+    public void Deces()
+    {
+        Mort.Play();
+    }
+
     public void Fire(bool reactionFire = false)
     {
         float lookAngle = GetLookAngle();
@@ -111,7 +122,21 @@ public class Soldier : MonoBehaviour
         animator?.SetTrigger(animIDFire);
         justFired = true;
 
-        BulletProjectile.Create(this, dir);
+        LayerMask mask = LayerMask.GetMask("Default");
+        Vector2 pos = GetBulletPos();
+        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 1.0f, mask);
+        TilemapCollider2D tilemap = hit.collider as TilemapCollider2D;
+        bool invalidTilemap = false;
+        if (tilemap != null && tilemap.tag == "Blocs")
+            invalidTilemap = true;
+        CompositeCollider2D tilemapComposite = hit.collider as CompositeCollider2D;
+        bool invalidTilemapComposite = false;
+        if (tilemapComposite != null && tilemapComposite.tag == "Blocs")
+            invalidTilemapComposite = true;
+        if (!invalidTilemap && !invalidTilemapComposite)
+        {
+            BulletProjectile.Create(this, dir);
+        }
 
         timerAction = 0.0f;
         TirRecharge.Play();
@@ -123,16 +148,6 @@ public class Soldier : MonoBehaviour
         justCaced = true;
         Baïonette.Play();
         timerAction = 0.0f;
-    }
-
-    public void SetOnHole(bool hole)
-    {
-        isOnHole = hole;
-    }
-        
-    public void Deces()
-    {
-        Mort.Play();
     }
 
     public void CacHit()

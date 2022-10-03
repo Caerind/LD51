@@ -21,10 +21,10 @@ EditorBuildSettings:
     path: Assets/Scenes/AlexisScene.unity
     guid: 3b405023a64c9d74b82aecd371c39629
   - enabled: 1
-    path: Assets/Scenes/CharlesScene.unity
-    guid: ee3c53274e7ebd74e97ddecc5ffd4e7b
-  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/TestScene1.unity
+    guid: cba045429a81399489dcc38f8eaa5332
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fcfc29dda049c5348bed11e6add462ac, type: 2}
