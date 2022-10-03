@@ -82,6 +82,11 @@ public class GameApplication : Singleton<GameApplication>
         return unlockedGameScenes.Contains(index);
     }
 
+    public void UnlockedGameScene(int index)
+    {
+        unlockedGameScenes.AddUnique(index);
+    }
+
     public void SetCurrentScene(int index)
     {
         currentGameScene = index;

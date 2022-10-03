@@ -40,6 +40,17 @@ public class Campaign : MonoBehaviour
         Select(maxReached);
     }
 
+    private void Update()
+    {
+        if (Inputs.Instance.nextLeft)
+        {
+            GameApplication.Instance.UnlockedGameScene(0);
+            GameApplication.Instance.UnlockedGameScene(1);
+            GameApplication.Instance.UnlockedGameScene(2);
+            Inputs.Instance.nextLeft = false;
+        }
+    }
+
     private void Select(int i)
     {
         title.text = GameApplication.Instance.GetGameScene(i).name;
