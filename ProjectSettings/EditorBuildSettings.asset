@@ -15,14 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/CampaignMenu.unity
     guid: 8ec97f121699d78448a720ecf848d251
   - enabled: 1
+    path: Assets/Scenes/Menus/TutoScene.unity
+    guid: da28f4ef81be35b418c282eca65d0544
+  - enabled: 1
     path: Assets/Scenes/Menus/EndGame.unity
     guid: 591a295c54e010043bcf07e9d8c805ab
-  - enabled: 1
-    path: Assets/Scenes/AlexisScene.unity
-    guid: 3b405023a64c9d74b82aecd371c39629
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/Scene1.unity
     guid: cba045429a81399489dcc38f8eaa5332

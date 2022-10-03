@@ -50,7 +50,7 @@ MonoBehaviour:
     m_IsDirty: 0
     m_ScenePath: Assets/Scenes/Menus/EndGame.unity
   gameScenes:
-  - name: Map1
+  - name: Pontivy
     text: sdqsdqsdjgbduhjqshdahjzydhAFDHJQABDYUQSHBD
     icon: {fileID: 21300000, guid: d8af3f974f29b1040a57a2d781f0299b, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
@@ -58,7 +58,7 @@ MonoBehaviour:
       m_SceneAsset: {fileID: 102900000, guid: cba045429a81399489dcc38f8eaa5332, type: 3}
       m_IsDirty: 0
       m_ScenePath: Assets/Scenes/Scene1.unity
-  - name: Map2
+  - name: Montivilliers
     text: wAGSDUHGQSOIDSYQIUGSDQSKLDSDFQSXQSDsdfsdfsdfqsdfsdfs
     icon: {fileID: 21300000, guid: 85ffb3c5a5c3cb649bfd703ee592a07c, type: 3}
     map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
@@ -66,10 +66,10 @@ MonoBehaviour:
       m_SceneAsset: {fileID: 102900000, guid: e2472e5e491292b40b33b53b6ea4a483, type: 3}
       m_IsDirty: 0
       m_ScenePath: Assets/Scenes/Scene2.unity
-  - name: Map3
+  - name: Avranches
     text: qsdqsdjhqdimoqshfk qezhf uygsfd tqbzdf ghqjds
     icon: {fileID: 21300000, guid: 80cbb6bdd2009254db0c899fca5dd47f, type: 3}
-    map: {fileID: 21300000, guid: 129d3d4e6771f9e45ac6cb9b0dd3bcc7, type: 3}
+    map: {fileID: 21300000, guid: 1b7a51564c36d094db7ae59979519d34, type: 3}
     scene:
       m_SceneAsset: {fileID: 102900000, guid: 8a468da5478e0f04eb04d0da311a0c75, type: 3}
       m_IsDirty: 0
