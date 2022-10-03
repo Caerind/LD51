@@ -427,6 +427,7 @@ MonoBehaviour:
   "Ba\xEFonette": {fileID: 4279761602026018368}
   Blessure: {fileID: 4579416187334775213}
   Mort: {fileID: 4774364298398083891}
+  isSelectable: 1
   fovLight: {fileID: 1627116386072193263}
   IntensiteTirShake: 3
   TimerTirShake: 1

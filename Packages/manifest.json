@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.h8man.2d.navmeshplus": "file:C:/Users/charl/Desktop/UnityProjects\\NavMeshPlus",
+    "com.h8man.2d.navmeshplus": "https://github.com/h8man/NavMeshPlus.git",
     "com.prybh.packagetosource": "https://github.com/Prybh/PackageToSource.git",
     "com.prybh.pathfinder": "https://github.com/Prybh/Pathfinder.git",
     "com.prybh.simplescenemanagement": "https://github.com/Prybh/SimpleSceneManagement.git",

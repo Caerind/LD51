@@ -52,6 +52,22 @@ public class General : MonoBehaviour
         return soldiers;
     }
 
+    public int GetSelectableSoldiersCount()
+    {
+        int count = 0;
+        if (soldiers != null)
+        {
+            foreach (var s in soldiers)
+            {
+                if (s != null && s.isSelectable)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public Soldier GetSelectedSoldier()
     {
         return selectedSoldier;
@@ -75,7 +91,7 @@ public class General : MonoBehaviour
             }
             else
             {
-                if (nextSelectedSoldier == null)
+                if (nextSelectedSoldier == null && soldier.isSelectable)
                 {
                     nextSelectedSoldier = soldier;
                 }

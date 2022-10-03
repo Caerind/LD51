@@ -39,7 +39,7 @@ public class StartZone : MonoBehaviour
     private void Update()
     {
         General playerGeneral = GameManager.Instance.GetPlayerGeneral();
-        if (playerGeneral != null && playerGeneral.GetSoldiers() != null && playerGeneral.GetSoldiers().Count == 0)
+        if (playerGeneral != null && playerGeneral.GetSelectableSoldiersCount() == 0)
         {
             GameManager.Instance.Reset();
             GameApplication.Instance.SetPlayerWin(false);
