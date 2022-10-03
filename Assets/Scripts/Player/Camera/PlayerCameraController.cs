@@ -1,7 +1,6 @@
 using UnityEngine;
 using Cinemachine;
 
-[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class PlayerCameraController : Singleton<PlayerCameraController>
 {
     [SerializeField] private float m_zoomSpeed = 5f;
@@ -14,25 +13,29 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
     private CinemachineCameraShake cinemachinecameraShake;
     private float m_orthographicSize;
     private float m_targetOrthographicSize;
-    private float shakeTimer;
 
-    private void Awake()
+    public void RegisterVCam(CinemachineVirtualCamera vCam)
     {
-        cinemachinecameraShake= GetComponent<CinemachineCameraShake>();
-        m_virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        m_orthographicSize = m_virtualCamera.m_Lens.OrthographicSize;
-        m_targetOrthographicSize = m_orthographicSize;
+        m_virtualCamera = vCam;
+        if (m_virtualCamera != null)
+        {
+            cinemachinecameraShake = m_virtualCamera.gameObject.GetComponent<CinemachineCameraShake>();
+            m_orthographicSize = m_virtualCamera.m_Lens.OrthographicSize;
+            m_targetOrthographicSize = m_orthographicSize;
+        }
     }
 
     private void Update()
     {
-        m_targetOrthographicSize += Input.mouseScrollDelta.y * m_zoomAmount * (m_invertZoom ? -1f : 1f);
-        m_targetOrthographicSize = Mathf.Clamp(m_targetOrthographicSize, m_minOrthographicSize, m_maxOrthographicSize);
+        if (m_virtualCamera != null)
+        {
+            m_targetOrthographicSize += Input.mouseScrollDelta.y * m_zoomAmount * (m_invertZoom ? -1f : 1f);
+            m_targetOrthographicSize = Mathf.Clamp(m_targetOrthographicSize, m_minOrthographicSize, m_maxOrthographicSize);
 
-        m_orthographicSize = Mathf.Lerp(m_orthographicSize, m_targetOrthographicSize, Time.deltaTime * m_zoomSpeed);
+            m_orthographicSize = Mathf.Lerp(m_orthographicSize, m_targetOrthographicSize, Time.deltaTime * m_zoomSpeed);
 
-        m_virtualCamera.m_Lens.OrthographicSize = m_orthographicSize;
-
+            m_virtualCamera.m_Lens.OrthographicSize = m_orthographicSize;
+        }
     }
 
     public void SetFollow(Transform transform)

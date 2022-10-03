@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2263512510653939199}
   - component: {fileID: 4735420207489372258}
   - component: {fileID: 7613464962489602320}
+  - component: {fileID: -2834944904555898474}
   m_Layer: 0
   m_Name: GameApplication
   m_TagString: Untagged
@@ -146,3 +147,20 @@ MonoBehaviour:
   nextLeft: 0
   nextRight: 0
   point: {x: 0, y: 0}
+--- !u!114 &-2834944904555898474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798476760075977795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28ee266f1c10ea409601b7ace46dd36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_zoomSpeed: 5
+  m_zoomAmount: 2
+  m_minOrthographicSize: 5
+  m_maxOrthographicSize: 13
+  m_invertZoom: 1

@@ -9,10 +9,14 @@ public class CinemachineCameraShake : MonoBehaviour
     private float timer;
     private float timerTotal;
 
-    private void Start()
+
+    private void Awake()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        // TEMP : ship hack
+        PlayerCameraController.Instance.RegisterVCam(virtualCamera);
     }
 
     public void Shake(float Amount, float time)
