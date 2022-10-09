@@ -25,6 +25,8 @@ public class GameManager : Singleton<GameManager>
                 playerGeneral.SelectNextPlayer();
                 aiGeneral.SelectNextPlayer();
             }
+
+            UpdateCheckGameFinished();
         }
         else if (playerGeneral != null && aiGeneral != null)
         {
@@ -36,6 +38,25 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void UpdateCheckGameFinished()
+    {
+        // Has player win ?
+        if (playerGeneral != null && playerGeneral.GetSelectableSoldiersCount() == 0)
+        {
+            GameManager.Instance.Reset();
+            GameApplication.Instance.SetPlayerWin(false);
+            return;
+        }
+
+        // Has ai win ?
+        if (aiGeneral != null && aiGeneral.GetSoldiers() != null && aiGeneral.GetSoldiers().Count == 0)
+        {
+            GameManager.Instance.Reset();
+            GameApplication.Instance.SetPlayerWin(false);
+            return;
+        }
+    }
+
     public bool IsPlaying()
     {
         return isPlaying;
@@ -44,8 +65,8 @@ public class GameManager : Singleton<GameManager>
     /*
     private void OnGUI()
     {
-        GUI.Label(new Rect(5, 5, 100, 25), "ZonePlayer: " + ((AIGeneral)aiGeneral).GetPlayerZone().GetCompteur().ToString());
-        GUI.Label(new Rect(5, 35, 100, 25), "ZoneEnemy: " + ((AIGeneral)aiGeneral).GetEnemyZone().GetCompteur().ToString());
+        GUI.Label(new Rect(5, 5, 100, 25), "ZonePlayer: " + ((AIGeneral)aiGeneral).GetPlayerZone().GetEnemyInZoneCounter().ToString());
+        GUI.Label(new Rect(5, 35, 100, 25), "ZoneEnemy: " + ((AIGeneral)aiGeneral).GetEnemyZone().GetEnemyInZoneCounter().ToString());
         GUI.Label(new Rect(5, 60, 100, 25), "AINext: " + aiGeneral.GetNextSelectedIndex().ToString());
     }
     */

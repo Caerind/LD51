@@ -45,7 +45,7 @@ public class AIBrain : MonoBehaviour
             if (controller.IsMainSoldier())
             {
                 Pattern newPattern;
-                if (((AIGeneral)controller.GetGeneral()).GetEnemyZone().GetCompteur() > 0)
+                if (((AIGeneral)controller.GetGeneral()).GetEnemyZone().GetEnemyInZoneCounter() > 0)
                 {
                     if (defaultPattern == Pattern.CacMan)
                     {
@@ -506,7 +506,7 @@ public class AIBrain : MonoBehaviour
             float distanceCheck = maxDistanceLookBrain;
 
             AIGeneral general = (AIGeneral)controller.GetGeneral();
-            if (general != null && general.GetPlayerZone().GetCompteur() > 0)
+            if (general != null && general.GetPlayerZone().GetEnemyInZoneCounter() > 0)
             {
                 distanceCheck *= general.GetCommander().factorDistanceAttackPlayerZone;
             }
@@ -543,7 +543,7 @@ public class AIBrain : MonoBehaviour
             float distanceCheck = maxDistanceLookBrain;
 
             AIGeneral general = (AIGeneral)controller.GetGeneral();
-            if (general != null && general.GetEnemyZone().GetCompteur() > 0)
+            if (general != null && general.GetEnemyZone().GetEnemyInZoneCounter() > 0)
             {
                 distanceCheck *= general.GetCommander().factorDistanceDefendEnemyZone;
             }

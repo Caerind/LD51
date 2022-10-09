@@ -11,8 +11,6 @@ public class AIController : Soldier
 
     [SerializeField] private GameObject redCircle;
 
-    public bool isInPlayerZone = false;
-
     private FakeAgent agent;
     private AIBrain brain;
 
@@ -150,7 +148,7 @@ public class AIController : Soldier
 
     private void UpdateMinimap()
     {
-        if (isInPlayerZone)
+        if (IsInOppositeZone())
         {
             redCircle.SetActive(true);
         }

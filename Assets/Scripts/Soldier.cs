@@ -27,6 +27,7 @@ public class Soldier : MonoBehaviour
 
     private float reactionTimer;
 
+    private bool isInOppositeZone = false;
     private bool isMainSoldier = false;
     protected bool isPlayerSoldier = false;
     private int justFired = 0;
@@ -353,5 +354,15 @@ public class Soldier : MonoBehaviour
             lineRenderer.positionCount = 1 + arcPointCount;
             lineRenderer.SetPositions(lines);
         }
+    }
+
+    public bool IsInOppositeZone()
+    {
+        return isInOppositeZone;
+    }
+
+    public void SetIsInOppositeZone(bool isInOppositeZone)
+    {
+        this.isInOppositeZone = isInOppositeZone;
     }
 }

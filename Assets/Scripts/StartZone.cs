@@ -2,121 +2,67 @@ using UnityEngine;
 
 public class StartZone : MonoBehaviour
 {
-    [SerializeField] private bool playerZone;
-    [SerializeField] private float timerMax = 30.0f;
+    [SerializeField] private bool isPlayerZone;
+    [SerializeField] private float timeToRemainInZoneToWin = 30.0f;
 
-    private int compteur = 0;
-    private float timer = 0;
+    private int enemyInZoneCounter = 0;
+    private float enemyInZoneTimer = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Soldier soldier = collision.GetComponentInParent<Soldier>();
-        if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
+        if (soldier != null && soldier.IsPlayerSoldier() != !isPlayerZone)
         {
-            compteur++;
-            AIController ai = soldier as AIController;
-            if (ai != null && playerZone)
-            {
-                ai.isInPlayerZone = true;
-            }
+            enemyInZoneCounter++;
+
+            soldier.SetIsInOppositeZone(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         Soldier soldier = collision.GetComponentInParent<Soldier>();
-        if (soldier != null && ((soldier.IsPlayerSoldier() && playerZone == false) || (soldier.IsPlayerSoldier() == false && playerZone == true)))
+        if (soldier != null && soldier.IsPlayerSoldier() != isPlayerZone)
         {
-            compteur--;
-            AIController ai = soldier as AIController;
-            if (ai != null && playerZone)
-            {
-                ai.isInPlayerZone = false;
-            }
+            enemyInZoneCounter--;
+
+            soldier.SetIsInOppositeZone(false);
         }
     }
 
     private void Update()
     {
-        General playerGeneral = GameManager.Instance.GetPlayerGeneral();
-        if (playerGeneral != null && playerGeneral.GetSelectableSoldiersCount() == 0)
+        if (enemyInZoneCounter > 0)
         {
-            GameManager.Instance.Reset();
-            GameApplication.Instance.SetPlayerWin(false);
-            return;
-        }
+            // TODO : UI Timer Win
 
-        General aiGeneral = GameManager.Instance.GetPlayerGeneral();
-        if (aiGeneral != null && aiGeneral.GetSoldiers() != null && aiGeneral.GetSoldiers().Count == 0)
-        {
-            GameManager.Instance.Reset();
-            GameApplication.Instance.SetPlayerWin(false);
-            return;
-        }
+            enemyInZoneTimer += Time.deltaTime;
 
-        // TODO : UI Timer Win
-
-        // Increment Timer
-        if (compteur > 0)
-        {
-            timer += Time.deltaTime;
-
-            if (timer > timerMax)
+            if (enemyInZoneTimer >= timeToRemainInZoneToWin)
             {
                 GameManager.Instance.Reset();
-                GameApplication.Instance.SetPlayerWin(!playerZone);
+                GameApplication.Instance.SetPlayerWin(!isPlayerZone);
                 return;
             }
         }
         else
         {
-            timer = 0;  
+            enemyInZoneTimer = 0.0f;  
         }
     }
 
-    public int GetCompteur()
+    public bool IsPlayerZone()
     {
-        return compteur;
+        return isPlayerZone;
     }
 
-#if UNITY_EDITOR
-    /*
-    [SerializeField] private int genZonePointCount = 30;
-    [SerializeField] private float genZonePointInterval = -4.0f;
-    [SerializeField] private float yDir = 2;
-    [CustomEditor(typeof(StartZone))]
-    internal class StartZoneEditor : Editor
+    public int GetEnemyInZoneCounter()
     {
-        private StartZone zone => target as StartZone;
-
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            if (GUILayout.Button("GeneratePoints"))
-            {
-                zone.GenPoints();
-            }
-        }
+        return enemyInZoneCounter;
     }
-    public void GenPoints()
+
+    public float GetEnemyInZoneTimer()
     {
-        float side = playerZone ? 1.0f : -1.0f;
-        for (int i = 0; i < genZonePointCount; ++i)
-        {
-            GameObject go = new GameObject();
-            go.transform.parent = transform;
-            go.transform.localPosition = new Vector3(i * genZonePointInterval, side * yDir, 0.0f);
-            go.AddComponent<ZonePoint>().isPlayerZonePoint = playerZone;
-        }
-        for (int i = 1; i < genZonePointCount; ++i)
-        {
-            GameObject go = new GameObject();
-            go.transform.parent = transform;
-            go.transform.localPosition = new Vector3(-i * genZonePointInterval, side * yDir, 0.0f);
-            go.AddComponent<ZonePoint>().isPlayerZonePoint = playerZone;
-        }
+        return enemyInZoneTimer;
     }
-    */
-#endif // UNITY_EDITOR
 }
