@@ -12,8 +12,8 @@ public class HealthBarSystem : MonoBehaviour
             InstantiateForSoldier(soldier);
         }
 
-        General enemyGeneral = GameManager.Instance.GetEnemyGeneral();
-        foreach (Soldier soldier in enemyGeneral.GetSoldiers())
+        General aiGeneral = GameManager.Instance.GetAIGeneral();
+        foreach (Soldier soldier in aiGeneral.GetSoldiers())
         {
             InstantiateForSoldier(soldier);
         }

@@ -45,7 +45,7 @@ public class AIBrain : MonoBehaviour
             if (controller.IsMainSoldier())
             {
                 Pattern newPattern;
-                if (((AIGeneral)controller.GetGeneral()).GetEnemyZone().GetEnemyInZoneCounter() > 0)
+                if (GameManager.Instance.GetAIZone().GetEnemyInZoneCounter() > 0)
                 {
                     if (defaultPattern == Pattern.CacMan)
                     {
@@ -227,7 +227,7 @@ public class AIBrain : MonoBehaviour
                 searchPos = (searchPos + soldier.transform.position.ToVector2()) * 0.5f;
             }
 
-            List<ZonePoint> enemyZonePoints = GameManager.Instance.GetAllEnemyZonePoints();
+            List<ZonePoint> enemyZonePoints = GameManager.Instance.GetAllAIZonePoints();
             ZonePoint bestPoint = null;
             float bestScore = 9999999.9f;
             foreach (var point in enemyZonePoints)

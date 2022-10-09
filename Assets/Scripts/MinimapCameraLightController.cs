@@ -7,7 +7,13 @@ public class MinimapCameraLightController : MonoBehaviour
     [SerializeField] private Light2D globalLight;
     [SerializeField] private float minimapIntensity = 0.7f;
 
+    private Camera ownCamera;
     private float previousIntensity;
+
+    private void Awake()
+    {
+        ownCamera = GetComponent<Camera>();
+    }
 
     private void Start()
     {
@@ -17,7 +23,7 @@ public class MinimapCameraLightController : MonoBehaviour
 
     private void OnBeginCameraRendering(ScriptableRenderContext context, Camera camera)
     {
-        if (camera == gameObject.GetComponent<Camera>())
+        if (camera == ownCamera)
         {
             previousIntensity = globalLight.intensity;
             globalLight.intensity = minimapIntensity;
@@ -26,7 +32,7 @@ public class MinimapCameraLightController : MonoBehaviour
 
     private void OnEndCameraRendering(ScriptableRenderContext context, Camera camera)
     {
-        if (camera == gameObject.GetComponent<Camera>())
+        if (camera == ownCamera)
         {
             globalLight.intensity = previousIntensity;
         }

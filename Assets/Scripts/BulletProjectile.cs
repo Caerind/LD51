@@ -3,13 +3,13 @@ using UnityEngine;
 public class BulletProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 50.0f;
-    [SerializeField] private int degat = 40;
+    [SerializeField] private int damage = 40;
     [SerializeField] private float distanceMinForCover = 3.0f;
 
     private Soldier shooter;
     private Vector2 dir;
     private float maxDistance;
-    private float distanceDone;
+    private float distanceTraveled;
 
     public static BulletProjectile Create(Soldier soldier, Vector2 dir)
     {
@@ -17,10 +17,10 @@ public class BulletProjectile : MonoBehaviour
         Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.GetBulletPos(), Quaternion.identity);
 
         BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
+        bulletProjectile.shooter = soldier;
         bulletProjectile.dir = dir;
         bulletProjectile.maxDistance = soldier.GetFireDistanceMax();
-        bulletProjectile.distanceDone = 0.0f;
-        bulletProjectile.shooter = soldier;
+        bulletProjectile.distanceTraveled = 0.0f;
         return bulletProjectile;
     }
 
@@ -29,8 +29,8 @@ public class BulletProjectile : MonoBehaviour
         transform.position += dir.ToVector3() * speed * Time.deltaTime;
         float mvt = Time.deltaTime * speed;
         maxDistance -= mvt;
-        distanceDone += mvt;
-        if (maxDistance <= 0)
+        distanceTraveled += mvt;
+        if (maxDistance <= 0.0f)
         {
             Destroy(gameObject);
         }
@@ -46,17 +46,17 @@ public class BulletProjectile : MonoBehaviour
         if (soldier != null)
         {
             Destroy(gameObject);
-            soldier.RecevedDamage(degat, shooter, fire:true);
+            soldier.RecevedDamage(damage, shooter, fire:true);
         }
         else if (collision.GetComponent<BulletDetector>() == null)
         {
             Cover cover = collision.GetComponent<Cover>();
             if (cover != null)
             {
-                if (distanceDone > distanceMinForCover)
+                if (distanceTraveled > distanceMinForCover)
                 {
                     float random = Random.Range(0f, 1f);
-                    if (random <= cover.coverPercent)
+                    if (random > cover.GetProtectionChance())
                     {
                         Destroy(gameObject);
                     }

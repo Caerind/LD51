@@ -8,6 +8,11 @@ public class StartZone : MonoBehaviour
     private int enemyInZoneCounter = 0;
     private float enemyInZoneTimer = 0;
 
+    private void Awake()
+    {
+        GameManager.Instance.RegisterStartZone(this);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Soldier soldier = collision.GetComponentInParent<Soldier>();

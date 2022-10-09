@@ -31,7 +31,9 @@ Library/
 [SourceExplorer.ignore]
 bin/
 obj/
+Build/
 Library/
+Temp/
 *.pdb
 *.dll
 *.log

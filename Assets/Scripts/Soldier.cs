@@ -81,12 +81,12 @@ public class Soldier : MonoBehaviour
 
     public General GetGeneral()
     {
-        return IsPlayerSoldier() ? GameManager.Instance.GetPlayerGeneral() : GameManager.Instance.GetEnemyGeneral();
+        return IsPlayerSoldier() ? GameManager.Instance.GetPlayerGeneral() : GameManager.Instance.GetAIGeneral();
     }
 
     public General GetOppositeGeneral()
     {
-        return IsPlayerSoldier() ? GameManager.Instance.GetEnemyGeneral() : GameManager.Instance.GetPlayerGeneral();
+        return IsPlayerSoldier() ? GameManager.Instance.GetAIGeneral() : GameManager.Instance.GetPlayerGeneral();
     }
 
     public HealthSystem GetHealthSystem()

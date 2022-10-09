@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1 : MonoBehaviour
+public class SoldierIcon : MonoBehaviour
 {
-    [SerializeField] int PlayerID;
+    [SerializeField] private int PlayerIndex;
     [SerializeField] private GameObject WhiteHalo;
     [SerializeField] private float selectedTransformScale = 1.1f;
 
@@ -15,8 +14,7 @@ public class Player1 : MonoBehaviour
     {
         general = GameManager.Instance.GetPlayerGeneral();
 
-        List<Soldier> soldiers = general.GetSoldiers();
-        soldier = soldiers[PlayerID];
+        soldier = general.GetSoldiers()[PlayerIndex];
 
         HealthBar = GetComponentInChildren<HealthBarMiniMap>();
         HealthBar.Init(soldier);

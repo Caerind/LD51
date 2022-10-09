@@ -5,9 +5,11 @@ public class GameManager : Singleton<GameManager>
 {
     private General playerGeneral = null;
     private General aiGeneral = null;
+    private StartZone playerZone = null;
+    private StartZone aiZone = null;
     private List<InterestPoint> interestPoints = new List<InterestPoint>();
     private List<ZonePoint> playerZonePoints = new List<ZonePoint>();
-    private List<ZonePoint> enemyZonePoints = new List<ZonePoint>();
+    private List<ZonePoint> aiZonePoints = new List<ZonePoint>();
 
     private float timer = 0.0f;
     public const float timerMax = 10.0f;
@@ -28,7 +30,7 @@ public class GameManager : Singleton<GameManager>
 
             UpdateCheckGameFinished();
         }
-        else if (playerGeneral != null && aiGeneral != null)
+        else if (playerGeneral != null && aiGeneral != null && playerZone != null && aiZone != null)
         {
             playerGeneral.SelectNextPlayer();
             aiGeneral.SelectNextPlayer();
@@ -81,9 +83,19 @@ public class GameManager : Singleton<GameManager>
         return playerGeneral;
     }
 
-    public General GetEnemyGeneral()
+    public General GetAIGeneral()
     {
         return aiGeneral;
+    }
+
+    public StartZone GetPlayerZone()
+    {
+        return playerZone;
+    }
+
+    public StartZone GetAIZone()
+    {
+        return aiZone;
     }
 
     public void RegisterGeneral(General general)
@@ -95,6 +107,18 @@ public class GameManager : Singleton<GameManager>
         else
         {
             aiGeneral = general;
+        }
+    }
+
+    public void RegisterStartZone(StartZone startZone)
+    {
+        if (startZone.IsPlayerZone())
+        {
+            playerZone = startZone;
+        }
+        else
+        {
+            aiZone = startZone;
         }
     }
 
@@ -111,7 +135,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            enemyZonePoints.Add(point);
+            aiZonePoints.Add(point);
         }
     }
 
@@ -125,9 +149,9 @@ public class GameManager : Singleton<GameManager>
         return playerZonePoints;
     }
 
-    public List<ZonePoint> GetAllEnemyZonePoints()
+    public List<ZonePoint> GetAllAIZonePoints()
     {
-        return enemyZonePoints;
+        return aiZonePoints;
     }
 
     public void Reset()
@@ -136,7 +160,9 @@ public class GameManager : Singleton<GameManager>
         interestPoints.Clear();
         playerGeneral = null;
         aiGeneral = null;
+        playerZone = null;
+        aiZone = null;
         playerZonePoints.Clear();
-        enemyZonePoints.Clear();
+        aiZonePoints.Clear();
     }
 }
