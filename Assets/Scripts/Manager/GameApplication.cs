@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameApplication : Singleton<GameApplication>
 {
@@ -69,7 +68,7 @@ public class GameApplication : Singleton<GameApplication>
         {
             unlockedGameScenes.AddUnique(currentGameScene + 1);
         }
-        SceneManager.LoadScene(endGameScene.ScenePath);
+        endGameScene.LoadScene();
     }
 
     public bool GetHasPlayerWin()
@@ -105,7 +104,7 @@ public class GameApplication : Singleton<GameApplication>
     public void GoToCurrentScene()
     {
         GameManager.Instance.Reset();
-        SceneManager.LoadScene(gameScenes[currentGameScene].scene.ScenePath);
+        gameScenes[currentGameScene].scene.LoadScene();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

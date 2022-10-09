@@ -6,14 +6,13 @@ public class BoostSceneFader : MonoBehaviour
     [SerializeField] private float introFader = 1.0f;
     [SerializeField] private float wait = 1.0f;
     [SerializeField] private float outroFader = 1.0f;
+    [SerializeField] private SceneReference outScene;
 
-    private SimpleSceneLoaderComponent comp;
     private Image image;
     private float timer = 0.0f;
 
     private void Awake()
     {
-        comp = GetComponent<SimpleSceneLoaderComponent>();
         image = GetComponent<Image>();
     }
 
@@ -22,7 +21,7 @@ public class BoostSceneFader : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > introFader + wait + outroFader)
         {
-            comp.LoadScene();
+            outScene.LoadScene();
         }
         else if (timer > introFader + wait)
         {

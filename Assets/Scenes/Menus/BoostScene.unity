@@ -422,7 +422,6 @@ GameObject:
   - component: {fileID: 1390261249}
   - component: {fileID: 1390261248}
   - component: {fileID: 1390261251}
-  - component: {fileID: 1390261250}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -488,22 +487,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390261246}
   m_CullTransparentMesh: 1
---- !u!114 &1390261250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390261246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cae038d46cf0d1498e8529a65cdd663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene:
-    m_SceneAsset: {fileID: 102900000, guid: 984bf3bf6f688f44f8f0f6cfa9c0a3d9, type: 3}
-    m_IsDirty: 0
-    m_ScenePath: Assets/Scenes/Menus/MainMenu.unity
 --- !u!114 &1390261251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,3 +502,7 @@ MonoBehaviour:
   introFader: 1
   wait: 1
   outroFader: 1
+  outScene:
+    m_SceneAsset: {fileID: 102900000, guid: 984bf3bf6f688f44f8f0f6cfa9c0a3d9, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Menus/MainMenu.unity
