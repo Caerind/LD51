@@ -11,17 +11,15 @@ public class BulletProjectile : MonoBehaviour
     private float maxDistance;
     private float distanceTraveled;
 
-    public static BulletProjectile Create(Soldier soldier, Vector2 dir)
+    public static void Create(Soldier soldier, Vector2 dir)
     {
-        Transform pfBulletProjectile = Resources.Load<Transform>("pfBulletProjectile");
-        Transform bulletTransform = Instantiate(pfBulletProjectile, soldier.GetBulletPos(), Quaternion.identity);
+        GameObject bullet = Instantiate(PrefabManager.Instance.GetBulletProjectilePrefab(), soldier.GetBulletPos(), Quaternion.identity);
 
-        BulletProjectile bulletProjectile = bulletTransform.GetComponent<BulletProjectile>();
+        BulletProjectile bulletProjectile = bullet.GetComponent<BulletProjectile>();
         bulletProjectile.shooter = soldier;
         bulletProjectile.dir = dir;
         bulletProjectile.maxDistance = soldier.GetFireDistanceMax();
         bulletProjectile.distanceTraveled = 0.0f;
-        return bulletProjectile;
     }
 
     private void Update()

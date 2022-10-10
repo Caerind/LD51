@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8282163101496704253}
   - component: {fileID: 1844578761236652224}
   m_Layer: 0
-  m_Name: pfBulletProjectile
+  m_Name: BulletProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

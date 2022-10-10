@@ -46,8 +46,8 @@ public class AIController : Soldier
         GetGeneral().RemoveRefToSoldier(this);
 
         // Spawn new entity
-        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBodyAI");
-        Instantiate(pfDeadBody, transform.position, Quaternion.identity).eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
+        GameObject pfDeadBody = PrefabManager.Instance.GetDeadBodyAIPrefab();
+        Instantiate(pfDeadBody, transform.position, Quaternion.Euler(new Vector3(0.0f, 0.0f, GetLookAngle())));
 
         // Blood
         GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7613464962489602320}
   - component: {fileID: -2834944904555898474}
   - component: {fileID: 3252805514171603199}
+  - component: {fileID: 302057956892995501}
+  - component: {fileID: 1456201198756452648}
   m_Layer: 0
   m_Name: GameApplication
   m_TagString: Untagged
@@ -197,3 +199,31 @@ MonoBehaviour:
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+--- !u!114 &302057956892995501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798476760075977795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c65788092002e4f8bfd8a3799869b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadBodyAIPrefab: {fileID: 3057205315011286958, guid: 6760ab7d0bac7764a80877ede8403560, type: 3}
+  deadBodyPlayerPrefab: {fileID: 3057205315011286958, guid: a906a3c484ee4324288bcb6237e8338c, type: 3}
+  bulletProjectilePrefab: {fileID: 4993542328764745163, guid: 37d6f4b0835437440b89319818c9a404, type: 3}
+--- !u!114 &1456201198756452648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798476760075977795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7364f0cf21d50f3458814afa7e0dc4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseCursorTexture: {fileID: 2800000, guid: a9cb36054b7d78246b71e346ec7834d2, type: 3}

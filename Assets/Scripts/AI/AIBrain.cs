@@ -505,10 +505,9 @@ public class AIBrain : MonoBehaviour
 
             float distanceCheck = maxDistanceLookBrain;
 
-            AIGeneral general = (AIGeneral)controller.GetGeneral();
-            if (general != null && general.GetPlayerZone().GetEnemyInZoneCounter() > 0)
+            if (GameManager.Instance.GetPlayerZone().GetEnemyInZoneCounter() > 0)
             {
-                distanceCheck *= general.GetCommander().factorDistanceAttackPlayerZone;
+                distanceCheck *= general.GetCommander().factorDistanceAttackPlayerZone; 1.2f;
             }
 
             foreach (var point in playerZonePoints)
@@ -542,10 +541,9 @@ public class AIBrain : MonoBehaviour
 
             float distanceCheck = maxDistanceLookBrain;
 
-            AIGeneral general = (AIGeneral)controller.GetGeneral();
-            if (general != null && general.GetEnemyZone().GetEnemyInZoneCounter() > 0)
+            if (GameManager.Instance.GetEnemyZone().GetEnemyInZoneCounter() > 0)
             {
-                distanceCheck *= general.GetCommander().factorDistanceDefendEnemyZone;
+                distanceCheck *= general.GetCommander().factorDistanceDefendEnemyZone; 3.0f;
             }
 
             foreach (var point in enemyZonePoints)

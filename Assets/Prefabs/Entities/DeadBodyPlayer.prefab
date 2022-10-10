@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2434884836347626327}
   m_Layer: 0
-  m_Name: pfDeadBodyPlayer
+  m_Name: DeadBodyPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

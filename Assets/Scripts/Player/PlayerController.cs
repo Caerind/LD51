@@ -22,8 +22,10 @@ public class PlayerController : Soldier
         AwakeSoldier(isPlayer: true);
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDied;
+
         fovLight.pointLightInnerRadius = 0.0f;
         fovLight.pointLightOuterRadius = fireDistance;
+
         gamepadLine = cameraTarget.GetComponent<LineRenderer>();
     }
 
@@ -52,8 +54,8 @@ public class PlayerController : Soldier
         GetGeneral().RemoveRefToSoldier(this);
 
         // Spawn new entity
-        Transform pfDeadBody = Resources.Load<Transform>("pfDeadBodyPlayer");
-        Instantiate(pfDeadBody, transform.position, Quaternion.identity).eulerAngles = new Vector3(0.0f, 0.0f, GetLookAngle());
+        GameObject pfDeadBody = PrefabManager.Instance.GetDeadBodyPlayerPrefab();
+        Instantiate(pfDeadBody, transform.position, Quaternion.Euler(new Vector3(0.0f, 0.0f, GetLookAngle())));
 
         // Center cam on new entity
         if (IsMainSoldier())
