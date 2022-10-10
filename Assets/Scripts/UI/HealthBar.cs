@@ -18,11 +18,12 @@ public class HealthBar : MonoBehaviour
 
     public void Init(Soldier soldier)
     {
-        healthSystem = soldier.GetComponent<HealthSystem>();
-        healthSystem.OnDamaged += HealthSystem_OnDamaged;
         target = soldier.transform;
         fullBarTransform.gameObject.SetActive(false);
-        healthSystem.OnDeath +=HealthSystem_OnDeath;
+
+        healthSystem = soldier.GetComponent<HealthSystem>();
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
+        healthSystem.OnDeath += HealthSystem_OnDeath;
     }
 
     private void LateUpdate()
@@ -43,6 +44,6 @@ public class HealthBar : MonoBehaviour
     private void UpdateBar()
     {
         fullBarTransform.gameObject.SetActive(true);
-        barTransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1, 1);
+        barTransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1.0f, 1.0f);
     }
 }

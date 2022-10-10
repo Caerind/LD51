@@ -163,6 +163,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapCommon
       objectReference: {fileID: 0}
+    - target: {fileID: 9036274568871514347, guid: 1a169fd6240f6684bbebe5526d6abe9d, type: 3}
+      propertyPath: isPlayerZone
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a169fd6240f6684bbebe5526d6abe9d, type: 3}
@@ -539,6 +543,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 9053491547429771497}
     m_Modifications:
+    - target: {fileID: 931608675018193116, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
+      propertyPath: playerIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250522798414734731, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
+      propertyPath: playerIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3761381820076684373, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
+      propertyPath: playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185931304441569164, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
+      propertyPath: playerIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6405456756955608538, guid: 11bd47819a05d414dbd8725a8580e295, type: 3}
       propertyPath: m_Pivot.x
       value: 0

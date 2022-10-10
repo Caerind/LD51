@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class HealthBarMiniMap : MonoBehaviour
 {
+    [SerializeField] private Image soldierImage;
+    [SerializeField] private float soldierDiedAlpha = 0.2f;
+
     private HealthSystem healthSystem;
     private Transform fullBarTransform;
     private Transform barTransform;
-    [SerializeField] private Image image;
-    [SerializeField] private float alphaDied = 0.2f;
 
     private void Awake()
     {
@@ -31,12 +32,12 @@ public class HealthBarMiniMap : MonoBehaviour
 
     private void HealthSystem_OnDeath(object sender, EventArgs e)
     {
-        image.color = new Color(1.0f, 1.0f, 1.0f, alphaDied);
+        soldierImage.color = new Color(1.0f, 1.0f, 1.0f, soldierDiedAlpha);
         Destroy(gameObject);
     }
 
     private void UpdateBar()
     {
-        barTransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1, 1);
+        barTransform.localScale = new Vector3(healthSystem.GetHealthAmountNormalized(), 1.0f, 1.0f);
     }
 }

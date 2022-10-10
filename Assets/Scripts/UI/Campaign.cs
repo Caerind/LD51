@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class Campaign : MonoBehaviour
 {
-    public List<Image> campImages;
-    public List<TMP_Text> campTexts;
+    [SerializeField] private List<Image> campImages;
+    [SerializeField] private List<TMP_Text> campTexts;
 
-    public TMP_Text title;
-    public TMP_Text desc;
-    public Image map;
+    [SerializeField] private TMP_Text title;
+    [SerializeField] private TMP_Text desc;
+    [SerializeField] private Image map;
 
     private void Start()
     {
@@ -42,6 +42,7 @@ public class Campaign : MonoBehaviour
 
     private void Update()
     {
+        // Cheat code
         if (Inputs.Instance.nextLeft)
         {
             GameApplication.Instance.UnlockedGameScene(0);

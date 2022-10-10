@@ -1,22 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HasWinConditionalImage : MonoBehaviour
 {
-    [SerializeField] private Sprite WinText;
-    [SerializeField] private Sprite LooseText;
+    [SerializeField] private Sprite WinImage;
+    [SerializeField] private Sprite LooseImage;
 
     private void Start()
     {
-        Image text = GetComponent<Image>();
+        Image image = GetComponent<Image>();
         if (GameApplication.Instance.GetHasPlayerWin())
         {
-            text.sprite = WinText;
+            image.sprite = WinImage;
         }
         else
         {
-            text.sprite = LooseText;
+            image.sprite = LooseImage;
         }
     }
 }
