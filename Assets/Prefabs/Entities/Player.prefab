@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4519866703184726411}
   - component: {fileID: 7643607392849039828}
   m_Layer: 3
-  m_Name: Circle
+  m_Name: CircleBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,12 +86,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466941874454349262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4395893598687474584}
+  m_Father: {fileID: 144575140478384986}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7643607392849039828
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 8691730108401513058}
   - component: {fileID: 3620605660589251820}
   m_Layer: 3
-  m_Name: CircleSelect
+  m_Name: CircleWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,12 +170,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731080772177184833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4395893598687474584}
+  m_Father: {fileID: 144575140478384986}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3620605660589251820
@@ -389,10 +389,9 @@ Transform:
   - {fileID: 7182123013765058225}
   - {fileID: 6556399720776751771}
   - {fileID: 5304325853869980212}
-  - {fileID: 4519866703184726411}
-  - {fileID: 8691730108401513058}
   - {fileID: 2693943714302034096}
   - {fileID: 1593094101353426051}
+  - {fileID: 144575140478384986}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -433,8 +432,6 @@ MonoBehaviour:
   TimerTirShake: 1
   IntensiteDegatShake: 6
   TimerDegatShake: 1
-  CircleBlue: {fileID: 466941874454349262}
-  CircleWhite: {fileID: 1731080772177184833}
   cameraTarget: {fileID: 5304325853869980212}
   bloodDeath: {fileID: 4741478964633163052, guid: 8b3d9a05eb3b9b5498c8af7f5c1f77a1, type: 3}
   bloodImpact: {fileID: 4187125541381706583, guid: d05b077a5e861f943917214e818c63bf, type: 3}
@@ -777,6 +774,54 @@ Transform:
   m_Father: {fileID: 1860316589174664381}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7701236330772151027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144575140478384986}
+  - component: {fileID: 2526268843003008058}
+  m_Layer: 3
+  m_Name: PlayerMinimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &144575140478384986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701236330772151027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4519866703184726411}
+  - {fileID: 8691730108401513058}
+  m_Father: {fileID: 4395893598687474584}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2526268843003008058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701236330772151027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e3b7c781f48fa449a2c53a5b3d768b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleBlue: {fileID: 466941874454349262}
+  circleWhite: {fileID: 1731080772177184833}
 --- !u!1 &8158101420904154894
 GameObject:
   m_ObjectHideFlags: 0

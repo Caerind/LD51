@@ -9,8 +9,6 @@ public class AIController : Soldier
     [SerializeField] private GameObject bloodImpact;
     [SerializeField] private AudioSource Deplacement;
 
-    [SerializeField] private GameObject redCircle;
-
     private FakeAgent agent;
     private AIBrain brain;
 
@@ -68,8 +66,6 @@ public class AIController : Soldier
         {
             UpdateReactions();
         }
-
-        UpdateMinimap();
     }
 
     public override void SetMainSoldier(bool mainSoldier)
@@ -143,18 +139,6 @@ public class AIController : Soldier
 
             // Update agent dir for physx
             agent.SetAngle(transform.eulerAngles.z);
-        }
-    }
-
-    private void UpdateMinimap()
-    {
-        if (IsInOppositeZone())
-        {
-            redCircle.SetActive(true);
-        }
-        else
-        {
-            redCircle.SetActive(false);
         }
     }
 }

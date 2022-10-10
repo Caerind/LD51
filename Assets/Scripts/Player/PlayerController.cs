@@ -8,8 +8,6 @@ public class PlayerController : Soldier
     [SerializeField] private float TimerTirShake = 1f;
     [SerializeField] private float IntensiteDegatShake = 6f;
     [SerializeField] private float TimerDegatShake = 3f;
-    [SerializeField] private GameObject CircleBlue;
-    [SerializeField] private GameObject CircleWhite;
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private GameObject bloodDeath;
     [SerializeField] private GameObject bloodImpact;
@@ -85,8 +83,6 @@ public class PlayerController : Soldier
         {
             UpdateReactions();
         }
-
-        UpdateMinimap();
     }
 
     public override void SetMainSoldier(bool mainSoldier)
@@ -184,26 +180,6 @@ public class PlayerController : Soldier
         {
             inputs.cac = false;
             Cac();
-        }
-    }
-
-    private void UpdateMinimap()
-    {
-        General general = GetGeneral();
-        if (this == general.GetNextSelectedSoldier())
-        {
-            CircleWhite.SetActive(true);
-            CircleBlue.SetActive(true);
-        }
-        else if (this == general.GetSelectedSoldier())
-        {
-            CircleWhite.SetActive(true);
-            CircleBlue.SetActive(false);
-        }
-        else
-        {
-            CircleWhite.SetActive(false);
-            CircleBlue.SetActive(true);
         }
     }
 
