@@ -16,7 +16,7 @@ public class StartZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Soldier soldier = collision.GetComponentInParent<Soldier>();
-        if (soldier != null && soldier.IsPlayerSoldier() != !isPlayerZone)
+        if (soldier != null && soldier.IsPlayerSoldier() != isPlayerZone)
         {
             enemyInZoneCounter++;
 
