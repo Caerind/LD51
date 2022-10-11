@@ -9,8 +9,7 @@ public class PlayerController : Soldier
     [SerializeField] private float IntensiteDegatShake = 6f;
     [SerializeField] private float TimerDegatShake = 3f;
     [SerializeField] private Transform cameraTarget;
-    [SerializeField] private GameObject bloodDeath;
-    [SerializeField] private GameObject bloodImpact;
+
     [SerializeField] private AudioSource Deplacement;
 
     private LineRenderer gamepadLine;
@@ -33,42 +32,25 @@ public class PlayerController : Soldier
         {
             PlayerCameraController.Instance.Shake(IntensiteDegatShake, TimerDegatShake);
         }
-        else if (sender != null)
-        {
-            Soldier senderSoldier = (Soldier)sender;
-            if (senderSoldier != null && !senderSoldier.IsPlayerSoldier())
-            {
-                SetLookAt(senderSoldier.transform.position);
-            }
 
-            // Blood
-            GameObject part = Instantiate(bloodImpact, transform.position, Quaternion.identity);
-            Destroy(part, 2.0f);
-        }
+        OnSoldierDamaged(sender);
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        GetGeneral().RemoveRefToSoldier(this);
-
-        // Spawn new entity
-        GameObject pfDeadBody = PrefabManager.Instance.GetDeadBodyPlayerPrefab();
-        Instantiate(pfDeadBody, transform.position, Quaternion.Euler(new Vector3(0.0f, 0.0f, GetLookAngle())));
-
         // Center cam on new entity
         if (IsMainSoldier())
         {
+            // TODO : Might be an error here, but seems ok in game
+            // TODO : Center on killer ?
             PlayerCameraController.Instance.SetFollow(cameraTarget);
         }
-        
+
+        // If using Gamepad, disable gamepadLine
         if (gamepadLine != null)
             gamepadLine.enabled = false;
 
-        // Blood
-        GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
-        Destroy(part, 2.0f);
-
-        Destroy(gameObject);
+        OnSoldierDied(deadBodyPrefab: PrefabManager.Instance.GetDeadBodyPlayerPrefab());
     }
 
     private void Update()
@@ -112,9 +94,9 @@ public class PlayerController : Soldier
         // Mvt
         float mvt = inputs.move.magnitude;
         animator?.SetFloat(animIDMvt, mvt);
-        bool wasmooving = isMoving;
+        bool wasMoving = isMoving;
         isMoving = mvt > 0.025f;
-        if(wasmooving != isMoving)
+        if (wasMoving != isMoving)
         {
             if (isMoving)
             {

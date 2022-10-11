@@ -5,8 +5,6 @@ public class AIController : Soldier
     [SerializeField] private float fireCooldownBonusAI = 0.5f;
     [SerializeField] private float cacCooldownBonusAI = 0.5f;
 
-    [SerializeField] private GameObject bloodDeath;
-    [SerializeField] private GameObject bloodImpact;
     [SerializeField] private AudioSource Deplacement;
 
     private FakeAgent agent;
@@ -23,35 +21,14 @@ public class AIController : Soldier
 
     private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
-        if (sender != null)
-        {
-            Soldier senderSoldier = (Soldier)sender;
-            if (senderSoldier != null && senderSoldier.IsPlayerSoldier())
-            {
-                SetLookAt(senderSoldier.transform.position);
-            }
-
-            // Blood
-            GameObject part = Instantiate(bloodImpact, transform.position, Quaternion.identity);
-            Destroy(part, 2.0f);
-        }
+        OnSoldierDamaged(sender);
     }
 
     private void HealthSystem_OnDied(object sender, System.EventArgs e)
     {
-        brain.UnlockPoint();
+        brain.OnDied();
 
-        GetGeneral().RemoveRefToSoldier(this);
-
-        // Spawn new entity
-        GameObject pfDeadBody = PrefabManager.Instance.GetDeadBodyAIPrefab();
-        Instantiate(pfDeadBody, transform.position, Quaternion.Euler(new Vector3(0.0f, 0.0f, GetLookAngle())));
-
-        // Blood
-        GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
-        Destroy(part, 2.0f);
-
-        Destroy(gameObject);
+        OnSoldierDied(deadBodyPrefab: PrefabManager.Instance.GetDeadBodyAIPrefab());
     }
 
     private void Update()
@@ -116,10 +93,9 @@ public class AIController : Soldier
             Vector2 mvt = transform.position.ToVector2() - prevPos;
             float mvtMagn = mvt.magnitude;
             animator?.SetFloat(animIDMvt, mvtMagn);
-            bool wasmooving = isMoving;
+            bool wasMoving = isMoving;
             isMoving = mvtMagn > 0.025f;
-
-            if (wasmooving != isMoving)
+            if (wasMoving != isMoving)
             {
                 if (isMoving)
                 {

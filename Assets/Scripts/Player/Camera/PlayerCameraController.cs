@@ -10,7 +10,7 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
     [SerializeField] private bool m_invertZoom = true;
 
     private CinemachineVirtualCamera m_virtualCamera;
-    private CinemachineCameraShake cinemachinecameraShake;
+    private CinemachineCameraShake m_cinemachinecameraShake;
     private float m_orthographicSize;
     private float m_targetOrthographicSize;
 
@@ -19,7 +19,7 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
         m_virtualCamera = vCam;
         if (m_virtualCamera != null)
         {
-            cinemachinecameraShake = m_virtualCamera.gameObject.GetComponent<CinemachineCameraShake>();
+            m_cinemachinecameraShake = m_virtualCamera.gameObject.GetComponent<CinemachineCameraShake>();
             m_orthographicSize = m_virtualCamera.m_Lens.OrthographicSize;
             m_targetOrthographicSize = m_orthographicSize;
         }
@@ -46,9 +46,11 @@ public class PlayerCameraController : Singleton<PlayerCameraController>
         }
     }
 
-    public void Shake(float Amount, float time)
+    public void Shake(float intensity, float time)
     {
-        cinemachinecameraShake.Shake(Amount, time);
-
+        if (m_cinemachinecameraShake != null)
+        {
+            m_cinemachinecameraShake.Shake(intensity, time);
+        }
     }
 }

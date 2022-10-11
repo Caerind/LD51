@@ -326,6 +326,11 @@ public class AIBrain : MonoBehaviour
         }
     }
 
+    public void OnDied()
+    {
+        UnlockPoint();
+    }
+
     public List<Soldier> GetAllPlayers()
     {
         return GameManager.Instance.GetPlayerGeneral().GetSoldiers();
@@ -461,142 +466,5 @@ public class AIBrain : MonoBehaviour
             }
         }
         return bestPoint;
-    }
-
-
-    public List<Objective> ScanObjectives()
-    {
-        List<Objective> results = new List<Objective>();
-
-        /*
-        // ReachInterestPoint
-        {
-            List<InterestPoint> interestPoints = GameManager.Instance.GetAllInterestPoints();
-
-            InterestPoint bestPoint = null;
-            float bestScore = -1.0f;
-
-            foreach (var point in interestPoints)
-            {
-                if (!point.IsLocked() && (point.transform.position - transform.position).sqrMagnitude < maxDistanceLookBrain * maxDistanceLookBrain)
-                {
-                    float score = point.GetBaseScore();
-
-                    if (score > bestScore)
-                    {
-                        bestPoint = point;
-                        bestScore = score;
-                    }
-                }
-            }
-
-            if (bestPoint != null)
-            {
-                results.Add(new Objective(ObjectiveType.ReachInterestPoint, bestPoint.gameObject, gameObject, bestScore));
-            }
-        }
-
-        // AttackPlayerZone
-        {
-            List<ZonePoint> playerZonePoints = GameManager.Instance.GetAllPlayerZonePoints();
-
-            ZonePoint bestPoint = null;
-            float bestScore = -1.0f;
-
-            float distanceCheck = maxDistanceLookBrain;
-
-            if (GameManager.Instance.GetPlayerZone().GetEnemyInZoneCounter() > 0)
-            {
-                distanceCheck *= general.GetCommander().factorDistanceAttackPlayerZone; 1.2f;
-            }
-
-            foreach (var point in playerZonePoints)
-            {
-                float d = (point.transform.position - transform.position).sqrMagnitude;
-                if (d < maxDistanceLookBrain * maxDistanceLookBrain)
-                {
-                    // Nearest point is best
-                    float score = distanceCheck * distanceCheck - d;
-
-                    if (score > bestScore)
-                    {
-                        bestPoint = point;
-                        bestScore = score;
-                    }
-                }
-            }
-
-            if (bestPoint != null)
-            {
-                results.Add(new Objective(ObjectiveType.AttackPlayerZone, bestPoint.gameObject, gameObject, bestScore));
-            }
-        }
-
-        // DefendEnemyZone
-        {
-            List<ZonePoint> enemyZonePoints = GameManager.Instance.GetAllEnemyZonePoints();
-
-            ZonePoint bestPoint = null;
-            float bestScore = -1.0f;
-
-            float distanceCheck = maxDistanceLookBrain;
-
-            if (GameManager.Instance.GetEnemyZone().GetEnemyInZoneCounter() > 0)
-            {
-                distanceCheck *= general.GetCommander().factorDistanceDefendEnemyZone; 3.0f;
-            }
-
-            foreach (var point in enemyZonePoints)
-            {
-                float d = (point.transform.position - transform.position).sqrMagnitude;
-                if (d < distanceCheck * distanceCheck)
-                {
-                    // Nearest point is best
-                    float score = maxDistanceLookBrain * maxDistanceLookBrain - d;
-
-                    if (score > bestScore)
-                    {
-                        bestPoint = point;
-                        bestScore = score;
-                    }
-                }
-            }
-
-            if (bestPoint != null)
-            {
-                results.Add(new Objective(ObjectiveType.DefendEnemyZone, bestPoint.gameObject, gameObject, bestScore));
-            }
-        }
-
-        // AttackPlayer
-        {
-            List<Soldier> playerSoldiers = 
-
-            Soldier bestPlayer = null;
-            float bestScore = -1.0f;
-
-            foreach (var soldier in playerSoldiers)
-            {
-                // *4 (2^2) here because, we can move+shoot
-                if ((soldier.transform.position - transform.position).sqrMagnitude < 4.0f * maxDistanceLookBrain * maxDistanceLookBrain)
-                {
-                    float score = 100.0f - soldier.GetHealthSystem().GetHealthAmount();
-
-                    if (score > bestScore)
-                    {
-                        bestPlayer = soldier;
-                        bestScore = score;
-                    }
-                }
-            }
-
-            if (bestPlayer != null)
-            {
-                results.Add(new Objective(ObjectiveType.AttackPlayer, bestPlayer.gameObject, gameObject, bestScore));
-            }
-        }
-        */
-
-        return results;
     }
 }

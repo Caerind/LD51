@@ -19,6 +19,8 @@ public class Soldier : MonoBehaviour
     [SerializeField] protected float cacHitRadius = 0.25f;
     [SerializeField] protected int cacDamage = 70;
     [SerializeField] private float updateReactionTimer = 0.1f;
+    [SerializeField] private GameObject bloodDeath;
+    [SerializeField] private GameObject bloodImpact;
     [SerializeField] private AudioSource TirRecharge;
     [SerializeField] private AudioSource Baïonette;
     [SerializeField] private AudioSource Blessure;
@@ -107,6 +109,36 @@ public class Soldier : MonoBehaviour
     public void Deces()
     {
         Mort.Play();
+    }
+
+    protected void OnSoldierDamaged(object sender)
+    {
+        if (sender != null)
+        {
+            Soldier senderSoldier = (Soldier)sender;
+            if (senderSoldier != null && senderSoldier.IsPlayerSoldier() != IsPlayerSoldier())
+            {
+                SetLookAt(senderSoldier.transform.position);
+            }
+        }
+
+        // Blood
+        GameObject part = Instantiate(bloodImpact, transform.position, Quaternion.identity);
+        Destroy(part, 2.0f);
+    }
+
+    protected void OnSoldierDied(GameObject deadBodyPrefab)
+    {
+        GetGeneral().RemoveRefToSoldier(this);
+
+        // Spawn new entity
+        Instantiate(deadBodyPrefab, transform.position, Quaternion.Euler(new Vector3(0.0f, 0.0f, GetLookAngle())));
+
+        // Blood
+        GameObject part = Instantiate(bloodDeath, transform.position, Quaternion.identity);
+        Destroy(part, 2.0f);
+
+        Destroy(gameObject);
     }
 
     public void Fire(bool reactionFire = false)

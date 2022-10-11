@@ -2,18 +2,11 @@ using UnityEngine;
 
 public class InterestPoint : MonoBehaviour
 {
-    [SerializeField] private float baseScore = 10.0f;
-
     private bool locked = false;
 
     private void Awake()
     {
         GameManager.Instance.RegisterInterestPoint(this);
-    }
-
-    public float GetBaseScore()
-    {
-        return baseScore;
     }
 
     public bool IsLocked()
@@ -34,7 +27,7 @@ public class InterestPoint : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 0.1f);
-        Gizmos.DrawLine(transform.position, transform.position + GetLookDir().ToVector3());
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+        Gizmos.DrawLine(transform.position, transform.position + 2.0f * GetLookDir().ToVector3());
     }
 }

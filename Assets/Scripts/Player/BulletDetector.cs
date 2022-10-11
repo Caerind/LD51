@@ -1,10 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletDetector : MonoBehaviour
 {
-    private Soldier soldier = null;
     [SerializeField] private float distanceShooterMax = 30.0f;
+
+    private Soldier soldier = null;
 
     private void Awake()
     {
